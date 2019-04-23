@@ -1,0 +1,98 @@
+
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-button slot="end"  (click)="presentActionSheet()">
+                <ion-icon name="person"></ion-icon>
+              </ion-button>
+              <ion-title text-center>Calendario</ion-title>
+        </ion-toolbar>
+      </ion-header>
+       
+      <ion-content  padding class="background">
+       
+        <!-- Card for adding a new event -->
+        <ion-card class="animated fadeIn slow" *ngIf="authIsKine">
+          <ion-card-header tappable (click)="collapseCard = !collapseCard">
+            <ion-card-title>Agregar Sesión</ion-card-title>
+          </ion-card-header>
+          <ion-card-content *ngIf="!collapseCard">
+       
+            <ion-item>
+              <ion-label>Comienza</ion-label>
+              <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>Termina</ion-label>
+              <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
+            </ion-item>
+            <ion-button expand="block" (click)="addEvent()" [disabled]="event.title == ''">Agregar Sesión</ion-button>
+       
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="animated fadeIn slow" *ngIf="!authIsKine">
+            <ion-card-header tappable (click)="collapseCard = !collapseCard">
+              <ion-card-title>Escoge un horario de preferencia</ion-card-title>
+            </ion-card-header>
+            <ion-card-content *ngIf="!collapseCard">
+         
+              <ion-item>
+                <ion-label>Fecha</ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+              </ion-item>
+              <ion-button expand="block" (click)="solicitarSesion()" [disabled]="event.title == ''">Solicitar Sesión</ion-button>
+         
+            </ion-card-content>
+          </ion-card>
+       
+        <ion-row>
+          <!-- Change the displayed calendar mode -->
+          <ion-col class="animated fadeIn slow" size="4">
+            <ion-button expand="block" [color]="calendar.mode == 'month' ? 'primary' : 'secondary'" (click)="changeMode('month')">Mes</ion-button>
+          </ion-col>
+          <ion-col class="animated fadeIn slow" size="4">
+            <ion-button expand="block" [color]="calendar.mode == 'week' ? 'primary' : 'secondary'" (click)="changeMode('week')">Semana</ion-button>
+          </ion-col>
+          <ion-col class="animated fadeIn slow" size="4">
+            <ion-button expand="block" [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" (click)="changeMode('day')">Día</ion-button>
+          </ion-col>
+       
+          <!-- Move back one screen of the slides -->
+          <ion-col class="animated fadeIn slow" size="6" text-left>
+            <ion-button fill="clear" (click)="back()">
+              <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+       
+          <!-- Move forward one screen of the slides -->
+          <ion-col class="animated fadeIn slow" size="6" text-right>
+            <ion-button fill="clear" (click)="next()">
+              <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col class="animated fadeIn slow" text-center>
+                <ion-label>
+                        {{ viewTitle }}
+                </ion-label>
+              </ion-col>
+        </ion-row>
+       
+        <calendar 
+        [eventSource]="eventSource" 
+        [calendarMode]="calendar.mode" 
+        [currentDate]="calendar.currentDate"
+        (onEventSelected)="onEventSelected($event)"
+        (onTitleChanged)="onViewTitleChanged($event)"
+        (onTimeSelected)="onTimeSelected($event)" 
+        startHour="6"
+        endHour="20"
+        step="30"
+        startingDayWeek="1">
+        </calendar>
+       
+      </ion-content>
+
+

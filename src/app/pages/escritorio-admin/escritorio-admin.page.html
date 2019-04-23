@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-button slot="end"  (click)="presentActionSheet()">
+      <ion-icon name="person"></ion-icon>
+    </ion-button>
+    <ion-title text-center>Panel</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding class="background">
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="!authIsAdmin" class="animated fadeIn slower" text-center>
+        <h2>Bienvenid@</h2>
+      </ion-col>
+      <ion-col *ngIf="authIsAdmin" class="animated fadeIn slower" text-center>
+          <h2>Bienvenido, Jefe</h2>
+        </ion-col>
+    </ion-row>
+    <br>
+
+      <ion-row>
+        <ion-col text-center>
+            <ion-button class="animated fadeIn slow" *ngIf="authIsKine" color="tertiary" (click)="openEscogerUser()" expand="block" shape="round">
+                Iniciar una Sesión de Fisiotraining
+              </ion-button>       
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openVerSolicitudes()" expand="block" shape="round">
+                   Ver Solicitudes
+                  </ion-button>       
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                    <ion-button class="animated fadeIn slow" color="tertiary" (click)="openFisiotrainingTuto()" expand="block" shape="round">
+                        ¿Qué es Fisiotraining?
+                      </ion-button>       
+                  </ion-col>
+                </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                    <ion-button *ngIf="!authIsKine" class="animated fadeIn slow" color="tertiary" (click)="openSolicitarSesion()" expand="block" shape="round">
+                        Solicitar una Sesión
+                      </ion-button>       
+                  </ion-col>
+                </ion-row>
+  </ion-grid>  
+  
+</ion-content>
+

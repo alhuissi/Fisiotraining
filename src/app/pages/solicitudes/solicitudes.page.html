@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-button slot="start" fill="clear" (click)="goBack()">
+          <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+        </ion-button>
+    <ion-title text-center>Solicitudes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-grid>
+  
+      <ion-row>
+        <ion-col class="animated fadeIn">
+          <b>Lista de Solicitudes </b>
+        </ion-col>
+      </ion-row>
+  
+      <ion-list>
+          <ion-item *ngFor= "let solicitud of solicitudes | async" (click)="openSolicitud(solicitud)" [routerLink]="solicitud.url" routerDirection="root" [class.active-item]="selectedPath === solicitud.url">
+                <ion-icon name="list-box" size="small" slot="start"></ion-icon> 
+  
+          <ion-label class="animated fadeIn slow">
+            <h2><b>Fecha solicitada: {{solicitud.fecha}}</b></h2>
+            <p>{{solicitud.nombre}} {{solicitud.apellido}}</p>
+            <p>{{solicitud.mail}}</p>
+          </ion-label>
+  
+        </ion-item>
+      </ion-list>
+      
+  
+        <br>
+        <ion-row>
+              <ion-col text-center>
+                  <ion-button class="animated fadeIn slow" color="tertiary" (click)="goBack()">
+                      Volver
+                    </ion-button>       
+                </ion-col>
+            </ion-row>
+    </ion-grid>
+  </ion-content>

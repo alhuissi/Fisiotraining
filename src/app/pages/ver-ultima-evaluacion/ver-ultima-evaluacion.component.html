@@ -1,0 +1,159 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-button slot="start" fill="clear" (click)="closeComponent()">
+        <ion-icon style="color:#fff; font-size: 25px" name="close"></ion-icon>
+      </ion-button>
+      <ion-title></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    
+      <ion-grid>
+          <ion-row>
+              <ion-col text-center>
+                 <h3> Resumen sesión anterior  </h3>        
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                  {{this.userName}} {{this.userLastName}}      
+                </ion-col>
+              </ion-row>
+        <ion-row>
+            <ion-col text-center>
+              Fecha: {{this.fecha}}          
+            </ion-col>
+          </ion-row>
+        <ion-row>
+          <ion-col text-center>
+            Kinesiólogo: {{nameAutor}}          
+          </ion-col>
+        </ion-row>
+          <br>
+          <ion-row>
+              <ion-col text-center>
+                <h3><b>Scanning</b></h3>         
+              </ion-col>
+            </ion-row>
+    
+        <ion-row>
+          <ion-col text-center>
+            1. Autopercepión al ejercicio:           
+          </ion-col>
+            {{this.rateAutopercepcion}} /5
+        </ion-row>
+        
+        <ion-row>
+            <ion-col text-center>
+              2. Alimentación:           
+            </ion-col>
+              {{this.rateAlimentacion}} /5
+          </ion-row>
+    
+          <ion-row>
+              <ion-col text-center>
+                3. Hidratación:           
+              </ion-col>
+                {{this.rateHidratacion}} /5
+            </ion-row>
+    
+            <ion-row>
+                <ion-col text-center>
+                 4. Stress:           
+                </ion-col>
+                 {{this.rateStress}} /5
+              </ion-row>
+    
+              <ion-row>
+                  <ion-col text-center>
+                   5. Calidad de sueño:           
+                  </ion-col>
+                  {{this.rateSueno}} /5
+                
+                </ion-row> 
+                <br>
+                <br>
+    
+      
+          <ion-row>
+              <ion-col text-center>
+               <h3> <b>Intensidad</b> </h3>         
+              </ion-col>
+            </ion-row>
+    
+            <ion-row>
+                <ion-col text-center>
+                    1. Circuito 1:          
+                </ion-col>
+                {{this.rateCircuito1}} /5
+              </ion-row>
+    
+              <ion-row>
+                  <ion-col text-center>
+                      2. Circuito 2:          
+                  </ion-col>
+                  {{this.rateCircuito2}} /5
+                </ion-row>
+    
+                <ion-row>
+                    <ion-col text-center>
+                        3. Circuito 3:          
+                    </ion-col>
+                    {{this.rateCircuito3}} /5
+                  </ion-row>
+                  <br>
+    
+                  <ion-row>
+                      <ion-col text-center>
+                       <h3> <b>Entrenamiento</b> </h3>         
+                      </ion-col>
+                    </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                    1. Brazos:         
+                </ion-col>
+                {{this.rateBrazos}} /5
+              </ion-row>
+    
+              <ion-row>
+                  <ion-col text-center>
+                      2. Piernas:        
+                  </ion-col>
+                  {{this.ratePiernas}} /5
+                </ion-row>
+                <ion-row>
+                    <ion-col text-center>
+                        3. CORE:        
+                    </ion-col>
+                    {{this.rateCore}} /5
+                  </ion-row>
+                <br>
+    
+                <ion-row>
+                    <ion-col text-center>
+                       4. Cardio:       
+                    </ion-col>
+                    {{this.rateCardio}} /5
+                  </ion-row>
+                  <ion-row>
+                      <ion-col text-center>
+                          5. Fuerza:        
+                      </ion-col>
+                      {{this.rateFuerza}} /5
+                    </ion-row>
+                    <br>
+                <ion-row>
+                    <ion-col text-center>
+                        <ion-button expand="block" shape="round" class="animated fadeIn slower" color="tertiary" (click)="closeComponent()">
+                            Ok
+                          </ion-button>       
+                      </ion-col>
+                    </ion-row>
+                    <br>
+            
+      </ion-grid>  
+      
+      
+    </ion-content>
+

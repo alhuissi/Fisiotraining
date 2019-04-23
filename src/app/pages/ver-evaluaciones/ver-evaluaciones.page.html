@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-button slot="start" fill="clear" (click)="goBack()">
+      <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+    </ion-button>
+  <ion-title text-center>Ver Evaluaciones de {{userName}}</ion-title>
+</ion-toolbar>
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col class="animated fadeIn">
+        <b>Evaluaciones Diarias: </b>
+      </ion-col>
+    </ion-row>
+
+    <ion-list>
+        <ion-item *ngFor= "let evaluacion of evas | async" (click)="openEvaluacion(evaluacion)" [routerLink]="evaluacion.url" routerDirection="root" [class.active-item]="selectedPath === evaluacion.url">
+              <ion-icon name="list-box" size="small" slot="start"></ion-icon> 
+
+        <ion-label class="animated fadeIn slow">
+          <h2><b>Fecha: {{evaluacion.fecha.toDate()}}</b></h2>
+          <p>ID Documento: {{evaluacion.formid}}</p>
+          <p>Autor: {{evaluacion.nombreAutor}}</p>
+        </ion-label>
+
+      </ion-item>
+    </ion-list>
+    <br>
+    <br>
+    <ion-row>
+        <ion-col class="animated fadeIn">
+          <b>Evaluaciones Bimensuales: </b>
+        </ion-col>
+      </ion-row>
+
+      <br>
+      <ion-row>
+            <ion-col text-center>
+                <ion-button class="animated fadeIn slow" color="tertiary" (click)="goBack()">
+                    Volver
+                  </ion-button>       
+              </ion-col>
+          </ion-row>
+  </ion-grid>
+</ion-content>

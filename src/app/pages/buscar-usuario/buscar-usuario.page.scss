@@ -1,0 +1,9 @@
+.active-item {
+    border-left: 8px solid var(--ion-color-primary);
+}
+
+:host {
+    ion-content.background{
+        --background: url(../../../assets/login-background.png) 0 0/100% 100% no-repeat;
+    }
+    }

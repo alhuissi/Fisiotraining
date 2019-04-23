@@ -1,0 +1,46 @@
+
+
+<ion-content padding class="background">
+    <div class="login-container">
+        <div class="animated fadeIn slower" text-center>
+            <img src="assets/Logo_fisiotraining.png" width='170px' alt="logo"> 
+          </div>
+    <form class="animated fadeIn slow" [formGroup]="registerForm" (submit)="tryRegister()" novalidate>
+
+        <ion-item>
+          <ion-label position="floating" color="primary">Nombre</ion-label>
+          <ion-input tappable formControlName="profileName" type="text" placeholder="" [class.invalid]="!registerForm.controls.profileName.valid && registerForm.controls.profileName.dirty"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating" color="primary">Apellido</ion-label>
+            <ion-input tappable formControlName="profileLastName" type="text" placeholder="" [class.invalid]="!registerForm.controls.profileName.valid && registerForm.controls.profileName.dirty"></ion-input>
+          </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating" color="primary">Email</ion-label>
+          <ion-input tappable formControlName="email" type="email" placeholder="" [class.invalid]="!registerForm.controls.email.valid && registerForm.controls.email.dirty"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating" color="primary">Contraseña</ion-label>
+          <ion-input tappable formControlName="password" type="password" placeholder="" [class.invalid]="!registerForm.controls.password.valid && registerForm.controls.password.dirty"></ion-input>
+        </ion-item>
+  
+  
+        
+        <ion-item class="error-message" lines="none">
+          <p *ngIf="!registerForm.controls.profileName.valid  &&
+                  registerForm.controls.profileName.dirty">*Por favor ingresa un nombre válido</p>
+          <p *ngIf="!registerForm.controls.email.valid  &&
+                  registerForm.controls.email.dirty">*Por favor ingresa un email válido</p>
+          <p *ngIf="!registerForm.controls.password.valid  &&
+          registerForm.controls.password.dirty">*La contraseña debe tener al menos 6 caracteres</p>
+        </ion-item>
+      
+      <br>
+      <ion-button class="animated fadeIn slower" shape="round" (click)="tryRegister()" color="tertiary" expand="block">Crear una Cuenta</ion-button>
+      <br>
+      <ion-button class="animated fadeIn slower" shape="round" (click)="goLoginPage()" color="primary" expand="block">Ya tengo una cuenta</ion-button>
+    </form>
+      </div>
+  </ion-content>

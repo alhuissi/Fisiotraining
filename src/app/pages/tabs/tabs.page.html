@@ -1,0 +1,32 @@
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+
+    <ion-tab-button class="tab-button" tab="escritorio-admin" (click)="escritorioTabSelected()">
+      <ion-icon name="sunny"></ion-icon>
+      <ion-label>Panel</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button class="tab-button" *ngIf="authIsKine" tab="buscar-usuario" (click)="buscarTabSelected()">
+      <ion-icon name="search"></ion-icon>
+      <ion-label>Buscar</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button class="tab-button" tab="calendario" (click)="calendarioTabSelected()">
+      <ion-icon name="calendar"></ion-icon>
+      <ion-label>Calendario</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button class="tab-button" *ngIf="authIsAlgo" tab="mis-sesiones"(click)="sesionesTabSelected()">
+      <ion-icon name="walk"></ion-icon>
+      <ion-label>Mis Sesiones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button class="tab-button" tab="mensajeria"(click)="mensajeriaTabSelected()">
+      <ion-icon name="mail"></ion-icon>
+      <ion-label>Mis Mensajes (BETA)</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-tabs>

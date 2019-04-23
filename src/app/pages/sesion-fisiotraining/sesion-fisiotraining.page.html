@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+      <ion-button slot="start" fill="clear" (click)="goBack()">
+          <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+        </ion-button>
+    <ion-title text-center>Sesión Fisiotraining en curso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+      
+      <ion-row>
+          <ion-col class="animated fadeIn slow" text-center>
+           Sesión de {{userName}} {{userLastName}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="animated fadeIn slow" text-center>
+                Fecha: {{fechaToday | date: 'dd/MM/yyyy'}}           
+            </ion-col>
+          </ion-row>
+
+          
+  <ion-row>
+    <ion-col class="animated fadeIn slow" text-center>
+        <ion-button color="tertiary" (click)="openHacerEvaluacionDiariaPage()" expand="block" shape="round">
+            Evaluación Diaria
+          </ion-button>       
+      </ion-col>
+    </ion-row>
+
+        <ion-row>
+            <ion-col class="animated fadeIn slow" text-center>
+                <ion-button color="tertiary" (click)="openVerUltimaEvaluacion()" expand="block" shape="round">
+                   Ver Sesión Anterior
+                  </ion-button>       
+              </ion-col>
+            </ion-row>
+
+          <ion-row>
+              <ion-col class="animated fadeIn slow" text-center>
+                  <ion-button color="tertiary" (click)="goBack()" expand="block" shape="round">
+                      Volver
+                    </ion-button>       
+                </ion-col>
+              </ion-row>
+        </ion-grid>  
+
+</ion-content>

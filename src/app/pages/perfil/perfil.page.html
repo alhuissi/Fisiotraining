@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" fill="clear">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title text-center>Fisiotraining</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content class="background" padding>
+  
+  <ion-grid>
+      <ion-row>
+          <ion-col class="animated fadeIn" text-center>
+              <ion-icon name="contact" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+    <ion-row>
+      <ion-col class="animated fadeIn" text-center>
+        <h3>{{userName}} {{userLastName}} </h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col class="animated fadeIn" text-center>
+          {{userEmail}}          
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="animated fadeIn" text-center>
+            Rol: {{userRole}}         
+          </ion-col>
+        </ion-row>
+       
+                  <ion-row>
+                    <ion-col class="animated fadeIn slow" text-center>
+                        <ion-button color="tertiary" (click)="openSesionFisiotrainingPage()" expand="block" shape="round">
+                            Iniciar Sesión Fisiotraining
+                          </ion-button>       
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col class="animated fadeIn slow" text-center>
+                            <ion-button color="tertiary" (click)="openFichaClinicaPage()" expand="block" shape="round">
+                                Ficha Clínica
+                              </ion-button>      
+                          </ion-col>
+                        </ion-row>
+                    <ion-row>
+                      <ion-col class="animated fadeIn slow" text-center>
+                          <ion-button color="tertiary" (click)="openHacerEvaluacionBimensualPage()" expand="block" shape="round">
+                              Evaluación Bimensual
+                            </ion-button>      
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col class="animated fadeIn slow" text-center>
+                            <ion-button color="tertiary" (click)="openVerEvaluacionesPage()" expand="block" shape="round">
+                                Ver Evaluaciones Pasadas
+                              </ion-button>       
+                          </ion-col>
+                        </ion-row>
+
+                  <ion-row>
+                      <ion-col class="animated fadeIn slow delay-2s" text-center>  
+                            <ion-button *ngIf="authIsAdmin" color="tertiary" (click)="cambiarRol()" expand="block" shape="round">
+                              Cambiar Rol
+                            </ion-button>  
+                        </ion-col>
+                      </ion-row>    
+                  
+                  
+  </ion-grid>  
+  
+  
+</ion-content>

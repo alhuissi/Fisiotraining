@@ -1,0 +1,107 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-button slot="start" fill="clear" (click)="goBack()">
+            <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+          </ion-button>
+      <ion-title text-center>Ficha Clínica</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content class="animated fadeIn slow" padding>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col>
+      Nombre: {{this.userName}} {{this.userLastName}}
+    </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+        <ion-col>
+      Edad: <ion-input tappable type="number" [(ngModel)]="this.fichaClinica.edad"></ion-input>  
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+        <ion-col>
+    Fecha de evaluación: {{this.fechaToday | date: 'dd/MM/yyyy'}}
+    </ion-col>
+    </ion-row>
+    <br>
+    <br>
+    <ion-row>
+        <ion-col>
+      Ocupación: <ion-input tappable type="text" placeholder="this.fichaClinica.ocupacion" [(ngModel)]="this.fichaClinica.ocupacion" inputmode="text"></ion-input>  
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+        <ion-col>
+      Ayudas técnicas: <ion-input tappable type="text" placeholder="this.fichaClinica.ayudasTecnicas" [(ngModel)]="this.fichaClinica.ayudasTecnicas" inputmode="text"></ion-input>  
+      </ion-col> 
+    </ion-row>
+      <ion-row>
+          <ion-col>
+        Actividad deportiva: <ion-input tappable type="text" placeholder="this.fichaClinica.actividadDeportiva" [(ngModel)]="this.fichaClinica.actividadDeportiva" inputmode="text"></ion-input>  
+        </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+          <ion-col>
+      Intervenciones qx: <ion-input tappable type="text" placeholder="this.fichaClinica.intervencionesQX" [(ngModel)]="this.fichaClinica.intervencionesQX" inputmode="text"></ion-input>  
+      </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+          <ion-col>
+      Traumas M-E: <ion-input tappable type="text" placeholder="this.fichaClinica.traumas" [(ngModel)]="this.fichaClinica.traumas" inputmode="text"></ion-input>  
+      </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>
+      Ocupación actual en su trabajo: <ion-input tappable type="text" placeholder="this.fichaClinica.ocupacionActualTrabajo" [(ngModel)]="this.fichaClinica.ocupacionActualTrabajo" inputmode="text"></ion-input>  
+      </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+          <ion-col>
+      Antecedentes mórbidos personales y/o familiares (HTA,DM,etc): <ion-input tappable type="text" placeholder="this.fichaClinica.antecedentes" [(ngModel)]="this.fichaClinica.antecedentes" inputmode="text"></ion-input>  
+      </ion-col> 
+      </ion-row>
+      <ion-row>
+          <ion-col>
+      Hábitos (tabaco,alcohol,drogas,etc): <ion-input tappable type="text" placeholder="this.fichaClinica.habitos" [(ngModel)]="this.fichaClinica.habitos" inputmode="text"></ion-input>  
+      </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+          <ion-col>
+      Medicamentos: <ion-input tappable type="text" placeholder="this.fichaClinica.medicamentos" [(ngModel)]="this.fichaClinica.medicamentos" inputmode="text"></ion-input>  
+      </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+          <ion-col>
+      Objetivo: <ion-input tappable type="text" placeholder="this.fichaClinica.objetivos" [(ngModel)]="this.fichaClinica.objetivos" inputmode="text"></ion-input>  
+      </ion-col>
+      </ion-row>
+      <br>
+              <br>
+              <ion-row>
+                  <ion-col text-center>
+                      <ion-button expand="block" shape="round"  class="animated fadeIn slow" color="tertiary" (click)="guardarEvaluacion()">
+                          Guardar
+                        </ion-button>       
+                    </ion-col>
+              </ion-row>
+              <ion-row>
+                    <ion-col text-center>
+                        <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="goBack()">
+                            Volver
+                          </ion-button>       
+                      </ion-col>
+                  </ion-row>
+      
+  </ion-grid>
+
+</ion-content>

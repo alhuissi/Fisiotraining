@@ -1,0 +1,210 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+      <ion-button slot="start" fill="clear" (click)="goBack()">
+          <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+        </ion-button>
+    <ion-title text-center>Evaluación diaria {{evaluacion.fecha.toDate()}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        Nombre: {{userName}} {{userLastName}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        Kinesiólogo: {{nameAutor}}          
+      </ion-col>
+    </ion-row>
+      <br>
+      <br>
+      <ion-row>
+          <ion-col text-center>
+            <b>Scanning</b>         
+          </ion-col>
+        </ion-row>
+
+    <ion-row>
+      <ion-col text-center>
+        1. Autopercepión al ejercicio:           
+      </ion-col>
+        <rating [(ngModel)]="rateAutopercepcion"
+        rate="rateAutopercepcion"
+        readonly="true" 
+        size="default"
+        >
+        </rating>
+    </ion-row>
+    
+    <ion-row>
+        <ion-col text-center>
+          2. Alimentación:           
+        </ion-col>
+          <rating [(ngModel)]="rateAlimentacion"
+          rate="rateAlimentacion"
+          readonly="true" 
+          size="default"
+          >
+          </rating>
+      </ion-row>
+
+      <ion-row>
+          <ion-col text-center>
+            3. Hidratación:           
+          </ion-col>
+            <rating [(ngModel)]="rateHidratacion"
+            rate="rateHidratacion"
+            readonly="true" 
+            size="default">
+            </rating>
+        </ion-row>
+
+        <ion-row>
+            <ion-col text-center>
+             4. Stress:           
+            </ion-col>
+              <rating [(ngModel)]="rateStress"
+              rate="rateStress"
+              readonly="true" 
+              size="default"
+              >
+              </rating>
+          </ion-row>
+
+          <ion-row>
+              <ion-col text-center>
+               5. Calidad de sueño:           
+              </ion-col>
+                <rating [(ngModel)]="rateSueno"
+                rate="rateSueno"
+                readonly="true" 
+                size="default"
+                >
+                </rating>
+            </ion-row> 
+            <br>
+            <br>
+
+  
+      <ion-row>
+          <ion-col text-center>
+            <b>Intensidad</b>         
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col text-center>
+                1. Circuito 1:          
+            </ion-col>
+              <rating [(ngModel)]="rateCircuito1"
+              rate="rateCircuito1"
+              readonly="true" 
+              size="default"
+              >
+              </rating>
+          </ion-row>
+
+          <ion-row>
+              <ion-col text-center>
+                  2. Circuito 2:          
+              </ion-col>
+                <rating [(ngModel)]="rateCircuito2"
+                rate="rateCircuito2"
+                readonly="true" 
+                size="default"
+                >
+                </rating>
+            </ion-row>
+
+            <ion-row>
+                <ion-col text-center>
+                    3. Circuito 3:          
+                </ion-col>
+                  <rating [(ngModel)]="rateCircuito3"
+                  rate="rateCircuito3"
+                  readonly="true" 
+                  size="default">
+                  </rating>
+              </ion-row>
+              <br>
+
+              <ion-row>
+                  <ion-col text-center>
+                    <b>Entrenamiento</b>         
+                  </ion-col>
+                </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                1. Brazos:         
+            </ion-col>
+              <rating [(ngModel)]="rateBrazos"
+              rate="rateBrazos"
+              readonly="true" 
+              size="default">
+              </rating>
+          </ion-row>
+
+          <ion-row>
+              <ion-col text-center>
+                  2. Piernas:        
+              </ion-col>
+                <rating [(ngModel)]="ratePiernas"
+                rate="ratePiernas"
+                readonly="true" 
+                size="default"
+                >
+                </rating>
+            </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                    3. CORE:        
+                </ion-col>
+                  <rating [(ngModel)]="rateCore"
+                  rate="rateCore"
+                  readonly="true" 
+                  size="default"
+                  >
+                  </rating>
+              </ion-row>
+            <br>
+
+            <ion-row>
+                <ion-col text-center>
+                   4. Cardio:       
+                </ion-col>
+                  <rating [(ngModel)]="rateCardio"
+                  rate="rateCardio"
+                  readonly="true" 
+                  size="default"
+                  >
+                  </rating>
+              </ion-row>
+              <ion-row>
+                  <ion-col text-center>
+                      5. Fuerza:        
+                  </ion-col>
+                    <rating [(ngModel)]="rateFuerza"
+                    rate="rateFuerza"
+                    readonly="true" 
+                    size="default"
+                    >
+                    </rating>
+                </ion-row>
+                <br>
+            <ion-row>
+                <ion-col text-center>
+                    <ion-button expand="block" shape="round" color="tertiary" (click)="goBack()">
+                        Volver
+                      </ion-button>       
+                  </ion-col>
+                </ion-row>
+                <br>
+        
+  </ion-grid>  
+  
+  
+</ion-content>

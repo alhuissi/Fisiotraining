@@ -1,0 +1,208 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-button slot="start" fill="clear" (click)="goBack()">
+            <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+          </ion-button>
+      <ion-title text-center>Evaluación diaria {{fechaToday | date: 'dd/MM/yyyy'}}  </ion-title>
+    </ion-toolbar>
+  </ion-header>
+   
+  <ion-content class="animated fadeIn slow" padding>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+          {{userName}} {{userLastName}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+        
+        </ion-col>
+      </ion-row>
+        <br>
+        <br>
+        <ion-row>
+            <ion-col text-center>
+              <b>Scanning</b>         
+            </ion-col>
+          </ion-row>
+      <ion-row>
+        <ion-col>
+          1. Autopercepión al ejercicio:           
+        </ion-col>
+          <rating [(ngModel)]="rateAutopercepcion"
+          readonly="false" 
+          size="default"
+          (ngModelChange)="onModelChangeAutopercepcion($event)">
+          </rating>
+      </ion-row>
+      <br>
+      <ion-row>
+          <ion-col>
+            2. Alimentación:           
+          </ion-col>
+            <rating [(ngModel)]="rateAlimentacion"
+            readonly="false" 
+            size="default"
+            (ngModelChange)="onModelChangeAlimentacion($event)">
+            </rating>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col>
+              3. Hidratación:           
+            </ion-col>
+              <rating [(ngModel)]="rateHidratacion"
+              readonly="false" 
+              size="default"
+              (ngModelChange)="onModelChangeHidratacion($event)">
+              </rating>
+          </ion-row>
+          <br>
+          <ion-row>
+              <ion-col>
+               4. Stress:           
+              </ion-col>
+                <rating [(ngModel)]="rateStress"
+                readonly="false" 
+                size="default"
+                (ngModelChange)="onModelChangeStress($event)">
+                </rating>
+            </ion-row> 
+            <br>
+            <ion-row>
+                <ion-col>
+                 5. Calidad de sueño:           
+                </ion-col>
+                  <rating [(ngModel)]="rateSueno"
+                  readonly="false" 
+                  size="default"
+                  (ngModelChange)="onModelChangeSueno($event)">
+                  </rating>
+              </ion-row> 
+              <br>
+              <br>
+
+              <ion-row>
+            <ion-col text-center>
+              <b>Intensidad</b>         
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                  1. Circuito 1:         
+              </ion-col>
+                <rating [(ngModel)]="rateCircuito1"
+                readonly="false" 
+                size="default"
+                (ngModelChange)="onModelChangeCircuito1($event)">
+                </rating>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-col>
+                    2. Circuito 2:        
+                </ion-col>
+                  <rating [(ngModel)]="rateCircuito2"
+                  readonly="false" 
+                  size="default"
+                  (ngModelChange)="onModelChangeCircuito2($event)">
+                  </rating>
+              </ion-row>
+              <br>
+              <ion-row>
+                  <ion-col>
+                      3. Circuito 3:         
+                  </ion-col>
+                    <rating [(ngModel)]="rateCircuito3"
+                    readonly="false" 
+                    size="default"
+                    (ngModelChange)="onModelChangeCircuito3($event)">
+                    </rating>
+                </ion-row>
+                <br>
+                <br>
+       
+                <ion-row>
+                  <ion-col text-center>
+                    <b>Entrenamiento</b>         
+                  </ion-col>
+                </ion-row>
+          <ion-row>
+              <ion-col>
+                  1. Tren Superior:      
+              </ion-col>
+                <rating [(ngModel)]="rateBrazos"
+                readonly="false" 
+                size="default"
+                (ngModelChange)="onModelChangeBrazos($event)">
+                </rating>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-col>
+                    2. Tren Inferior:    
+                </ion-col>
+                  <rating [(ngModel)]="ratePiernas"
+                  readonly="false" 
+                  size="default"
+                  (ngModelChange)="onModelChangePiernas($event)">
+                  </rating>
+              </ion-row>
+              <br>
+              <ion-row>
+                  <ion-col>
+                      3. CORE:    
+                  </ion-col>
+                    <rating [(ngModel)]="rateCore"
+                    readonly="false" 
+                    size="default"
+                    (ngModelChange)="onModelChangeCore($event)">
+                    </rating>
+                </ion-row>
+                <br>
+                
+              <ion-row>
+                  <ion-col>
+                      4. Cardio:      
+                  </ion-col>
+                    <rating [(ngModel)]="rateCardio"
+                    readonly="false" 
+                    size="default"
+                    (ngModelChange)="onModelChangeCardio($event)">
+                    </rating>
+                </ion-row>
+                <br>
+                <ion-row>
+                    <ion-col>
+                        5. Fuerza:      
+                    </ion-col>
+                      <rating [(ngModel)]="rateFuerza"
+                      readonly="false" 
+                      size="default"
+                      (ngModelChange)="onModelChangeFuerza($event)">
+                      </rating>
+                  </ion-row>
+              <br>
+              <br>
+              <ion-row>
+                  <ion-col text-center>
+                      <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="guardarEvaluacion()">
+                          Guardar
+                        </ion-button>       
+                    </ion-col>
+              </ion-row>
+              <ion-row>
+                    <ion-col text-center>
+                        <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="goBack()">
+                            Volver
+                          </ion-button>       
+                      </ion-col>
+                  </ion-row>
+  
+          
+    </ion-grid>  
+    
+    
+  </ion-content>

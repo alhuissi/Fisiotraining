@@ -2,9 +2,37 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: bolder;
+  src: url('../assets/fonts/OpenSans/OpenSans-Bold.ttf');
+}
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/OpenSans/OpenSans-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: lighter;
+  src: url('../assets/fonts/OpenSans/OpenSans-Light.ttf');
+}
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/OpenSans/OpenSans-Regular.ttf');
+}
+
 :root {
+
+  --ion-font-family: 'OpenSans';
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #2f4a81;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -20,7 +48,7 @@
   --ion-color-secondary-tint: #24d6ea;
 
   /** tertiary **/
-  --ion-color-tertiary: #7044ff;
+  --ion-color-tertiary: #0ca1e8;
   --ion-color-tertiary-rgb: 112, 68, 255;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
@@ -52,7 +80,7 @@
   --ion-color-danger-tint: #f25454;
 
   /** dark **/
-  --ion-color-dark: #222428;
+  --ion-color-dark: #222;
   --ion-color-dark-rgb: 34, 34, 34;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
@@ -68,10 +96,14 @@
   --ion-color-medium-tint: #a2a4ab;
 
   /** light **/
-  --ion-color-light: #f4f5f8;
+  --ion-color-light: #f4f4f4;
   --ion-color-light-rgb: 244, 244, 244;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --ion-color-roze: #FFBF8D;
+  --ion-color-verde: #b7ce48;
 }
+
