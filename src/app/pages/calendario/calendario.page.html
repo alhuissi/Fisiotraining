@@ -1,52 +1,112 @@
 
     <ion-header>
-        <ion-toolbar color="primary">
+        <ion-toolbar color="dark">
             <ion-button slot="end"  (click)="presentActionSheet()">
-                <ion-icon name="person"></ion-icon>
+                <ion-icon name="power"></ion-icon>
               </ion-button>
               <ion-title text-center>Calendario</ion-title>
         </ion-toolbar>
-      </ion-header>
-       
-      <ion-content  padding class="background">
-       
-        <!-- Card for adding a new event -->
-        <ion-card class="animated fadeIn slow" *ngIf="authIsKine">
-          <ion-card-header tappable (click)="collapseCard = !collapseCard">
-            <ion-card-title>Agregar Sesión</ion-card-title>
-          </ion-card-header>
-          <ion-card-content *ngIf="!collapseCard">
-       
-            <ion-item>
-              <ion-label>Comienza</ion-label>
-              <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
-            </ion-item>
-            <ion-item>
-              <ion-label>Termina</ion-label>
-              <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
-            </ion-item>
-            <ion-button expand="block" (click)="addEvent()" [disabled]="event.title == ''">Agregar Sesión</ion-button>
-       
-          </ion-card-content>
-        </ion-card>
+    </ion-header>
 
-        <ion-card class="animated fadeIn slow" *ngIf="!authIsKine">
+    <ion-content  padding class="background">      
+
+
+        <!-- Para los Administradores -->
+        <ion-card class="animated fadeIn slow" *ngIf="authIsAdmin">
             <ion-card-header tappable (click)="collapseCard = !collapseCard">
-              <ion-card-title>Escoge un horario de preferencia</ion-card-title>
+              <ion-card-title color='dark'>COORDINAR UN NUEVO ENTRENAMIENTO:</ion-card-title>
             </ion-card-header>
             <ion-card-content *ngIf="!collapseCard">
          
               <ion-item>
-                <ion-label>Fecha</ion-label>
+                <ion-label>Fecha: </ion-label>
                 <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
               </ion-item>
-              <ion-button expand="block" (click)="solicitarSesion()" [disabled]="event.title == ''">Solicitar Sesión</ion-button>
+            <!--  <ion-item>
+                <ion-label>Termina:</ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
+              </ion-item>
+              -->
+              <ion-item>
+                  
+                 
+                  <ion-button  (click)="openEscogerUser()">Seleccionar Paciente</ion-button>
+                  <ion-label text-center>{{userSelected}} {{userSelectedLastName}}</ion-label>
+                
+              </ion-item>
+              <ion-item>
+                 
+                  
+                  <ion-button  (click)="openEscogerKine()">Seleccionar Coach</ion-button>
+                  <ion-label text-center>{{kineSelected}} {{kineSelectedLastName}}</ion-label>
+                
+              </ion-item>
+              <ion-button expand="block" (click)="agregarSesion()" [disabled]="event.title == ''">Agregar</ion-button>
          
             </ion-card-content>
           </ion-card>
+
+        <!-- Para los Kinesiólogos -->
+        <!--
+        <ion-card class="animated fadeIn slow" *ngIf="authIsKine">
+          <ion-card-header tappable (click)="collapseCard = !collapseCard">
+            <ion-card-title color='light'>Agregar una nueva sesión de Fisiotraining:</ion-card-title>
+          </ion-card-header>
+          <ion-card-content *ngIf="!collapseCard">
+       
+            <ion-item>
+              <ion-label>Fecha: </ion-label>
+              <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>Paciente: </ion-label>
+                <ion-label text-center>{{userSelected}}</ion-label>
+                <ion-button  (click)="openEscogerUser()" >Seleccionar Paciente</ion-button>
+              
+            </ion-item>
+            <ion-button expand="block" (click)="agregarSesion()" [disabled]="event.title == ''">Agregar Sesión</ion-button>
+       
+          </ion-card-content>
+        </ion-card>
+        -->
+        <!-- Para los Clientes -->
+        <ion-card class="animated fadeIn slow" *ngIf="authIsUsuario">
+            <ion-card-header tappable (click)="collapseCard = !collapseCard">
+              <ion-card-title color='dark'>SOLICITAR UN ENTRENAMIENTO:</ion-card-title>
+            </ion-card-header>
+            <ion-card-content *ngIf="!collapseCard">
+         
+              <ion-item>
+                <ion-label>Fecha:</ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+              </ion-item>
+              <ion-button expand="block" (click)="solicitarSesion()" [disabled]="event.title == ''">Solicitar</ion-button>
+         
+            </ion-card-content>
+        </ion-card>
+
+
+        <!-- Para las Visitas -->
+        <ion-card class="animated fadeIn slow" *ngIf="authIsVisita">
+            <ion-card-header tappable (click)="collapseCard = !collapseCard">
+              <ion-card-title color='dark'>SOLICITAR UNA SESION:</ion-card-title>
+            </ion-card-header>
+            <ion-card-content *ngIf="!collapseCard">
+         
+              <ion-item>
+                <ion-label>Selecciona una Fecha:</ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+              </ion-item>
+              <ion-button expand="block" (click)="solicitarSesion()" [disabled]="event.title == ''">Solicitar</ion-button>
+         
+            </ion-card-content>
+        </ion-card>
+
+
        
         <ion-row>
           <!-- Change the displayed calendar mode -->
+          
           <ion-col class="animated fadeIn slow" size="4">
             <ion-button expand="block" [color]="calendar.mode == 'month' ? 'primary' : 'secondary'" (click)="changeMode('month')">Mes</ion-button>
           </ion-col>
@@ -56,7 +116,7 @@
           <ion-col class="animated fadeIn slow" size="4">
             <ion-button expand="block" [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" (click)="changeMode('day')">Día</ion-button>
           </ion-col>
-       
+          
           <!-- Move back one screen of the slides -->
           <ion-col class="animated fadeIn slow" size="6" text-left>
             <ion-button fill="clear" (click)="back()">
@@ -80,18 +140,22 @@
               </ion-col>
         </ion-row>
        
-        <calendar 
+        
+        <calendar
         [eventSource]="eventSource" 
         [calendarMode]="calendar.mode" 
         [currentDate]="calendar.currentDate"
-        (onEventSelected)="onEventSelected($event)"
+        (onEventSelected)="onEventSelectedAdmin($event)"  
         (onTitleChanged)="onViewTitleChanged($event)"
         (onTimeSelected)="onTimeSelected($event)" 
         startHour="6"
-        endHour="20"
+        endHour="24"
         step="30"
         startingDayWeek="1">
         </calendar>
+      
+
+        
        
       </ion-content>
 

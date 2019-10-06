@@ -3,7 +3,7 @@
     <ion-button slot="start" fill="clear" (click)="closeComponent()">
       <ion-icon style="color:#fff; font-size: 25px" name="close"></ion-icon>
     </ion-button>
-    <ion-title text-center>¿A quién quieres evaluar?</ion-title>
+    <ion-title text-center>Buscar Usuario por Email</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,9 @@
   
   <ion-row>
       <ion-col class="animated fadeIn" text-center>
-          <ion-label class="animated fadeIn slow">Buscar usuario por su email:</ion-label>
+          <ion-item>
+          <ion-label class="animated fadeIn slow">Ingresa el email del usuario que buscas:</ion-label>
+        </ion-item>
         </ion-col>
   </ion-row>
   <ion-row>
@@ -25,7 +27,7 @@
       <ul *ngFor="let user of users">
           <ion-col class="animated fadeIn" text-center>
           <ion-item (click)="openProfile(user)" [routerLink]="user.url" routerDirection="root" [class.active-item]="selectedPath === user.url">
-          <ion-icon name="happy" size="small" slot="start"></ion-icon> 
+          <ion-icon name="happy" size="large" slot="start"></ion-icon> 
           <ion-label>
           <ion-row ><ion-col><h2><b>{{user.name}} {{user.lastName}}</b></h2></ion-col></ion-row>
           
@@ -39,6 +41,14 @@
         <p>No hay resultados</p>
       </div>
       </ion-col>
+      <br>
+        <ion-row>
+              <ion-col text-center>
+                  <ion-button class="animated fadeIn slow" color="tertiary" (click)="closeComponent()">
+                      Volver
+                    </ion-button>       
+                </ion-col>
+            </ion-row>
 </ion-grid>
 </ion-content>
 

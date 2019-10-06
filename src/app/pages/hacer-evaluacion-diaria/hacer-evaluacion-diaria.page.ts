@@ -38,7 +38,6 @@ export class HacerEvaluacionDiariaPage implements OnInit {
   ratePiernas: number;
   rateHidratacion: number;
   rateCardio: number;
-  rateFuerza: number;
   rateStress: number;
   rateSueno: number;
 
@@ -73,7 +72,6 @@ export class HacerEvaluacionDiariaPage implements OnInit {
         piernas: 0,
         hidratacion: 0,
         cardio: 0,
-        fuerza: 0,
         nombre: 'a',
         apellido: '',
         stress: 0,
@@ -126,7 +124,11 @@ export class HacerEvaluacionDiariaPage implements OnInit {
   }
 
   goBack(){
-    this.navCtrl.navigateBack('/tabs/sesion-fisiotraining');
+    this.navCtrl.navigateBack('/tabs/perfil');
+  }
+
+  printCardio(){
+    console.log(this.rateCardio);
   }
 
   onModelChangeAutopercepcion($event){
@@ -176,16 +178,13 @@ export class HacerEvaluacionDiariaPage implements OnInit {
     this.evaluacionPrueba.cardio = this.rateCardio;
   }
 
-  onModelChangeFuerza($event){
-    this.evaluacionPrueba.fuerza = this.rateFuerza;
-  }
 
 
  async presentAlertConfirm() {
   return new Promise(async (resolve) => {
   const alert = await this.alertController.create({
-    header: 'Guardando evaluación...',
-    message: '<strong>Verifica que los datos fueron bien ingresados.</strong>',
+    header: 'Guardar Evaluación',
+    message: '',
     buttons: [
       {
         text: 'Cancelar',
@@ -196,7 +195,7 @@ export class HacerEvaluacionDiariaPage implements OnInit {
           return resolve(false);
         }
       }, {
-        text: 'Ok',
+        text: 'Continuar',
         handler: () => {
           console.log('Guardando evaluación...');
           return resolve(true);
@@ -229,8 +228,7 @@ export class HacerEvaluacionDiariaPage implements OnInit {
               fecha: this.evaluacionPrueba.fecha,
               piernas: this.evaluacionPrueba.piernas,
               hidratacion: this.evaluacionPrueba.hidratacion,
-              cardio: this.evaluacionPrueba.cardio,
-              fuerza: this.evaluacionPrueba.fuerza,
+              cardio: this.evaluacionPrueba.cardio,//this.evaluacionPrueba.cardio,
               nombre: this.userName,
               apellido: this.userLastName,
               stress: this.evaluacionPrueba.stress,
@@ -239,7 +237,7 @@ export class HacerEvaluacionDiariaPage implements OnInit {
               formid: uid
             })
               console.log('Evaluacion guardada con éxito en la base de datos: '+ this.evaluacionPrueba);
-              this.router.navigate(['/tabs/sesion-fisiotraining']);
+              this.router.navigate(['/tabs/perfil']);
           }
            else {
               console.log('Error. No se pudo grabar la evaluación en la base de datos.');

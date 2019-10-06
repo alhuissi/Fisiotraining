@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-button slot="start" fill="clear" (click)="closeComponent()">
+      <ion-icon style="color:#fff; font-size: 25px" name="close"></ion-icon>
+    </ion-button>
+    <ion-title text-center>Seleccionar un Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background" padding>
+<ion-grid>
+  
+  <ion-row>
+      <ion-col class="animated fadeIn" text-center>
+          <ion-item>
+              <ion-label class="animated fadeIn slow">Ingresa el email del usuario que buscas:</ion-label>
+            </ion-item>
+        </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col class="animated fadeIn" text-center>
+      <ion-item>
+       <ion-searchbar placeholder="ejemplo@gmail.com" type="text" [(ngModel)]="searchterm" (keydown)="search($event)"></ion-searchbar>
+      </ion-item>
+      </ion-col>
+    </ion-row>
+      <ul *ngFor="let user of users">
+          <ion-col class="animated fadeIn" text-center>
+          <ion-item (click)="selectUser(user)" [routerLink]="user.url" routerDirection="root" [class.active-item]="selectedPath === user.url">
+          <ion-icon name="happy" size="small" slot="start"></ion-icon> 
+          <ion-label>
+          <ion-row ><ion-col><h2><b>{{user.name}} {{user.lastName}}</b></h2></ion-col></ion-row>
+          
+          <ion-row><ion-col><p>{{user.mail}}</p></ion-col></ion-row>
+          </ion-label>
+      </ion-item>
+      </ion-col>
+      </ul>
+      <ion-col class="animated fadeIn" text-center>
+      <div class="animated fadeIn" *ngIf="users?.length <1">
+        <p>No hay resultados</p>
+      </div>
+      </ion-col>
+</ion-grid>
+</ion-content>

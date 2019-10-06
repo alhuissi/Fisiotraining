@@ -15,7 +15,6 @@ export interface evaluacionDiaria {
     piernas: number,
     hidratacion: number,
     cardio: number,
-    fuerza: number,
     nombre: string,
     apellido: string,
     stress: number,

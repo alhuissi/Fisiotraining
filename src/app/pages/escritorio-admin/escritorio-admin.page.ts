@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
 import { NavController, ModalController, LoadingController } from '@ionic/angular';
 import { AuthenticateService } from '../../services/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -30,6 +33,9 @@ export class EscritorioAdminPage implements OnInit {
   public authIsUsuario: boolean = false;
   public authIsVisita: boolean = false;
   private loading;
+
+  eventSource = [];
+  pages: any = [];
   
  
   constructor(
@@ -41,87 +47,112 @@ export class EscritorioAdminPage implements OnInit {
     private AFauth: AngularFireAuth, 
     private db: AngularFirestore,
     public loadingController: LoadingController,
-    public alertController: AlertController
-  ) {}
+    public alertController: AlertController,
+    public platform: Platform,
+    public userServ: UserService,
+    private appAvailability: AppAvailability,
+    private inAppBrowser: InAppBrowser,
+  ) {
+    this.pages = [
+      { title: "Y O G A", image: "assets/imgs/yoga.jpg" },
+      { title: "B O D Y B U L I D I N G", image: "assets/imgs/bb.jpg" },
+      { title: "P H Y S I Q U E", image: "assets/imgs/physique.jpg" },
+      { title: "F I T N E S S", image: "assets/imgs/fitness.jpg" },
+      { title: "Z U M B A", image: "assets/imgs/zumba.jpg" }
+    ];
+  }
  
- async ngOnInit(){
+ngOnInit(){
     
-    this.loadingController.create({
-      message: 'Haciendo elongaciones...'
-    }).then((overlay) => {
-      this.loading = overlay;
-      this.loading.present();
-    });
     this.authService.getInfo();
     this.userRole = this.authService.whatRole();
+    this.userEmail = this.authService.userDetails().email;
+    this.userID = this.authService.userDetails().uid;
+    this.userName = this.authService.getName();
+    this.userLastName = this.authService.getLastName();
     console.log('this.authservice.whatRole(): ' + this.userRole)
     if(this.authService.userDetails()){
       if(this.authService.whatRole() === 'admin' ){
         this.authIsAdmin = true;
-    }
-      if(this.authService.whatRole() === 'admin' || this.authService.whatRole() === 'profesor' ){
-        
+      }
+      if(this.authService.whatRole() === 'admin' || this.authService.whatRole() === 'profesor' ){    
         this.authIsKine = true;
-    }
-    if(this.authService.whatRole() === 'cliente' ){
-      this.authIsUsuario = true;
-  }
-  if(this.authService.whatRole() === 'visita' ){
-    this.authIsVisita = true;
-}
+      }
+      if(this.authService.whatRole() === 'cliente' ){
+        this.authIsUsuario = true;
+      }
+      if(this.authService.whatRole() === 'visita' ){
+      this.authIsVisita = true;
+      }
 
-   //Buscamos usuario por la id y recuperamos el resto de los datos
-    let docRef = this.db.collection("users").doc(firebase.auth().currentUser.uid);
-    var stuff = []; //for names
-    var stoff = []; //for lastNames
-    var steff = [];  //for role
-
-   await docRef.get().toPromise().then( doc => {
-    
-      if (doc.exists) {
-        stuff = stuff.concat(doc.data().name);
-        stoff = stoff.concat(doc.data().lastName);
-        steff = steff.concat(doc.data().role);
-       } else {
-        // doc.data() will be undefined in this case
-        console.log("No existe");
-       }
-      }).catch(function(error) {
-       console.log("Error de la base de datos: ", error);
-      });
-      
-      let X = stuff.toString();
-      let Y = stoff.toString();
-      let Z = steff.toString();
-      this.authService.currentUser.name = X;
-      this.authService.currentUser.lastName = Y;
-      this.authService.currentUser.role = Z;
-      this.authService.currentUser.uid = this.authService.userDetails().uid;
-  
       console.log('Usuario actual: ');
       console.log(this.authService.currentUser);
-      
-      this.userEmail = this.authService.userDetails().email;
-      this.userID = this.authService.userDetails().uid;
-      this.userName = this.authService.getName();
-      this.userLastName = this.authService.getLastName();
-      this.userRole = this.authService.getRole();
-      this.loading.dismiss();
-      
+
     }else{
-      this.navCtrl.navigateBack('');
-      this.loading.dismiss();
-      
+      this.navCtrl.navigateBack('');  
     }
-    this.loading.dismiss();
   }
 
   ionViewDidEnter(){
     this.userEmail = this.authService.userDetails().email;
-      this.userID = this.authService.userDetails().uid;
-      this.userName = this.authService.getName();
-      this.userLastName = this.authService.getLastName();
-      this.userRole = this.authService.getRole();
+    this.userID = this.authService.userDetails().uid;
+    this.userName = this.authService.getName();
+    this.userLastName = this.authService.getLastName();
+    this.userRole = this.authService.getRole();
+    if(this.authService.userDetails()){
+      if(this.authService.whatRole() === 'admin' ){
+        this.authIsAdmin = true;
+      }
+      if(this.authService.whatRole() === 'admin' || this.authService.whatRole() === 'profesor' ){    
+        this.authIsKine = true;
+      }
+      if(this.authService.whatRole() === 'cliente' ){
+        this.authIsUsuario = true;
+      }
+      if(this.authService.whatRole() === 'visita' ){
+      this.authIsVisita = true;
+      }
+
+      console.log('Usuario actual: ');
+      console.log(this.authService.currentUser);
+
+    }else{
+      this.navCtrl.navigateBack('');  
+    }
+
+    if(this.authService.whatRole() === 'profesor' || this.authService.whatRole() === 'admin'){
+      this.authIsKine = true;
+
+      this.db.collection('sesiones').snapshotChanges().subscribe(colSnap => {
+        this.eventSource = [];
+        colSnap.forEach(snap => {
+          let event:any = snap.payload.doc.data();
+          if (event.idKine === this.userID){
+           event.startTime = event.startTime.toDate();
+           event.endTime = event.endTime.toDate(); 
+           this.eventSource.push(event);
+          }
+        });
+    });  
+    }
+
+    if(this.authService.whatRole() === 'cliente' ){
+      this.authIsUsuario = true;
+
+      this.db.collection('sesiones').snapshotChanges().subscribe(colSnap => {
+        this.eventSource = [];
+        colSnap.forEach(snap => {
+         let event:any = snap.payload.doc.data();
+         console.log(event.idAlumno);
+          if (event.idAlumno === this.userID){
+           event.startTime = event.startTime.toDate();
+           event.endTime = event.endTime.toDate(); 
+           this.eventSource.push(event);
+          }
+        });
+    }); 
+    }
+
   }
  
   logout(){
@@ -140,9 +171,9 @@ export class EscritorioAdminPage implements OnInit {
     this.userID = this.authService.userDetails().uid;
 
     this.userName = this.authService.getName();
-    console.log('ID Escritorio: ' + this.userID);
-    console.log('Name Escritorio: ' + this.userName);
-    console.log('Mail Escritorio: ' + this.userEmail);
+    console.log('ID: ' + this.userID);
+    console.log('Nombre: ' + this.userName);
+    console.log('Mail: ' + this.userEmail);
   }
 
 openEscogerUser(){
@@ -167,6 +198,52 @@ openFisiotrainingTuto(){
 
 openVerSolicitudes(){
   this.router.navigate(['/tabs/solicitudes']);
+}
+
+openProximoPaciente(){
+  this.router.navigate(['/tabs/calendario']);
+}
+
+openCalendario(){
+  this.router.navigate(['/tabs/calendario']);
+}
+
+openAgregarSesion(){
+  this.router.navigate(['/tabs/calendario']);
+}
+
+openMiFicha(){
+  this.userServ.setUser(this.authService.currentUser);
+  this.router.navigate(['/tabs/perfil']);
+}
+
+openInstagram(name) {
+  let app;
+
+  if (this.platform.is('ios')) {
+    app = 'instagram://';
+  } else if (this.platform.is('android')) {
+    app = 'com.instagram.android';
+  } else {
+    const browser: InAppBrowserObject = this.inAppBrowser.create('https://www.instagram.com/' + name);
+    return;
+  }
+
+  this.appAvailability.check(app)
+    .then(
+      (yes: boolean) => {
+        console.log(app + ' is available')
+        // Success
+        // App exists
+        const browser: InAppBrowserObject = this.inAppBrowser.create('instagram://user?username=' + name, '_system');
+      },
+      (no: boolean) => {
+        // Error
+        // App does not exist
+        // Open Web URL
+        const browser: InAppBrowserObject = this.inAppBrowser.create('https://www.instagram.com/' + name, '_system');
+      }
+    );
 }
   
 
@@ -204,28 +281,28 @@ async presentActionSheet() {
       text: this.userName + ' ' + this.userLastName,
       icon: 'person',
       handler: () => {
-        console.log('Nombre clicked');
+        console.log('Nombre');
       }
-    }, {
+    }, /*{
       text: 'Compartir',
       icon: 'share',
       handler: () => {
         console.log('Compartir clicked');
       }
-    }, {
+    }, */ {
       text: 'Desconectarse',
       role: 'destructive',
       icon: 'log-out',
       handler: () => {
         this.logout();
-        console.log('Delete clicked');
+        console.log('Desconectado');
       }
     }, {
       text: 'Cancelar',
       icon: 'close',
       role: 'cancel',
       handler: () => {
-        console.log('Cancel clicked');
+        console.log('Cancelar');
       }
     }]
   });

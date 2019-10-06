@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { message } from '../../models/message';
 import { ChatsService } from "../../services/chats.service";
+import { AuthenticateService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-chat',
@@ -17,7 +18,7 @@ export class ChatComponent implements OnInit {
 
   public room: any;
 
-  constructor(private navParams: NavParams, private modal: ModalController, private chatService : ChatsService) { }
+  constructor(private navParams: NavParams, private authService: AuthenticateService, private modal: ModalController, private chatService : ChatsService) { }
 
   ngOnInit() {
     
@@ -35,6 +36,7 @@ export class ChatComponent implements OnInit {
   sendMessage(){
     const mensaje : message = {
       content : this.msg,
+      author : this.authService.currentUser.name + ' ' +this.authService.currentUser.lastName,
       type: 'test',
       date: new Date()
     }

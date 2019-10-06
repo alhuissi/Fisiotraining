@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="end"  (click)="presentActionSheet()">
+      <ion-icon name="power"></ion-icon>
+    </ion-button>
+    <ion-title text-center>Ayuda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="background">
+    <ion-grid>
+ 
+    
+        <div text-center>
+       <img src="assets/Logo_fisiotraining.png" width='170px' alt="logo"> 
+     </div>
+  
+    <br>
+    <br>
+    <br>
+
+    
+    <ion-row>
+        <ion-col text-center>
+
+            <ion-title color="light" text-center>¿Tienes algunas duda?</ion-title>      
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col text-center>
+
+            <ion-title color="light" text-center>Envíanos un mensaje a:</ion-title>      
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col text-center>
+
+            <ion-title color="light" text-center><h1>contacto@fisiotraining.cl</h1></ion-title>      
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col text-center>
+            <a href="mailto:asistencia@fisiotraining.cl" style="text-decoration: none">
+            <ion-button class="animated fadeIn slow" color="tertiary"  expand="block" shape="round" full>ENVIAR MENSAJE</ion-button>
+            </a>
+        </ion-col>
+    </ion-row>
+
+    </ion-grid> 
+</ion-content>

@@ -36,7 +36,6 @@ export class AbrirEvaluacionDiariaPage implements OnInit {
   ratePiernas: number;
   rateHidratacion: number;
   rateCardio: number;
-  rateFuerza: number;
   rateStress: number;
   rateSueno: number;
 
@@ -69,7 +68,6 @@ export class AbrirEvaluacionDiariaPage implements OnInit {
       this.rateCircuito2 = this.evaDiServ.evaluacionDi.circuito2;
       this.rateCircuito3 = this.evaDiServ.evaluacionDi.circuito3;
       this.rateCore = this.evaDiServ.evaluacionDi.core;
-      this.rateFuerza = this.evaDiServ.evaluacionDi.fuerza;
       this.rateBrazos = this.evaDiServ.evaluacionDi.brazos;
       this.ratePiernas = this.evaDiServ.evaluacionDi.piernas;
       this.rateHidratacion = this.evaDiServ.evaluacionDi.hidratacion;
@@ -98,7 +96,6 @@ export class AbrirEvaluacionDiariaPage implements OnInit {
       this.rateCircuito2 = this.evaDiServ.evaluacionDi.circuito2;
       this.rateCircuito3 = this.evaDiServ.evaluacionDi.circuito3;
       this.rateCore = this.evaDiServ.evaluacionDi.core;
-      this.rateFuerza = this.evaDiServ.evaluacionDi.fuerza;
       this.rateBrazos = this.evaDiServ.evaluacionDi.brazos;
       this.ratePiernas = this.evaDiServ.evaluacionDi.piernas;
       this.rateHidratacion = this.evaDiServ.evaluacionDi.hidratacion;

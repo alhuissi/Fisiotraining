@@ -13,7 +13,6 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       { path: 'first', loadChildren: '../first/first.module#FirstPageModule' },
-      { path: 'second', loadChildren: '../second/second.module#SecondPageModule' },
       { path: 'escritorio-admin', loadChildren: '../escritorio-admin/escritorio-admin.module#EscritorioAdminPageModule'},
       { path: 'mensajeria', loadChildren: '../mensajeria/mensajeria.module#MensajeriaPageModule'},
       { path: 'buscar-usuario', loadChildren: '../buscar-usuario/buscar-usuario.module#BuscarUsuarioPageModule'},
@@ -30,6 +29,10 @@ const routes: Routes = [
       { path: 'solicitudes', loadChildren: '../solicitudes/solicitudes.module#SolicitudesPageModule' },
       { path: 'mis-sesiones', loadChildren: '../mis-sesiones/mis-sesiones.module#MisSesionesPageModule' },
       { path: 'solicitar-sesion', loadChildren: '../solicitar-sesion/solicitar-sesion.module#SolicitarSesionPageModule' },
+      { path: 'ayuda', loadChildren: '../ayuda/ayuda.module#AyudaPageModule' },
+      { path: 'administrador', loadChildren: '../administrador/administrador.module#AdministradorPageModule' },
+      { path: 'ver-listas-usuarios', loadChildren: '../ver-listas-usuarios/ver-listas-usuarios.module#VerListasUsuariosPageModule' },
+      { path: 'mi-ficha', loadChildren: '../mi-ficha/mi-ficha.module#MiFichaPageModule' },
     ]
   },
 ];

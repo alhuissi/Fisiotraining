@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-button slot="start" fill="clear" (click)="goBack()">
+            <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+          </ion-button>
+      <ion-title text-center>Listas de Usuarios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding>
+    <ion-grid> 
+        <br>
+    <ion-row>
+        <ion-col text-center>
+            <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaAdmins()" expand="block" shape="round">
+                Lista de Administradores
+            </ion-button>       
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col text-center>
+              <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaCoachs()" expand="block" shape="round">
+                  Lista de Coachs
+              </ion-button>       
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaPacientes()" expand="block" shape="round">
+                    Lista de Pacientes
+                </ion-button>       
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col text-center>
+                  <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaVisitas()" expand="block" shape="round">
+                      Lista de Visitas
+                  </ion-button>       
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                    <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaUsers()" expand="block" shape="round">
+                        Lista completa de Usuarios 
+                    </ion-button>       
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col text-center>
+                      <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="goBack()" expand="block" shape="round">
+                          Volver
+                      </ion-button>       
+                  </ion-col>
+                </ion-row>
+
+    </ion-grid> 
+</ion-content>

@@ -1,31 +1,45 @@
 <ion-tabs>
 
-  <ion-tab-bar slot="bottom">
+  <ion-tab-bar slot="bottom" class="tabs">
 
-    <ion-tab-button class="tab-button" tab="escritorio-admin" (click)="escritorioTabSelected()">
-      <ion-icon name="sunny"></ion-icon>
-      <ion-label>Panel</ion-label>
+    <ion-tab-button class="tab-button" *ngIf="authIsAdmin" tab="administrador" (click)="adminTabSelected()">
+      <ion-icon name="glasses" size="large"></ion-icon>
+     <!--  <ion-label>Admin</ion-label> -->
     </ion-tab-button>
-
-    <ion-tab-button class="tab-button" *ngIf="authIsKine" tab="buscar-usuario" (click)="buscarTabSelected()">
-      <ion-icon name="search"></ion-icon>
-      <ion-label>Buscar</ion-label>
+    
+    <ion-tab-button class="tab-button" tab="escritorio-admin" (click)="escritorioTabSelected()">
+      <ion-icon name="home" size="large"></ion-icon>
+     <!-- <ion-label>Inicio</ion-label> -->
     </ion-tab-button>
 
     <ion-tab-button class="tab-button" tab="calendario" (click)="calendarioTabSelected()">
-      <ion-icon name="calendar"></ion-icon>
-      <ion-label>Calendario</ion-label>
+      <ion-icon name="calendar" size="large"></ion-icon>
+     <!--  <ion-label>Calendario</ion-label> -->
     </ion-tab-button>
 
-    <ion-tab-button class="tab-button" *ngIf="authIsAlgo" tab="mis-sesiones"(click)="sesionesTabSelected()">
+<!-- <ion-tab-button class="tab-button" *ngIf="authIsAlgo" tab="mis-sesiones"(click)="sesionesTabSelected()">
       <ion-icon name="walk"></ion-icon>
       <ion-label>Mis Sesiones</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button class="tab-button" tab="mensajeria"(click)="mensajeriaTabSelected()">
-      <ion-icon name="mail"></ion-icon>
-      <ion-label>Mis Mensajes (BETA)</ion-label>
+--> 
+
+    <ion-tab-button class="tab-button" *ngIf="authIsAlgo" tab="mensajeria" (click)="mensajeriaTabSelected()">
+      <ion-icon name="mail" size="large"></ion-icon>
+      <!-- <ion-label>Notificaciones</ion-label> -->
     </ion-tab-button>
+
+    <ion-tab-button class="tab-button" *ngIf="authIsVisita" tab="ayuda" (click)="ayudaTabSelected()">
+      <ion-icon name="help-circle" size="large"></ion-icon>
+   <!--    <ion-label>Ayuda</ion-label>   --> 
+    </ion-tab-button>
+
+    <!--
+      <ion-tab-button class="tab-button" tab="ayuda"(click)="ayudaTabSelected()">
+      <ion-icon name="help-circle" size="large"></ion-icon>
+       <ion-label>Ayuda</ion-label> 
+    </ion-tab-button>
+    -->
 
   </ion-tab-bar>
 

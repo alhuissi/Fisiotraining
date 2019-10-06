@@ -5,7 +5,7 @@
         <div class="animated fadeIn slower" text-center>
             <img src="assets/Logo_fisiotraining.png" width='170px' alt="logo"> 
           </div>
-    <form class="animated fadeIn slow" [formGroup]="registerForm" (submit)="tryRegister()" novalidate>
+    <form class="animated fadeIn slow" [formGroup]="registerForm" (submit)="tryRegister()" class="formulario" novalidate>
 
         <ion-item>
           <ion-label position="floating" color="primary">Nombre</ion-label>
@@ -22,7 +22,7 @@
         </ion-item>
   
         <ion-item>
-          <ion-label position="floating" color="primary">Contraseña</ion-label>
+          <ion-label position="floating" color="primary">Password</ion-label>
           <ion-input tappable formControlName="password" type="password" placeholder="" [class.invalid]="!registerForm.controls.password.valid && registerForm.controls.password.dirty"></ion-input>
         </ion-item>
   
@@ -34,13 +34,13 @@
           <p *ngIf="!registerForm.controls.email.valid  &&
                   registerForm.controls.email.dirty">*Por favor ingresa un email válido</p>
           <p *ngIf="!registerForm.controls.password.valid  &&
-          registerForm.controls.password.dirty">*La contraseña debe tener al menos 6 caracteres</p>
+          registerForm.controls.password.dirty">*Los passwords debe tener al menos 6 caracteres</p>
         </ion-item>
       
       <br>
-      <ion-button class="animated fadeIn slower" shape="round" (click)="tryRegister()" color="tertiary" expand="block">Crear una Cuenta</ion-button>
+      <ion-button class="animated fadeIn slower" shape="round" (click)="tryRegister()" color="tertiary" expand="block" strong="true">Crear</ion-button>
       <br>
-      <ion-button class="animated fadeIn slower" shape="round" (click)="goLoginPage()" color="primary" expand="block">Ya tengo una cuenta</ion-button>
+      <ion-button class="animated fadeIn slower" shape="round" (click)="goLoginPage()" color="primary" expand="block" strong="true">Ya tengo una cuenta</ion-button>
     </form>
       </div>
   </ion-content>

@@ -3,33 +3,28 @@
         <ion-button slot="start" fill="clear" (click)="goBack()">
             <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
           </ion-button>
-      <ion-title text-center>Evaluación diaria {{fechaToday | date: 'dd/MM/yyyy'}}  </ion-title>
+      <ion-title text-center> {{userName}} {{userLastName}} {{fechaToday | date: 'dd/MM/yyyy'}}  </ion-title>
     </ion-toolbar>
   </ion-header>
    
-  <ion-content class="animated fadeIn slow" padding>
-    
+  <ion-content class="background" padding>
     <ion-grid>
-      <ion-row>
-        <ion-col text-center>
-          {{userName}} {{userLastName}}
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col text-center>
-        
-        </ion-col>
-      </ion-row>
-        <br>
-        <br>
         <ion-row>
-            <ion-col text-center>
-              <b>Scanning</b>         
-            </ion-col>
-          </ion-row>
+          <ion-col text-center>
+        <div class="animated fadeIn slower" text-center>
+            <img src="assets/spotify.png" width='100px' height='100px' alt="logo" class="center img"> 
+          </div>
+        </ion-col>
+        </ion-row>
+    
+        <ion-card class="animated fadeIn slow card">
+            <ion-card-header>
+                <ion-card-title color='dark' text-center><b>SCANNING</b></ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
       <ion-row>
         <ion-col>
-          1. Autopercepión al ejercicio:           
+          <b>-AUTOPERCEPCION: </b>          
         </ion-col>
           <rating [(ngModel)]="rateAutopercepcion"
           readonly="false" 
@@ -40,7 +35,7 @@
       <br>
       <ion-row>
           <ion-col>
-            2. Alimentación:           
+            <b>-ALIMENTACION: </b>           
           </ion-col>
             <rating [(ngModel)]="rateAlimentacion"
             readonly="false" 
@@ -51,7 +46,7 @@
         <br>
         <ion-row>
             <ion-col>
-              3. Hidratación:           
+              <b>-HIDRATACION: </b>          
             </ion-col>
               <rating [(ngModel)]="rateHidratacion"
               readonly="false" 
@@ -62,7 +57,7 @@
           <br>
           <ion-row>
               <ion-col>
-               4. Stress:           
+               <b>-STRESS: </b>          
               </ion-col>
                 <rating [(ngModel)]="rateStress"
                 readonly="false" 
@@ -73,7 +68,7 @@
             <br>
             <ion-row>
                 <ion-col>
-                 5. Calidad de sueño:           
+                 <b>-SUEÑO: </b>          
                 </ion-col>
                   <rating [(ngModel)]="rateSueno"
                   readonly="false" 
@@ -81,17 +76,26 @@
                   (ngModelChange)="onModelChangeSueno($event)">
                   </rating>
               </ion-row> 
+            </ion-card-content>
+            </ion-card>
+            
               <br>
-              <br>
-
               <ion-row>
-            <ion-col text-center>
-              <b>Intensidad</b>         
-            </ion-col>
-          </ion-row>
+                  <ion-col text-center>
+                  <div class="animated fadeIn slower" text-center>
+                      <img src="assets/clock.png" width='100px' height='100px' alt="logo" class="center img"> 
+                    </div>
+                    </ion-col>
+                  </ion-row>
+
+              <ion-card class="animated fadeIn slow card">
+                  <ion-card-header>
+                      <ion-card-title color='dark' text-center><b>CIRCUITOS</b> </ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
           <ion-row>
               <ion-col>
-                  1. Circuito 1:         
+                  <b>-CIRCUITO 1: </b>        
               </ion-col>
                 <rating [(ngModel)]="rateCircuito1"
                 readonly="false" 
@@ -102,7 +106,7 @@
             <br>
             <ion-row>
                 <ion-col>
-                    2. Circuito 2:        
+                    <b>-CIRCUITO 2: </b>        
                 </ion-col>
                   <rating [(ngModel)]="rateCircuito2"
                   readonly="false" 
@@ -113,7 +117,7 @@
               <br>
               <ion-row>
                   <ion-col>
-                      3. Circuito 3:         
+                      <b>-CIRCUITO 3:  </b>        
                   </ion-col>
                     <rating [(ngModel)]="rateCircuito3"
                     readonly="false" 
@@ -121,28 +125,30 @@
                     (ngModelChange)="onModelChangeCircuito3($event)">
                     </rating>
                 </ion-row>
-                <br>
+              </ion-card-content>
+              </ion-card>
                 <br>
        
-                <ion-row>
-                  <ion-col text-center>
-                    <b>Entrenamiento</b>         
-                  </ion-col>
-                </ion-row>
-          <ion-row>
-              <ion-col>
-                  1. Tren Superior:      
-              </ion-col>
-                <rating [(ngModel)]="rateBrazos"
-                readonly="false" 
-                size="default"
-                (ngModelChange)="onModelChangeBrazos($event)">
-                </rating>
-            </ion-row>
+                <ion-card class="animated fadeIn slow card">
+                    <ion-card-header>
+                        <ion-card-title color='dark' text-center><b>ENTRENAMIENTO</b></ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                    <ion-row>
+                        <ion-col>
+                            <b>-CORE:  </b>   
+                        </ion-col>
+                          <rating [(ngModel)]="rateCore"
+                          readonly="false" 
+                          size="default"
+                          (ngModelChange)="onModelChangeCore($event)">
+                          </rating>
+                      </ion-row>
+          
             <br>
             <ion-row>
                 <ion-col>
-                    2. Tren Inferior:    
+                    <b>-TREN INFERIOR: </b>    
                 </ion-col>
                   <rating [(ngModel)]="ratePiernas"
                   readonly="false" 
@@ -153,19 +159,28 @@
               <br>
               <ion-row>
                   <ion-col>
-                      3. CORE:    
+                      <b>-TREN SUPERIOR: </b>      
                   </ion-col>
-                    <rating [(ngModel)]="rateCore"
+                    <rating [(ngModel)]="rateBrazos"
                     readonly="false" 
                     size="default"
-                    (ngModelChange)="onModelChangeCore($event)">
+                    (ngModelChange)="onModelChangeBrazos($event)">
                     </rating>
                 </ion-row>
+              
                 <br>
-                
+                <ion-range [(ngModel)]="rateCardio" min="1" max="10" color="secondary" value='50' disabled="false" (ngModelChange)="onModelChangeCardio($event)">
+                    <ion-icon  slot="start" name="heart"></ion-icon>
+                    <ion-icon  slot="end" name="heart-dislike"></ion-icon>
+
+                  </ion-range>
+                  <!-- <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="printCardio()">
+                    Print Cardio
+                  </ion-button>  -->
+            <!---   
               <ion-row>
                   <ion-col>
-                      4. Cardio:      
+                      -Cardio:      
                   </ion-col>
                     <rating [(ngModel)]="rateCardio"
                     readonly="false" 
@@ -176,27 +191,37 @@
                 <br>
                 <ion-row>
                     <ion-col>
-                        5. Fuerza:      
+                        -Fuerza:      
                     </ion-col>
                       <rating [(ngModel)]="rateFuerza"
                       readonly="false" 
                       size="default"
                       (ngModelChange)="onModelChangeFuerza($event)">
                       </rating>
-                  </ion-row>
-              <br>
+                  </ion-row>  -->
+
+                  <br>
+                </ion-card-content>
+                </ion-card>   
+                <ion-row>
+                    <ion-col text-center>
+                    <div class="animated fadeIn slower" text-center>
+                        <img src="assets/instagram.png" width='100px' height='100px' alt="logo" class="center img"> 
+                      </div>
+                      </ion-col>
+                    </ion-row>
               <br>
               <ion-row>
                   <ion-col text-center>
                       <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="guardarEvaluacion()">
-                          Guardar
+                          GUARDAR
                         </ion-button>       
                     </ion-col>
               </ion-row>
               <ion-row>
                     <ion-col text-center>
                         <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="goBack()">
-                            Volver
+                            VOLVER
                           </ion-button>       
                       </ion-col>
                   </ion-row>

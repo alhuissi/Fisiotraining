@@ -1,5 +1,15 @@
 :host {
     ion-content.background{
-        --background: url(../../../assets/background3.jpg) 0 0/100% 100% no-repeat;
+        --background: url(../../../assets/bck4.jpg) 0 0/100% 100% no-repeat;
     }
     }
+
+    rating {
+        ion-icon {
+          color: gray;
+      
+          &.filled {
+            color: #b7ce48;
+          }
+        }
+      }

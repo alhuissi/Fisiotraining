@@ -1,10 +1,10 @@
 export interface sesionFisio {
 
-    nombre: string,
-    apellido: string,
-    kine: string,
-     userID: string,
-     kineID: string,
+    nombreKine: string,
+    nombreAlumno: string,
+    idKine: string,
+    idAlumno: string,
+    fechaEmision: string,
     fecha: string,
     id: string,
 }

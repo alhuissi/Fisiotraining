@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from '@angular/fire/firestore';
 
-interface user {
+export interface user {
     name: string,
     lastName: string,
     uid: string,
@@ -39,6 +39,11 @@ export class UserService {
     getRole(){
         return this.user.role
     }
+
+    getallusers() {
+        return this.db.collection('users', ref => ref.orderBy('name')).valueChanges();
+      }
+
     changeRole(newRol: string){
 
         this.db.collection('users').doc(this.user.uid).update({

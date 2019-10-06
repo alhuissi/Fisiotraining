@@ -20,7 +20,7 @@
 
     <ion-list>
         <ion-item *ngFor= "let evaluacion of evas | async" (click)="openEvaluacion(evaluacion)" [routerLink]="evaluacion.url" routerDirection="root" [class.active-item]="selectedPath === evaluacion.url">
-              <ion-icon name="list-box" size="small" slot="start"></ion-icon> 
+              <ion-icon name="list-box" size="large" slot="start"></ion-icon> 
 
         <ion-label class="animated fadeIn slow">
           <h2><b>Fecha: {{evaluacion.fecha.toDate()}}</b></h2>

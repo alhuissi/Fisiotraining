@@ -1,6 +1,34 @@
 
 :host{
 ion-content.background{
-    --background: url(../../../../assets/login-background.png) 0 0/100% 100% no-repeat;
+    --background: url(../../../../assets/bck5.jpg) 0 0/100% 100% no-repeat;
 }
+}
+
+#rounded {
+    width: 100%;
+    height: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 10px;
+    margin-bottom: 10px;  
+}
+
+#container {
+    width: 300px; 
+    margin-left:auto; 
+    margin-right: auto; 
+    
+}
+
+.formulario{
+
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 25px;
+    opacity: 0.8;
+    -moz-opacity: 0.8;
+    filter: alpha(opacity=80);
+    -khtml-opacity: 0.8;
+
 }

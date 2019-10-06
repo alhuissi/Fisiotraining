@@ -43,7 +43,7 @@ export class SesionFisiotrainingPage implements OnInit {
     if(this.authService.userDetails()){
 
       this.ultimaEva = this.evaDiariaServ.getEvaluacion();
-      this.openVerUltimaEvaluacion(); //abre última sesión en un componente
+     //this.openVerUltimaEvaluacion(); //abre última sesión en un componente
 
       this.userID = this.userServ.getUID();
       this.userEmail = this.userServ.getEmail();
@@ -97,7 +97,7 @@ export class SesionFisiotrainingPage implements OnInit {
   }
 
   goBack(){
-    this.navCtrl.navigateBack('/tabs/perfil');
+    this.navCtrl.navigateBack('/tabs/escritorio-admin');
   }
 
   openHacerEvaluacionDiariaPage(){
@@ -114,6 +114,10 @@ export class SesionFisiotrainingPage implements OnInit {
 
   openVerEvaluacionesPage(){
     this.router.navigate(['/tabs/ver-evaluaciones']);
+  }
+
+  evaluarSesion(){
+    
   }
 
   async openVerUltimaEvaluacion(){

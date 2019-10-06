@@ -7,3 +7,28 @@ rating {
     }
   }
 }
+
+.center {
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  
+}
+
+.img{
+  border-radius: 25px;
+}
+
+
+
+:host {
+  ion-content.background{
+      --background: url(../../../assets/background2.jpg) 0 0/100% 100% no-repeat;
+  }
+  }
+
+  .card {
+    background-color: #fff;
+  }

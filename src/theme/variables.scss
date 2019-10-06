@@ -3,6 +3,7 @@
 
 /** Ionic CSS Variables **/
 
+/**
 @font-face {
   font-family: 'OpenSans';
   font-style: normal;
@@ -27,10 +28,41 @@
   font-weight: normal;
   src: url('../assets/fonts/OpenSans/OpenSans-Regular.ttf');
 }
+**/
+@font-face {
+  font-family: 'amurg';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/amurg/Amurg-Regular.otf');
+}
+@font-face {
+  font-family: 'axton';
+  font-style: normal;
+  font-weight: bolder;
+  src: url('../assets/fonts/axton/AXTON-Stroke.otf');
+}
+@font-face {
+  font-family: 'axton';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/axton/AXTON.otf');
+}
+@font-face {
+  font-family: 'axton';
+  font-style: normal;
+  font-weight: lighter;
+  src: url('../assets/fonts/axton/AXTON-Line.otf');
+}
+@font-face {
+  font-family: 'axton';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/axton/AXTON.otf');
+}
 
 :root {
 
-  --ion-font-family: 'OpenSans';
+  --ion-font-family: 'amurg';
   /** primary **/
   --ion-color-primary: #2f4a81;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -48,7 +80,7 @@
   --ion-color-secondary-tint: #24d6ea;
 
   /** tertiary **/
-  --ion-color-tertiary: #0ca1e8;
+  --ion-color-tertiary: #b7ce48;
   --ion-color-tertiary-rgb: 112, 68, 255;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;

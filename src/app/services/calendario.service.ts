@@ -10,6 +10,7 @@ import { firestore } from 'firebase';
 export interface calendarioFisio {
 
     sesiones: sesionFisio[],
+    eventos: [],
     nombre: string,
     apellido: string,
     userID: string,

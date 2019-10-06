@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="end"  (click)="presentActionSheet()">
+      <ion-icon name="power"></ion-icon>
+    </ion-button>
+    <ion-title text-center>Panel Administrador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="background">
+  <ion-grid>
+    <br>
+    <ion-row>
+      <ion-col text-center>
+          <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openVerSolicitudes()" expand="block" shape="round">
+             Ver Solicitudes
+            </ion-button>       
+        </ion-col>
+      </ion-row>
+
+  <ion-row>
+    <ion-col text-center>
+        <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openEscogerUser()" expand="block" shape="round">
+            Buscar Usuario
+        </ion-button>       
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col text-center>
+          <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaUsers()" expand="block" shape="round">
+              Ver listas de Usuarios
+          </ion-button>       
+      </ion-col>
+    </ion-row>
+
+  <ion-row>
+      <ion-col text-center>
+          <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openEnviarNotificacion()" expand="block" shape="round">
+              Enviar Notificacion
+          </ion-button>       
+      </ion-col>
+  </ion-row>
+
+
+      <ion-list class="animated fadeIn slow" class="bg-transparent">
+        <ion-item *ngFor= "let chat of chatRooms" color="none" lines="none" (click)="openChat(chat)">
+            <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary"  expand="block" shape="round">
+                {{chat.name}}
+            </ion-button> 
+        </ion-item>
+      </ion-list>      
+
+
+    </ion-grid>
+</ion-content>

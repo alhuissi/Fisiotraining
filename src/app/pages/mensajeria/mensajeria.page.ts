@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatsService, chat } from '../../services/chats.service';
+import { NotificacionService, chat } from '../../services/notificaciones.service';
 import { NavController, ModalController } from '@ionic/angular';
 import { AuthenticateService } from '../../services/authentication.service';
 import { ChatComponent } from '../chat/chat.component';
 import { ActionSheetController } from '@ionic/angular';
-
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mensajeria',
@@ -26,38 +27,35 @@ export class MensajeriaPage implements OnInit {
 
   public chatRooms: any = [];
 
-  constructor(public authService: AuthenticateService, private navCtrl: NavController, public chatservice: ChatsService, private modal: ModalController, public actionSheetController: ActionSheetController) { }
+  constructor(private router: Router, public alertController: AlertController, public authService: AuthenticateService, private navCtrl: NavController, public chatservice: NotificacionService, private modal: ModalController, public actionSheetController: ActionSheetController) { }
 
 
   ngOnInit(){
     
     if(this.authService.userDetails()){
-
       this.userEmail = this.authService.userDetails().email;
-    this.userID = this.authService.userDetails().uid;
-    this.userName = this.authService.getName();
-    this.userLastName = this.authService.getLastName();
-    this.userRole = this.authService.getRole();
+      this.userID = this.authService.userDetails().uid;
+      this.userName = this.authService.getName();
+      this.userLastName = this.authService.getLastName();
+      this.userRole = this.authService.getRole();
 
-    if(this.authService.whatRole() === 'admin' ){
-      this.authIsAdmin = true;
-  }
-    if(this.authService.whatRole() === 'admin' || this.authService.whatRole() === 'profesor' ){
-      
-      this.authIsKine = true;
+      if(this.authService.whatRole() === 'admin' ){
+       this.authIsAdmin = true;
+       }
+      if(this.authService.whatRole() === 'admin' || this.authService.whatRole() === 'profesor' ){    
+        this.authIsKine = true;
+      }
+      if(this.authService.whatRole() === 'cliente' ){
+        this.authIsUsuario = true;
+      }
+      if(this.authService.whatRole() === 'visita' ){
+        this.authIsVisita = true;
+      }
 
-  }
-  if(this.authService.whatRole() === 'cliente' ){
-    this.authIsUsuario = true;
-}
-if(this.authService.whatRole() === 'visita' ){
-  this.authIsVisita = true;
-}
-
-    this.chatservice.getChatRooms().subscribe( chats => {
+      this.chatservice.getChatRooms().subscribe( chats => {
       this.chatRooms = chats;
-    })
-  }
+       })
+    }
     else{
       this.navCtrl.navigateBack('');
     }
@@ -69,8 +67,20 @@ if(this.authService.whatRole() === 'visita' ){
       this.userName = this.authService.getName();
       this.userLastName = this.authService.getLastName();
       this.userRole = this.authService.getRole();
+      
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Función Bloqueada',
+      subHeader: 'Por favor solicita una sesión',
+      message: 'Debes ser miembro para acceder a esta función',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+    
+  }
 
   logout(){
     this.authService.logoutUser().then(res => {
@@ -84,12 +94,12 @@ if(this.authService.whatRole() === 'visita' ){
 
   openChat(chat){
 
-    this.modal.create({
+   /* this.modal.create({
       component: ChatComponent,
       componentProps : {
         chat: chat
       }
-    }).then( (modal) => modal.present())
+    }).then( (modal) => modal.present()) */
 
   }
 
@@ -102,13 +112,13 @@ if(this.authService.whatRole() === 'visita' ){
         handler: () => {
           console.log('Nombre clicked');
         }
-      }, {
+      }, /*{
         text: 'Compartir',
         icon: 'share',
         handler: () => {
           console.log('Compartir clicked');
         }
-      }, {
+      }, */{
         text: 'Desconectarse',
         role: 'destructive',
         icon: 'log-out',

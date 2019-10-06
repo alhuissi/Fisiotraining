@@ -17,3 +17,15 @@
     margin-right: auto;
     width: 10%;
 }
+
+.weekview-allday-table, .dayview-allday-table {
+    display: none;
+  }
+  
+  .weekview-normal-event-container {
+    margin-top: 37px !important;
+  }
+  
+  .dayview-normal-event-container {
+    margin-top: 0 !important;
+  }

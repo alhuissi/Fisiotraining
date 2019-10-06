@@ -1,6 +1,36 @@
 
-:host {
-    ion-content.background{
-        --background: url(../../../assets/login-background.png) 0 0/100% 100% no-repeat;
+//:host {
+ //   ion-content.background{
+ 
+       // --background: url(../../../assets/background2.jpg) 0 0/100% 100% no-repeat;
+  //  }
+  //  }
+
+    :host{
+        ion-item {
+     --border-style: none;
+      --inner-padding-end: 0;
+      --padding-start: 0;
     }
     }
+
+        .label {
+          margin: 0;
+       }
+       :host{
+       .imagediv{
+          height:200px;
+          justify-content: center;
+          display: flex;
+          vertical-align: middle;
+          align-items: center;
+          width: 100%;
+           font-size: 30px;
+        color:white;
+       }
+       }
+        :host {
+          ion-list{
+  margin: 0;
+        }
+      }

@@ -11,6 +11,9 @@
   <div *ngIf = "room">
       <ion-card *ngFor="let mensaje of room.messages">
           <ion-card-content>
+              <b>{{mensaje.author}}</b>
+          </ion-card-content>
+          <ion-card-content>
               {{mensaje.content}}
           </ion-card-content>
         </ion-card>

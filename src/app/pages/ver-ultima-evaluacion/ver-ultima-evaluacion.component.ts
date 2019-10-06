@@ -40,7 +40,6 @@ export class VerUltimaEvaluacionComponent implements OnInit {
   ratePiernas: number;
   rateHidratacion: number;
   rateCardio: number;
-  rateFuerza: number;
   rateStress: number;
   rateSueno: number;
 
@@ -83,7 +82,6 @@ export class VerUltimaEvaluacionComponent implements OnInit {
       this.rateCircuito2 = this.evaluacion.circuito2;
       this.rateCircuito3 = this.evaluacion.circuito3;
       this.rateCore = this.evaluacion.core;
-      this.rateFuerza = this.evaluacion.fuerza;
       this.rateBrazos = this.evaluacion.brazos;
       this.ratePiernas = this.evaluacion.piernas;
       this.rateHidratacion = this.evaluacion.hidratacion;

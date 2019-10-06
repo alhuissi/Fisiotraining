@@ -7,6 +7,7 @@ import { Subject, Observable, combineLatest } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { AlertController } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EvaluacionDiariaService, evaluacionDiaria } from '../../services/evaluacion-diaria.service';
 
@@ -35,7 +36,18 @@ export class PerfilPage implements OnInit {
   userID: string;
   userRole: string;
   authRole: string;
+
+  rateCore: number;
+  rateSup: number;
+  rateInf: number;
+  rateCardio: number;
+
+  fechaToday;
+
+  public authIsKine: boolean = false;
   public authIsAdmin: boolean = false;
+  public authIsUsuario: boolean = false;
+  public authIsVisita: boolean = false;
 
   evaDiCollection: AngularFirestoreCollection<evaluacionDiaria>;
   evas: Observable<evaluacionDiaria[]>;
@@ -51,7 +63,6 @@ export class PerfilPage implements OnInit {
     piernas: 0,
     hidratacion: 0,
     cardio: 0,
-    fuerza: 0,
     nombre: '',
     apellido: '',
     stress: 0,
@@ -65,6 +76,7 @@ export class PerfilPage implements OnInit {
 
  
   constructor(
+    public actionSheetController: ActionSheetController,
     private navCtrl: NavController,
     private evaDiServ: EvaluacionDiariaService,
     private authService: AuthenticateService,
@@ -75,22 +87,54 @@ export class PerfilPage implements OnInit {
   ) {}
  
   async ngOnInit(){
+    this.fechaToday = Date.now();
     if(this.authService.userDetails()){
-     
+      if(this.authService.whatRole() === 'admin' ){
+        this.authIsAdmin = true;
+       }
+      if(this.authService.whatRole() === 'admin' || this.authService.whatRole() === 'profesor' ){
+        
+        this.authIsKine = true;
+       }
+      if(this.authService.whatRole() === 'cliente' ){
+        this.authIsUsuario = true;
+      }
+      if(this.authService.whatRole() === 'visita' ){
+        this.authIsVisita = true;
+       }
 
     }else{
       this.navCtrl.navigateBack('');
     }
 
-    if(this.authService.whatRole() === 'admin'){
-        this.authIsAdmin = true;
-    }else{
+  }
 
-    }
-
+  goBack(){
+    this.navCtrl.navigateBack('/tabs/escritorio-admin');
   }
 
  async ionViewDidEnter(){
+
+  this.fechaToday = Date.now();
+    if(this.authService.userDetails()){
+      if(this.authService.whatRole() === 'admin' ){
+        this.authIsAdmin = true;
+       }
+      if(this.authService.whatRole() === 'admin' || this.authService.whatRole() === 'profesor' ){
+        
+        this.authIsKine = true;
+       }
+      if(this.authService.whatRole() === 'cliente' ){
+        this.authIsUsuario = true;
+      }
+      if(this.authService.whatRole() === 'visita' ){
+        this.authIsVisita = true;
+       }
+
+    }else{
+      this.navCtrl.navigateBack('');
+    }
+    
     if(this.authService.userDetails()){
       
 
@@ -119,7 +163,6 @@ export class PerfilPage implements OnInit {
       var Spiernas= [];
       var Shidratacion= [];
       var Scardio= [];
-      var Sfuerza= [];
       var Snombre= [];
       var Sapellido= [];
       var Sstress= [];
@@ -147,7 +190,6 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
             Spiernas = Spiernas.concat(doc.data().piernas);
             Shidratacion = Shidratacion.concat(doc.data().hidratacion);
             Scardio = Scardio.concat(doc.data().cardio);
-            Sfuerza = Sfuerza.concat(doc.data().fuerza);
             Snombre = Snombre.concat(doc.data().nombre);
             Sapellido = Sapellido.concat(doc.data().apellido);
             Sstress = Sstress.concat(doc.data().stress);
@@ -176,7 +218,6 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
     let SSpiernas = Number(Spiernas.toString());
     let SShidratacion = Number(Shidratacion.toString());
     let SScardio = Number(Scardio.toString());
-    let SSfuerza = Number(Sfuerza.toString());
     let SSnombre = Snombre.toString();
     let SSapellido = Sapellido.toString();
     let SSstress = Number(Sstress.toString());
@@ -200,7 +241,6 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
     this.evaluacion.piernas = SSpiernas;
     this.evaluacion.hidratacion = SShidratacion;
     this.evaluacion.cardio = SScardio;
-    this.evaluacion.fuerza = SSfuerza;
     this.evaluacion.nombre = SSnombre;
     this.evaluacion.apellido = SSapellido;
     this.evaluacion.stress = SSstress;
@@ -210,6 +250,11 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
     this.evaluacion.mailAutor = SSmailAutor;
     this.evaluacion.nombreAutor = SSnombreAutor;
     this.evaluacion.IDAutor = SSIDAutor;
+
+    this.rateCore = SScore;
+    this.rateInf = SSpiernas;
+    this.rateSup = SSbrazos;
+    this.rateCardio = SScardio;
 
     this.evaDiServ.setEvaluacion(this.evaluacion);
     // this.evaluacion = this.afs.collection('evaluacion-diaria').doc(X);
@@ -238,13 +283,13 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
   }
 
 
-  openSesionFisiotrainingPage(){
+  openHacerEvaluacionDiariaPage(){
     
     console.log(this.evaluacion);
     this.evaDiServ.setEvaluacion(this.evaluacion);
 
     //leer última evaluación
-    this.router.navigate(['/tabs/sesion-fisiotraining']);
+    this.router.navigate(['/tabs/hacer-evaluacion-diaria']);
   }
 
   
@@ -263,8 +308,6 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
 
   cambiarRol(){
     this.presentAlertRadio();
-    //this.userRole = newRole;
-    //this.userServ.changeRole(newRole);
   }
 
   async presentAlertRadio() {
@@ -318,5 +361,42 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
     });
 
     await alert.present();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Más información',
+      buttons: [{
+        text: 'Evaluación Bimensual ',
+        icon: 'person',
+        handler: () => {
+          console.log('Nombre clicked');
+          this.router.navigate(['/tabs/hacer-evaluacion-bimensual']);
+        }
+      }, {
+        text: 'Ver Evaluaciones Pasadas',
+        icon: 'paper',
+        handler: () => {
+          console.log('Ver Evaluaciones Pasadas clicked');
+          this.router.navigate(['/tabs/ver-evaluaciones']);
+        }
+      }, {
+        text: 'Cambiar Rol Actual: ' + this.userRole,
+        role: 'destructive',
+        icon: 'log-out',
+        handler: () => {
+          this.presentAlertRadio();
+          console.log('Cambiar Rol clicked');
+        }
+      }, {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

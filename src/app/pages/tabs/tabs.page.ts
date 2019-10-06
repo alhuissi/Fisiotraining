@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from '../../services/authentication.service';
 import { Router, RouterEvent } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
@@ -18,7 +19,7 @@ export class TabsPage implements OnInit {
   public authIsVisita: boolean = false;
   public authIsAlgo: boolean = false;
 
-  constructor(public authservice: AuthenticateService, private router: Router) { }
+  constructor(public alertController: AlertController, public authservice: AuthenticateService, private router: Router) { }
 
   async ngOnInit() {
     await this.authservice.getInfo();
@@ -42,11 +43,35 @@ if(this.authservice.whatRole() === 'cliente' || this.authservice.whatRole() === 
 
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Función Bloqueada',
+      subHeader: '',
+      message: 'Debes ser miembro para acceder a esta función.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
   escritorioTabSelected(){
    
   }
 
   buscarTabSelected(){
+
+  }
+
+  misPacientesTabSelected(){
+
+  }
+
+  adminTabSelected(){
+    
+  }
+
+  ayudaTabSelected(){
 
   }
 

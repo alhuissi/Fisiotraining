@@ -27,7 +27,7 @@ export class AuthenticateService {
  
   
  
-  constructor(private AFauth: AngularFireAuth, private router: Router, private db: AngularFirestore){}
+  constructor(private AFauth: AngularFireAuth, private authService: AuthenticateService, private router: Router, private db: AngularFirestore){}
  
   registerUser(email: string, password: string, name: string, lastName: string){
 
@@ -45,7 +45,7 @@ export class AuthenticateService {
          name: name,
          lastName: lastName,
          mail: email.toLowerCase(),    //para evitar problemas con mayúsculas
-         role: this.currentUser.role,
+         role: 'visita',
          uid: uid
        })
       resolve(res)
@@ -53,18 +53,33 @@ export class AuthenticateService {
    })
   }
  
- loginUser(email:string, password:string){
+async loginUser(email:string, password:string){
 
     this.currentUser.mail = email;
-    if (email === 'alfredolhuissier@gmail.com' || email === 'matthieu.manas@gmail.com'){   
-      this.currentUser.role = 'admin'; 
-      console.log('administrador');
-    }
-
-   return new Promise<any>((resolve, reject) => {
+    
+   return await new Promise<any>((resolve, reject) => {
      this.AFauth.auth.signInWithEmailAndPassword(email, password).then(user => {
       this.getInfo();  
-       resolve(user)    
+      
+      this.currentUser.uid = firebase.auth().currentUser.uid;
+      let docRef =  this.db.collection("users").doc(firebase.auth().currentUser.uid);
+      //this.currentUser.role = ;
+         
+      docRef.get().toPromise().then( doc => {
+    
+      if (doc.exists) {
+          this.currentUser.name = doc.data().name;
+          this.currentUser.lastName = doc.data().lastName;
+          this.currentUser.mail = doc.data().mail;
+          this.currentUser.role = doc.data().role;
+          resolve(user) 
+      } else {
+          // doc.data() will be undefined in this case
+          console.log("No existe");
+      }
+        }).catch(function(error) {
+         console.log("Error de la base de datos: ", error);
+        });
           
      }).catch(err => reject(err));
 

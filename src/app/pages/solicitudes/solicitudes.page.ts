@@ -57,7 +57,7 @@ export class SolicitudesPage implements OnInit {
   }
 
   goBack(){
-    this.navCtrl.navigateBack('/tabs/escritorio-admin');
+    this.navCtrl.navigateBack('/tabs/administrador');
   }
 
 openSolicitud(solicitud: SolicitudService){

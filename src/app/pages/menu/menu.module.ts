@@ -15,7 +15,6 @@ const routes: Routes = [
     component: MenuPage,
     children: [
       { path: 'first', loadChildren: '../first/first.module#FirstPageModule' },
-      { path: 'second', loadChildren: '../second/second.module#SecondPageModule' },
       { path: 'escritorio-admin', loadChildren: '../escritorio-admin/escritorio-admin.module#EscritorioAdminPageModule'},
       { path: 'mensajeria', loadChildren: '../mensajeria/mensajeria.module#MensajeriaPageModule'},
       { path: 'buscar-usuario', loadChildren: '../buscar-usuario/buscar-usuario.module#BuscarUsuarioPageModule'},

@@ -16,6 +16,11 @@ const routes: Routes = [
   { path: 'mensajeria', loadChildren: './pages/mensajeria/mensajeria.module#MensajeriaPageModule', canActivate: [AuthGuard]  },*/
   { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },   { path: 'buscar-usuario', loadChildren: './pages/buscar-usuario/buscar-usuario.module#BuscarUsuarioPageModule' },
   { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+  { path: 'evaluar-coach', loadChildren: './pages/evaluar-coach/evaluar-coach.module#EvaluarCoachPageModule' },
+  { path: 'mi-ficha', loadChildren: './pages/mi-ficha/mi-ficha.module#MiFichaPageModule' },
+  { path: 'ver-listas-usuarios', loadChildren: './pages/ver-listas-usuarios/ver-listas-usuarios.module#VerListasUsuariosPageModule' },
+  //{ path: 'administrador', loadChildren: './pages/administrador/administrador.module#AdministradorPageModule' },
+  //{ path: 'ayuda', loadChildren: './pages/ayuda/ayuda.module#AyudaPageModule' },
   //{ path: 'solicitar-sesion', loadChildren: './pages/solicitar-sesion/solicitar-sesion.module#SolicitarSesionPageModule' },
   //{ path: 'calendario', loadChildren: './pages/calendario/calendario.module#CalendarioPageModule' },
   //{ path: 'estadisticas-globales', loadChildren: './pages/estadisticas-globales/estadisticas-globales.module#EstadisticasGlobalesPageModule' },
