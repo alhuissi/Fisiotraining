@@ -50,7 +50,7 @@ export class FichaClinicaPage implements OnInit {
     public alertController: AlertController
   ) { }
 
-async  ngOnInit() {
+async ngOnInit() {
 
     this.fechaToday = Date.now();
     this.fichaClinica.fecha = this.fechaToday;
@@ -100,14 +100,11 @@ async  ngOnInit() {
           Suserid = Suserid.concat(doc.data().userid);
           Sformid = Sformid.concat(doc.data().formid);
     } else {
-              // doc.data() will be undefined in this case
           console.log("No such document!");
           }
       }).catch(function(error) {
           console.log("Error getting document:", error);
       });
-      //this.fichaClinicaServ.setFicha(); 
-      // this.fichaClinicaServ.getFichaID(this.userServ.getUID());
       
       console.log('aaaa?', SayudasTecnicas);
       let SSnombre = Snombre.toString();
@@ -147,15 +144,13 @@ async  ngOnInit() {
       this.fichaClinica.userid = SSuserid;
       this.fichaClinica.formid = SSformid;
 
-      console.log(SSnombre);
-      console.log(SSayudasTecnicas);
 
     }else{
       this.navCtrl.navigateBack('');
     }
   }
 
-  async ionViewDidEnter(){
+async ionViewDidEnter(){
 
     this.fechaToday = Date.now();
 
@@ -268,7 +263,13 @@ async  ngOnInit() {
 
 
   goBack(){
-    this.navCtrl.navigateBack('/tabs/perfil');
+    if(this.authService.currentUser.role == 'cliente'){
+      this.navCtrl.navigateBack('/tabs/perfil2');
+    }
+    else{
+      this.navCtrl.navigateBack('/tabs/perfil');
+    }
+    
   }
 
 

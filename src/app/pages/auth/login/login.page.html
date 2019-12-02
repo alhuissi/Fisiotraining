@@ -3,17 +3,19 @@
 <ion-content padding class="background">
  <div class="login-container">
    <div class="animated fadeIn slower" text-center>
-  <img src="assets/Logo_fisiotraining.png" width='170px' alt="logo"> 
+  <img src="assets/Logo_fisiotraining.png" width='120px' alt="logo"> 
 </div>
   <form class="animated fadeIn slow"  [formGroup]="loginForm" (submit)="loginUser()" class="formulario" novalidate>
       <ion-item>
-        <ion-label position="floating"  color="primary">Email</ion-label>
+        <ion-label position="floating" color="primary">Email</ion-label>
+        <br>
         <ion-input tappable #email placeholder="" type="email" formControlName="email" [class.invalid]="!loginForm.controls.email.valid &&loginForm.controls.email.dirty">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating" color="primary">Password</ion-label>
+        <ion-label position="floating" color="primary">Contraseña</ion-label>
+        <br>
         <ion-input tappable #password placeholder="" type="password" formControlName="password" [class.invalid]="!loginForm.controls.password.valid &&loginForm.controls.password.dirty">
         </ion-input>
       </ion-item>
@@ -25,12 +27,25 @@
                 loginForm.controls.password.dirty">*Los passwords deben tener un mínimo de 6 caracteres</p>
       </ion-item>
 
-      <div class="animated fadeIn slower" class="submit-box">
+      <div class="animated fadeIn slower">
         <br>
-        <ion-button shape="round" (click)="loginUser()" color="primary" expand="block" strong="true">Entrar</ion-button>
-        <br>
-        <ion-button shape="round" (click)="goToRegisterPage()" color="tertiary" expand="block" strong="true">Crear una Cuenta</ion-button>
-      </div>
+        <ion-grid>
+          <ion-row>
+              <ion-col class="ion-text-center">
+        <ion-button shape="round" (click)="loginUser()" color="tertiary" expand="block">
+          <ion-label color="dark">Ingresar</ion-label></ion-button>
+          </ion-col>
+         </ion-row>
+
+          <ion-row>
+           <ion-col class="ion-text-center">
+        <ion-button shape="round" (click)="goToRegisterPage()" color="tertiary" expand="block">
+          <ion-label color="dark">Registrarse</ion-label></ion-button>
+           </ion-col>
+          </ion-row>
+            
+      </ion-grid>
+     </div>
     </form>
   </div>
 </ion-content>

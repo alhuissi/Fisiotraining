@@ -5,46 +5,61 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from "rxjs/operators";
 
 export interface evaluacionBimensual {
-    actividadDeportiva: string,
-    antecedentes: string,
-    ayudasTecnicas: string,
-    colesterol: number,
-    diagnostico: string,
-    dolor: string,
+
+    nombre: string,
+    userid: string,
+    formid: string,
+    fecha: Timestamp,
     edad: number,
-    examenKinesico: number,
+
+    //Evaluacion Fisiotraining
+    funcionCardiaca: number,
     fcMaxima: number,
     fcReposo: number,
-    fecha: Timestamp,
-    fms: number,
-    fuerza: number,
-    funcionCardiaca: number,
-    habitos: string,
+    presionArterial: number,
+
     indiceCardiovascular: number,
-    intervencionesQx: string,
+    colesterol: number,
     ldl: number,
-    medicamentos: string,
+    tgl: number,
+    
+    fms: number,
+    potencia: number,
+
+    oxigeno: string,
+
+    //Examen Kinésico
+    dolor: string,
+    diagnostico: string,
     motivo: string,
-    nombre: string,
+
+    //Observación
+    planoFrontal: string,
+    planoLateral: string,
+    planoPosterior: string,
+    fuerza: number,
     objetivo: string,
     objetivosEspecificos: string,
     objetivosGenerales: string,
     observacion: string,
-    ocupacion: string,
-    ocupacionActualTrabajo: string,
-    oxigeno: string,
     palpacion: string,
-    planoFrontal: string,
-    planoLateral: string,
-    planoPosterior: string,
-    potencia: number,
-    presionArterial: number,
     pruebasEspeciales: string,
     rangosActivosPasivos: number,
-    tgl: number,
+
+    
+    actividadDeportiva: string,
+    antecedentes: string,
+    ayudasTecnicas: string,
+    examenKinesico: number,
+
+    
+    habitos: string,
+    intervencionesQx: string,
+    medicamentos: string,
+    ocupacion: string,
+    ocupacionActualTrabajo: string,
     traumas: string,
-    userid: string,
-    formid: string,
+
 }
 
 @Injectable()

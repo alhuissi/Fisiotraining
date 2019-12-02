@@ -1,30 +1,53 @@
 <ion-header>
-    <ion-toolbar color="tertiary">
+    <ion-toolbar color="dark">
         <ion-button slot="start" fill="clear" (click)="goBack()">
-            <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+            <ion-icon style="color:#ffffff; font-size: 25px" name="arrow-round-back"></ion-icon>
           </ion-button>
-      <ion-title text-center> {{userName}} {{userLastName}} {{fechaToday | date: 'dd/MM/yyyy'}}  </ion-title>
+      <ion-title style="color:#ffffff" text-center>  </ion-title>
     </ion-toolbar>
   </ion-header>
    
   <ion-content class="background" padding>
     <ion-grid>
-        <ion-row>
-          <ion-col text-center>
-        <div class="animated fadeIn slower" text-center>
-            <img src="assets/spotify.png" width='100px' height='100px' alt="logo" class="center img"> 
-          </div>
-        </ion-col>
-        </ion-row>
-    
-        <ion-card class="animated fadeIn slow card">
-            <ion-card-header>
-                <ion-card-title color='dark' text-center><b>SCANNING</b></ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
+   <!--    
       <ion-row>
-        <ion-col>
-          <b>-AUTOPERCEPCION: </b>          
+            <p>{{userName}} {{userLastName}}</p>
+      </ion-row>
+      -->
+        <ion-row>
+          
+          <ion-col>
+           <div class="animated fadeIn slower" (click)="openSpotify()">
+            <img src="assets/spotify.png" width='70px' height='70px' alt="logo" class="img"> 
+           </div>
+          </ion-col>
+
+           <ion-col>
+            <div class="animated fadeIn slower" (click)="startTimer()">
+              <img src="assets/clock.png" width='70px' height='70px' alt="logo" class="img"> 
+            </div>
+          </ion-col>
+
+          <ion-col>
+            <div class="animated fadeIn slower" (click)="openInstagram('fisiotraininglc')">
+             <img src="assets/instagram.png" width='70px' height='70px' alt="logo" class="img"> 
+            </div>
+           </ion-col>
+        </ion-row>
+      
+
+        <ion-card class="animated fadeIn slow card">
+            <ion-card-header color="light" tappable (click)="collapseCard = !collapseCard">
+                <ion-card-title color="dark" text-center><ion-icon name="qr-scanner"></ion-icon>  <b>SCANNING</b> <ion-icon name="qr-scanner"></ion-icon></ion-card-title> 
+              
+            
+            </ion-card-header>
+            <ion-card-content *ngIf="collapseCard">
+      <ion-row>
+        <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+          Autopercepción
+        </ion-label>        
         </ion-col>
           <rating [(ngModel)]="rateAutopercepcion"
           readonly="false" 
@@ -32,10 +55,11 @@
           (ngModelChange)="onModelChangeAutopercepcion($event)">
           </rating>
       </ion-row>
-      <br>
       <ion-row>
-          <ion-col>
-            <b>-ALIMENTACION: </b>           
+          <ion-col class="ion-text-center">
+              <ion-label class="ion-text-center">
+            Alimentación
+          </ion-label>        
           </ion-col>
             <rating [(ngModel)]="rateAlimentacion"
             readonly="false" 
@@ -43,10 +67,11 @@
             (ngModelChange)="onModelChangeAlimentacion($event)">
             </rating>
         </ion-row>
-        <br>
         <ion-row>
-            <ion-col>
-              <b>-HIDRATACION: </b>          
+            <ion-col class="ion-text-center">
+                <ion-label class="ion-text-center">
+              Hidratación
+            </ion-label>        
             </ion-col>
               <rating [(ngModel)]="rateHidratacion"
               readonly="false" 
@@ -54,10 +79,11 @@
               (ngModelChange)="onModelChangeHidratacion($event)">
               </rating>
           </ion-row>
-          <br>
           <ion-row>
-              <ion-col>
-               <b>-STRESS: </b>          
+              <ion-col class="ion-text-center">
+                  <ion-label class="ion-text-center">
+                Stress
+              </ion-label>        
               </ion-col>
                 <rating [(ngModel)]="rateStress"
                 readonly="false" 
@@ -65,10 +91,12 @@
                 (ngModelChange)="onModelChangeStress($event)">
                 </rating>
             </ion-row> 
-            <br>
+           
             <ion-row>
-                <ion-col>
-                 <b>-SUEÑO: </b>          
+                <ion-col class="ion-text-center">
+                    <ion-label class="ion-text-center">
+                  Sueño
+                </ion-label>        
                 </ion-col>
                   <rating [(ngModel)]="rateSueno"
                   readonly="false" 
@@ -79,23 +107,18 @@
             </ion-card-content>
             </ion-card>
             
-              <br>
-              <ion-row>
-                  <ion-col text-center>
-                  <div class="animated fadeIn slower" text-center>
-                      <img src="assets/clock.png" width='100px' height='100px' alt="logo" class="center img"> 
-                    </div>
-                    </ion-col>
-                  </ion-row>
+            
 
               <ion-card class="animated fadeIn slow card">
-                  <ion-card-header>
-                      <ion-card-title color='dark' text-center><b>CIRCUITOS</b> </ion-card-title>
+                  <ion-card-header color="light" tappable (click)="collapseCard2 = !collapseCard2">
+                        <ion-card-title color="dark" text-center><ion-icon name="walk"></ion-icon>  <b>CIRCUITOS</b> <ion-icon name="walk"></ion-icon></ion-card-title> 
                   </ion-card-header>
-                  <ion-card-content>
+                  <ion-card-content *ngIf="collapseCard2">
           <ion-row>
-              <ion-col>
-                  <b>-CIRCUITO 1: </b>        
+              <ion-col class="ion-text-center">
+                  <ion-label class="ion-text-center">
+                Circuito 1
+              </ion-label>        
               </ion-col>
                 <rating [(ngModel)]="rateCircuito1"
                 readonly="false" 
@@ -103,10 +126,12 @@
                 (ngModelChange)="onModelChangeCircuito1($event)">
                 </rating>
             </ion-row>
-            <br>
+            
             <ion-row>
-                <ion-col>
-                    <b>-CIRCUITO 2: </b>        
+                <ion-col class="ion-text-center">
+                    <ion-label class="ion-text-center">
+                  Circuito 2
+                </ion-label>        
                 </ion-col>
                   <rating [(ngModel)]="rateCircuito2"
                   readonly="false" 
@@ -114,10 +139,12 @@
                   (ngModelChange)="onModelChangeCircuito2($event)">
                   </rating>
               </ion-row>
-              <br>
+    
               <ion-row>
-                  <ion-col>
-                      <b>-CIRCUITO 3:  </b>        
+                  <ion-col class="ion-text-center">
+                      <ion-label class="ion-text-center">
+                    Circuito 3
+                  </ion-label>        
                   </ion-col>
                     <rating [(ngModel)]="rateCircuito3"
                     readonly="false" 
@@ -127,16 +154,18 @@
                 </ion-row>
               </ion-card-content>
               </ion-card>
-                <br>
+               
        
                 <ion-card class="animated fadeIn slow card">
-                    <ion-card-header>
-                        <ion-card-title color='dark' text-center><b>ENTRENAMIENTO</b></ion-card-title>
+                    <ion-card-header color="light" tappable (click)="collapseCard3 = !collapseCard3">
+                         <ion-card-title color="dark" text-center><ion-icon name="bicycle"></ion-icon> <b>ENTRENAMIENTO</b> <ion-icon name="bicycle"></ion-icon></ion-card-title> 
                     </ion-card-header>
-                    <ion-card-content>
+                    <ion-card-content *ngIf="collapseCard3">
                     <ion-row>
-                        <ion-col>
-                            <b>-CORE:  </b>   
+                        <ion-col class="ion-text-center">
+                            <ion-label class="ion-text-center">
+                          Core
+                        </ion-label>        
                         </ion-col>
                           <rating [(ngModel)]="rateCore"
                           readonly="false" 
@@ -145,10 +174,11 @@
                           </rating>
                       </ion-row>
           
-            <br>
             <ion-row>
-                <ion-col>
-                    <b>-TREN INFERIOR: </b>    
+                <ion-col class="ion-text-center">
+                    <ion-label class="ion-text-center">
+                  Tren inferior
+                </ion-label>        
                 </ion-col>
                   <rating [(ngModel)]="ratePiernas"
                   readonly="false" 
@@ -156,10 +186,12 @@
                   (ngModelChange)="onModelChangePiernas($event)">
                   </rating>
               </ion-row>
-              <br>
+           
               <ion-row>
-                  <ion-col>
-                      <b>-TREN SUPERIOR: </b>      
+                  <ion-col class="ion-text-center">
+                      <ion-label class="ion-text-center">
+                    Tren Superior
+                  </ion-label>        
                   </ion-col>
                     <rating [(ngModel)]="rateBrazos"
                     readonly="false" 
@@ -171,57 +203,26 @@
                 <br>
                 <ion-range [(ngModel)]="rateCardio" min="1" max="10" color="secondary" value='50' disabled="false" (ngModelChange)="onModelChangeCardio($event)">
                     <ion-icon  slot="start" name="heart"></ion-icon>
-                    <ion-icon  slot="end" name="heart-dislike"></ion-icon>
+                    <ion-icon  slot="end" src="assets/strength.svg"></ion-icon>
 
                   </ion-range>
-                  <!-- <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="printCardio()">
-                    Print Cardio
-                  </ion-button>  -->
-            <!---   
-              <ion-row>
-                  <ion-col>
-                      -Cardio:      
-                  </ion-col>
-                    <rating [(ngModel)]="rateCardio"
-                    readonly="false" 
-                    size="default"
-                    (ngModelChange)="onModelChangeCardio($event)">
-                    </rating>
-                </ion-row>
-                <br>
-                <ion-row>
-                    <ion-col>
-                        -Fuerza:      
-                    </ion-col>
-                      <rating [(ngModel)]="rateFuerza"
-                      readonly="false" 
-                      size="default"
-                      (ngModelChange)="onModelChangeFuerza($event)">
-                      </rating>
-                  </ion-row>  -->
+                 
 
                   <br>
                 </ion-card-content>
                 </ion-card>   
-                <ion-row>
-                    <ion-col text-center>
-                    <div class="animated fadeIn slower" text-center>
-                        <img src="assets/instagram.png" width='100px' height='100px' alt="logo" class="center img"> 
-                      </div>
-                      </ion-col>
-                    </ion-row>
-              <br>
+             
               <ion-row>
                   <ion-col text-center>
                       <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="guardarEvaluacion()">
-                          GUARDAR
+                          <ion-label color="dark">Guardar</ion-label>
                         </ion-button>       
                     </ion-col>
               </ion-row>
               <ion-row>
                     <ion-col text-center>
                         <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="goBack()">
-                            VOLVER
+                            <ion-label color="dark"> Volver</ion-label>
                           </ion-button>       
                       </ion-col>
                   </ion-row>

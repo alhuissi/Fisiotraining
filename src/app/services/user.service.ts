@@ -7,6 +7,8 @@ export interface user {
     uid: string,
     mail: string,
     role: string
+    kine: string,
+    kineID: string,
 }
 
 @Injectable()
@@ -28,7 +30,7 @@ export class UserService {
     }
 
     getName(){
-            return this.user.name
+        return this.user.name
     }
     getLastName(){
         return this.user.lastName
@@ -39,6 +41,12 @@ export class UserService {
     getRole(){
         return this.user.role
     }
+    getKine(){
+        return this.user.kine
+    }
+    getKineID(){
+        return this.user.kineID
+    }
 
     getallusers() {
         return this.db.collection('users', ref => ref.orderBy('name')).valueChanges();
@@ -48,7 +56,7 @@ export class UserService {
 
         this.db.collection('users').doc(this.user.uid).update({
             role: newRol,
-          })
+          });
         this.user.role = newRol;
     }
 }

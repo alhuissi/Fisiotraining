@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar color="dark">
     <ion-button slot="start" fill="clear" (click)="goBack()">
       <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
     </ion-button>
-  <ion-title text-center>Ver Evaluaciones de {{userName}}</ion-title>
+  <ion-title text-center>Evaluaciones</ion-title>
 </ion-toolbar>
 </ion-header>
 
@@ -22,10 +22,9 @@
         <ion-item *ngFor= "let evaluacion of evas | async" (click)="openEvaluacion(evaluacion)" [routerLink]="evaluacion.url" routerDirection="root" [class.active-item]="selectedPath === evaluacion.url">
               <ion-icon name="list-box" size="large" slot="start"></ion-icon> 
 
-        <ion-label class="animated fadeIn slow">
-          <h2><b>Fecha: {{evaluacion.fecha.toDate()}}</b></h2>
-          <p>ID Documento: {{evaluacion.formid}}</p>
-          <p>Autor: {{evaluacion.nombreAutor}}</p>
+        <ion-label class="animated fadeIn slow ion-text-wrap">        
+          <p>Coach: {{evaluacion.nombreAutor}}</p>
+          <p>{{evaluacion.fecha.toDate() | date:'dd/MM/yyyy'}}</p>
         </ion-label>
 
       </ion-item>

@@ -1,3 +1,5 @@
+//Selecciona Paciente desde Calendario para agendar una Sesión
+
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';

@@ -1,3 +1,5 @@
+//Lista completa de Pacientes (para administradores)
+
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';

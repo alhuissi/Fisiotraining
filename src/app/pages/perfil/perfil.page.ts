@@ -1,15 +1,17 @@
+// Perfil de Paciente, visto por Coach
+
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { AuthenticateService } from '../../services/authentication.service';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { trigger, transition, animate, style } from '@angular/animations';
-import { AlertController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EvaluacionDiariaService, evaluacionDiaria } from '../../services/evaluacion-diaria.service';
+import { Timestamp } from 'firebase-firestore-timestamp';
 
 
 @Component({
@@ -41,6 +43,7 @@ export class PerfilPage implements OnInit {
   rateSup: number;
   rateInf: number;
   rateCardio: number;
+  fechaEntrenamientoAnterior;
 
   fechaToday;
 
@@ -48,6 +51,8 @@ export class PerfilPage implements OnInit {
   public authIsAdmin: boolean = false;
   public authIsUsuario: boolean = false;
   public authIsVisita: boolean = false;
+
+  private loading;
 
   evaDiCollection: AngularFirestoreCollection<evaluacionDiaria>;
   evas: Observable<evaluacionDiaria[]>;
@@ -59,7 +64,7 @@ export class PerfilPage implements OnInit {
     circuito3: 0,
     core: 0,
     brazos: 0,
-    fecha: '',
+    fecha: Timestamp,
     piernas: 0,
     hidratacion: 0,
     cardio: 0,
@@ -72,6 +77,7 @@ export class PerfilPage implements OnInit {
     mailAutor: '',
     nombreAutor: '',
     IDAutor: '',
+    idSesion: '',
   };
 
  
@@ -84,6 +90,7 @@ export class PerfilPage implements OnInit {
     private afs: AngularFirestore,
     private userServ: UserService,
     private alertController: AlertController,
+    public loadingController: LoadingController,
   ) {}
  
   async ngOnInit(){
@@ -113,8 +120,14 @@ export class PerfilPage implements OnInit {
     this.navCtrl.navigateBack('/tabs/escritorio-admin');
   }
 
- async ionViewDidEnter(){
-
+ async ionViewWillEnter(){
+  this.loadingController.create({
+    message: 'Buscando última evaluación...',
+    duration: 2000,
+  }).then((overlay) => {
+    this.loading = overlay;
+    this.loading.present();
+  });
   this.fechaToday = Date.now();
     if(this.authService.userDetails()){
       if(this.authService.whatRole() === 'admin' ){
@@ -143,6 +156,7 @@ export class PerfilPage implements OnInit {
       this.userName = this.userServ.getName();
       this.userLastName = this.userServ.getLastName();
       this.userRole = this.userServ.getRole();
+      
       this.authRole = this.authService.whatRole();
 
       console.log('Buscando última evaluación...');
@@ -186,7 +200,7 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
             Scircuito3 = Scircuito3.concat(doc.data().circuito3);
             Score = Score.concat(doc.data().core);
             Sbrazos = Sbrazos.concat(doc.data().brazos);
-            Sfecha = Sfecha.concat(doc.data().fecha.toDate());
+            Sfecha = doc.data().fecha.toDate();
             Spiernas = Spiernas.concat(doc.data().piernas);
             Shidratacion = Shidratacion.concat(doc.data().hidratacion);
             Scardio = Scardio.concat(doc.data().cardio);
@@ -214,7 +228,7 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
     let SScircuito3 = Number(Scircuito3.toString());
     let SScore = Number(Score.toString());
     let SSbrazos = Number(Sbrazos.toString());
-    let SSfecha = Sfecha.toString();
+
     let SSpiernas = Number(Spiernas.toString());
     let SShidratacion = Number(Shidratacion.toString());
     let SScardio = Number(Scardio.toString());
@@ -237,7 +251,7 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
     this.evaluacion.circuito3 = SScircuito3;
     this.evaluacion.core = SScore;
     this.evaluacion.brazos = SSbrazos;
-    this.evaluacion.fecha = SSfecha;
+    this.evaluacion.fecha = Sfecha;
     this.evaluacion.piernas = SSpiernas;
     this.evaluacion.hidratacion = SShidratacion;
     this.evaluacion.cardio = SScardio;
@@ -255,9 +269,8 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
     this.rateInf = SSpiernas;
     this.rateSup = SSbrazos;
     this.rateCardio = SScardio;
-
+    
     this.evaDiServ.setEvaluacion(this.evaluacion);
-    // this.evaluacion = this.afs.collection('evaluacion-diaria').doc(X);
 
 
     }else{

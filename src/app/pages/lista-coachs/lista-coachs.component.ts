@@ -1,3 +1,5 @@
+//Lista completa de Coachs (para administradores)
+
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
@@ -50,11 +52,12 @@ export class ListaCoachsComponent implements OnInit {
   ngOnInit() {
     if(this.authService.userDetails()){
   
+      
     }else{
       this.navCtrl.navigateBack('');
     }
-
-      this.UserCollection = this.afs.collection('users', ref => ref.where('role', '==', 'profesor')) //this.afs.collection('users', ref => ref.orderBy('name'));
+      this.UserCollection = this.afs.collection('users', ref => ref.where('role', 'in', ['profesor', 'admin']));
+      //this.UserCollection = this.afs.collection('users', ref => ref.where('role', '==', 'profesor'));
       this.ListaUsers = this.UserCollection.valueChanges();
   }
 

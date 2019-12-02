@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "fisiotraining-86885",
-    "fisiotraining": "fisiotraining-86885"
+    "default": "fisiotraining-86885"
+    
   }
 }
+

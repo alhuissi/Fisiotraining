@@ -9,12 +9,16 @@ import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { EscogerUsuarioComponent } from '../escoger-usuario/escoger-usuario.component';
+import { MisPacientesComponent } from '../mis-pacientes/mis-pacientes.component';
 import { AlertController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 
 import { FisiotrainingTutoComponent } from '../fisiotraining-tuto/fisiotraining-tuto.component';
 import { UserService } from '../../services/user.service';
 import { CurrentUserService } from '../../services/currentUser.service';
+import { myEnterAnimation } from '../../animations/enter';
+import { myLeaveAnimation } from '../../animations/leave';
+import { OverlayEventDetail } from '@ionic/core'; 
  
 @Component({
   selector: 'app-dashboard',
@@ -94,11 +98,13 @@ ngOnInit(){
   }
 
   ionViewDidEnter(){
+    this.authService.getInfo();
     this.userEmail = this.authService.userDetails().email;
     this.userID = this.authService.userDetails().uid;
     this.userName = this.authService.getName();
     this.userLastName = this.authService.getLastName();
     this.userRole = this.authService.getRole();
+    console.log('this.authservice.whatRole(): ' + this.userRole)
     if(this.authService.userDetails()){
       if(this.authService.whatRole() === 'admin' ){
         this.authIsAdmin = true;
@@ -159,7 +165,7 @@ ngOnInit(){
     this.authService.logoutUser()
     .then(res => {
       console.log(res);
-      this.navCtrl.navigateBack('');
+      this.router.navigate(['login']);
     })
     .catch(error => {
       console.log(error);
@@ -186,14 +192,28 @@ openEscogerUser(){
 
 }
 
-openFisiotrainingTuto(){
-  this.modal.create({
-    component: FisiotrainingTutoComponent,
+async openMisPacientes(){
+  const modalEscoger: HTMLIonModalElement = await this.modal.create({
+    component: MisPacientesComponent,
+    enterAnimation: myEnterAnimation,
+    leaveAnimation: myLeaveAnimation,
     componentProps : {
      
     }
-  }).then( (modal) => modal.present())
+    })
+  
+    modalEscoger.onDidDismiss().then((detail: OverlayEventDetail) => {
+    if (detail !== null) {
+      //console.log('Paciente seleccionado: ', this.userServ.getName());
+      
+    }
+    });
+ 
+    await modalEscoger.present();
+}
 
+openFisiotrainingTuto(){
+  const browser: InAppBrowserObject = this.inAppBrowser.create('https://www.fisiotraining.cl/');
 }
 
 openVerSolicitudes(){

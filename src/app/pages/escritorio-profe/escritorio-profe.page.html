@@ -1,0 +1,43 @@
+<ion-header translucent>
+  <ion-toolbar color="dark">
+    <ion-button slot="end"  (click)="presentActionSheet()">
+       <ion-icon  name="power"></ion-icon>  
+    </ion-button>
+    <ion-title class="ion-text-center">Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content color="dark" fullscreen>
+
+        <ion-list>
+          <ion-item no-lines ion-item (click)="openMisPacientes()" class="ion-no-padding">
+            <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/yoga.jpg)','background-repeat': 'no-repeat', 
+          'height':'40% 100px', 'background-size': 'cover '}">
+              <div class="inner">
+                <b>¿QUÉ ES FISIOTRAINING?</b>
+              </div>
+            </div>
+
+          </ion-item>
+          <ion-item no-lines ion-item (click)="openProximoPaciente()" class="ion-no-padding">
+            <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/bb.jpg)','background-repeat': 'no-repeat', 
+          'height':'40% 100px', 'background-size': 'cover '}">
+              <div class="inner">
+                <b>PRÓXIMO ENTRENAMIENTO </b>
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item no-lines ion-item (click)="openCalendario()" class="ion-no-padding">
+              <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/appBackground.jpg)','background-repeat': 'no-repeat', 
+            'height':'40% 100px', 'background-size': 'cover '}">
+                <div class="inner">
+                  <b>HORAS TRABAJADAS: 15</b>
+                </div>
+              </div>
+            </ion-item>
+        </ion-list>
+
+
+</ion-content>
+

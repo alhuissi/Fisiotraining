@@ -13,13 +13,14 @@
 
         <!-- Para los Administradores -->
         <ion-card class="animated fadeIn slow" *ngIf="authIsAdmin">
-            <ion-card-header tappable (click)="collapseCard = !collapseCard">
-              <ion-card-title color='dark'>COORDINAR UN NUEVO ENTRENAMIENTO:</ion-card-title>
+            <ion-card-header color="primary" tappable (click)="collapseCard = !collapseCard">
+              <ion-card-title class="ion-text-center" color='dark'>Coordinar un nuevo Entrenamiento</ion-card-title>
             </ion-card-header>
-            <ion-card-content *ngIf="!collapseCard">
+            <ion-card-content *ngIf="collapseCard">
          
               <ion-item>
-                <ion-label>Fecha: </ion-label>
+                <ion-label class="ion-text-wrap">Fecha: </ion-label>
+                <br>
                 <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
               </ion-item>
             <!--  <ion-item>
@@ -27,19 +28,11 @@
                 <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
               </ion-item>
               -->
-              <ion-item>
-                  
-                 
-                  <ion-button  (click)="openEscogerUser()">Seleccionar Paciente</ion-button>
-                  <ion-label text-center>{{userSelected}} {{userSelectedLastName}}</ion-label>
-                
+              <ion-item (click)="openEscogerUser()">
+                  <ion-label class="ion-text-wrap">{{userSelected}} {{userSelectedLastName}}</ion-label>
               </ion-item>
-              <ion-item>
-                 
-                  
-                  <ion-button  (click)="openEscogerKine()">Seleccionar Coach</ion-button>
-                  <ion-label text-center>{{kineSelected}} {{kineSelectedLastName}}</ion-label>
-                
+              <ion-item (click)="openEscogerKine()">
+                  <ion-label class="ion-text-wrap">{{kineSelected}} {{kineSelectedLastName}}</ion-label>
               </ion-item>
               <ion-button expand="block" (click)="agregarSesion()" [disabled]="event.title == ''">Agregar</ion-button>
          
@@ -71,10 +64,10 @@
         -->
         <!-- Para los Clientes -->
         <ion-card class="animated fadeIn slow" *ngIf="authIsUsuario">
-            <ion-card-header tappable (click)="collapseCard = !collapseCard">
-              <ion-card-title color='dark'>SOLICITAR UN ENTRENAMIENTO:</ion-card-title>
+            <ion-card-header color="primary" tappable (click)="collapseCard = !collapseCard">
+              <ion-card-title class="ion-text-center" color='dark'>Solicitar un Entrenamiento</ion-card-title>
             </ion-card-header>
-            <ion-card-content *ngIf="!collapseCard">
+            <ion-card-content *ngIf="collapseCard">
          
               <ion-item>
                 <ion-label>Fecha:</ion-label>
@@ -88,13 +81,13 @@
 
         <!-- Para las Visitas -->
         <ion-card class="animated fadeIn slow" *ngIf="authIsVisita">
-            <ion-card-header tappable (click)="collapseCard = !collapseCard">
-              <ion-card-title color='dark'>SOLICITAR UNA SESION:</ion-card-title>
+            <ion-card-header color="primary" tappable (click)="collapseCard = !collapseCard">
+              <ion-card-title class="ion-text-center" color='dark'>Solicitar una Sesión</ion-card-title>
             </ion-card-header>
-            <ion-card-content *ngIf="!collapseCard">
+            <ion-card-content *ngIf="collapseCard">
          
               <ion-item>
-                <ion-label>Selecciona una Fecha:</ion-label>
+                <ion-label>Fecha:</ion-label>
                 <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
               </ion-item>
               <ion-button expand="block" (click)="solicitarSesion()" [disabled]="event.title == ''">Solicitar</ion-button>
@@ -117,28 +110,36 @@
             <ion-button expand="block" [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" (click)="changeMode('day')">Día</ion-button>
           </ion-col>
           
-          <!-- Move back one screen of the slides -->
-          <ion-col class="animated fadeIn slow" size="6" text-left>
-            <ion-button fill="clear" (click)="back()">
-              <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
-            </ion-button>
-          </ion-col>
+          
        
-          <!-- Move forward one screen of the slides -->
-          <ion-col class="animated fadeIn slow" size="6" text-right>
-            <ion-button fill="clear" (click)="next()">
-              <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
-            </ion-button>
-          </ion-col>
+         
         </ion-row>
 
-        <ion-row>
-            <ion-col class="animated fadeIn slow" text-center>
-                <ion-label>
+      <ion-grid>
+        <ion-row justify-content-center>
+
+          <!-- Move back one screen of the slides -->
+            <ion-col class="animated fadeIn slow" size="3" >
+              <ion-button fill="clear" (click)="back()">
+                <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+
+            <ion-col class="animated fadeIn slow fecha ion-text-center" size="6" >
+                <ion-label class="ion-text-wrap">
                         {{ viewTitle }}
                 </ion-label>
-              </ion-col>
+            </ion-col>
+
+               <!-- Move forward one screen of the slides -->
+            <ion-col class="animated fadeIn slow" size="3" >
+              <ion-button fill="clear" (click)="next()">
+                <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+
         </ion-row>
+      </ion-grid>
        
         
         <calendar

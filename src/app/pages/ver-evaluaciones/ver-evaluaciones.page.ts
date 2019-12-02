@@ -94,7 +94,12 @@ export class VerEvaluacionesPage implements OnInit {
 
 
   goBack(){
-    this.navCtrl.navigateBack('/tabs/perfil');
+    if(this.authService.currentUser.role == 'cliente'){
+      this.navCtrl.navigateBack('/tabs/perfil2');
+    }
+    else{
+      this.navCtrl.navigateBack('/tabs/perfil');
+    }
   }
 
   search($event){
@@ -104,14 +109,11 @@ export class VerEvaluacionesPage implements OnInit {
   }
 
   firequery(start, end){
-    return this.afs.collection('evaluacion-diaria', ref => ref.limit(20).orderBy('fecha').startAt(start).endAt(end)).valueChanges();
+    return this.afs.collection('evaluacion-diaria', ref => ref.limit(50).orderBy('fecha').startAt(start).endAt(end)).valueChanges();
   }
 
   async openEvaluacion(evaluacion){
     this.evaDiariaServ.setEvaluacion(evaluacion);
-    //console.log('ID: ', evaluacion.formid);
-    //console.log('Evaluación: ', evaluacion);
-    //this.userServ.setUser(this.afs.collection('users').doc(uid));
     this.router.navigate(['/tabs/abrir-evaluacion-diaria']);
   }
   

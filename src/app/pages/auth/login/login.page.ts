@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
   }
  
 
- 
+ z
  
 async loginUser(){
 
@@ -52,7 +52,8 @@ async loginUser(){
       } else {
         // this.presentLoadingWithOptions();
         this.loadingController.create({
-          message: 'Verificando datos...'
+          message: 'Verificando datos...',
+          duration: 2000,
         }).then((overlay) => {
           this.loading = overlay;
           this.loading.present();
@@ -61,8 +62,21 @@ async loginUser(){
        await this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
         .then( authData => {
           console.log("Authentification completed");
-         this.authService.getInfo();  
+         this.authService.getInfo(); 
+         this.loading.dismiss();
+         if(this.authService.whatRole() === 'admin') {
           this.router.navigate(['/tabs/escritorio-admin']);
+         }
+         if(this.authService.whatRole() === 'profesor') {
+          this.router.navigate(['/tabs/escritorio-profesor']);
+         }
+         if(this.authService.whatRole() === 'cliente') {
+          this.router.navigate(['/tabs/escritorio-cliente']);
+         }
+         if(this.authService.whatRole() === 'visita') {
+          this.router.navigate(['/tabs/escritorio-visita']);
+         }
+          
           this.loading.dismiss();
         }, error => {
           var errorMessage: string = error.message;

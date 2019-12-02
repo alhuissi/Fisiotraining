@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OverlayEventDetail } from '@ionic/core'; 
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { ViewChild, Inject, LOCALE_ID } from '@angular/core';
-import { AlertController, NavController, ModalController, LoadingController } from '@ionic/angular';
+import { AlertController, NavController, ModalController, ToastController, LoadingController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { AuthenticateService } from '../../services/authentication.service';
 import { SolicitudService, solicitudFisio } from '../../services/solicitud.service';
@@ -30,6 +30,7 @@ export class CalendarioPage implements OnInit {
   userRole: string;
   userName: string;
   userLastName:string;
+  userPhone: string;
 
   userSelected: string;
   userSelectedLastName: string;
@@ -77,6 +78,7 @@ export class CalendarioPage implements OnInit {
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
  
   constructor(private alertCtrl: AlertController, 
+    private toastCtrl: ToastController,
     public actionSheetController: ActionSheetController, 
     private router: Router,
     private navCtrl: NavController,
@@ -99,6 +101,7 @@ export class CalendarioPage implements OnInit {
         apellido: this.userLastName,
         mail: this.userEmail,
         userID: this.userID,
+        phone: this.userPhone,
         fechaEmision: '',
         fecha: '',
         id: '',
@@ -119,7 +122,9 @@ export class CalendarioPage implements OnInit {
     this.userName = this.authService.getName();
     this.userLastName = this.authService.getLastName();
     this.userRole = this.authService.getRole();
-    this.userSelected = '';
+    this.userPhone = this.authService.getPhone();
+    this.userSelected = "Seleccionar Paciente";
+    this.kineSelected = "Seleccionar Coach";
 
     if(this.authService.whatRole() === 'admin' ){
       this.authIsAdmin = true;
@@ -287,6 +292,14 @@ ionViewDidEnter(){
   });
   }
 
+  async toastExitoAgregarSesion() {
+    const toast = await this.toastCtrl.create({
+      message: '¡Solicitud Existosa! Esperando la confirmación del conductor...',
+      duration: 3000
+    });
+    toast.present();
+  }
+
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       header: 'Por favor, selecciona a un paciente primero',
@@ -305,6 +318,7 @@ ionViewDidEnter(){
     this.solicitud.apellido = this.userLastName;
     this.solicitud.userID = this.userID;
     this.solicitud.mail = this.userEmail;
+    this.solicitud.phone = this.userPhone;
     this.solicitud.id = uid.toString();
     this.solicitud.fecha = this.event.startTime.toString();
     this.solicitud.fechaEmision = Date.now().toString();
@@ -320,6 +334,7 @@ ionViewDidEnter(){
           apellido: this.solicitud.apellido,
           mail: this.solicitud.mail,
           userID: this.solicitud.userID,
+          phone: this.solicitud.phone,
           fechaEmision: this.solicitud.fechaEmision,
           fecha: this.solicitud.fecha,
           id: this.solicitud.id,
@@ -373,25 +388,7 @@ ionViewDidEnter(){
       });
    
       await modalEscoger.present();
-  /*  const modalEscoger: HTMLIonModalElement = await this.modal.create({
-    component: EscogerUsuario2Component,
-    enterAnimation: myEnterAnimation,
-    leaveAnimation: myLeaveAnimation,
-    componentProps : {
-     
-    }
-    })
-  
-    modalEscoger.onDidDismiss().then((detail: OverlayEventDetail) => {
-    if (detail !== null) {
-      console.log('Paciente seleccionado: ', this.userServ.getName());
-      this.userSelected = this.userServ.getName();
-      this.userIDSelected = this.userServ.getUID();
-    }
-    });
- 
-    await modalEscoger.present();
-  */
+
   }
 
   async openEscogerKine(){
@@ -464,35 +461,10 @@ ionViewDidEnter(){
           eventCopy.startTime = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate()));
           eventCopy.endTime = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate() + 1));
         }
-       
-      /* 
-        this.db.collection('sesiones').add(eventCopy)
-        console.log('Sesion agendada: '+ eventCopy);
-        this.eventSource.push(eventCopy);
-        this.myCal.loadEvents();
-        this.resetEvent();
-      */
 
-        this.db.collection('sesiones').doc(uid).set(eventCopy/*{ 
-            title: 'Fisiotraining',
-            desc: 'Sesión de Kinesiología',
-            startTime: this.event.startTime.toString(),
-            endTime: this.event.endTime.toString(),
-            allDay: false,
-            nombreKine: this.sesion.nombreKine,
-            nombreAlumno: this.sesion.nombreAlumno,
-            idKine: this.sesion.idKine,
-            idAlumno: this.sesion.idAlumno,
-            fechaEmision: this.sesion.fechaEmision,
-            fecha: this.sesion.fecha,
-            id: this.sesion.id,
-        }*/)
-        /*  
-        this.db.collection('users').doc(this.sesion.idAlumno).update({ 
-            fechasSesiones: ''
-          })
-          */
-          
+         this.db.collection('sesiones').doc(uid).set(eventCopy)
+         await this.toastExitoAgregarSesion();  
+         console.log('Sesión Guardada'); 
          this.eventSource.push(eventCopy);
          this.myCal.loadEvents();
          this.resetEvent();
@@ -539,7 +511,7 @@ ionViewDidEnter(){
     this.authService.logoutUser()
     .then(res => {
       console.log(res);
-      this.navCtrl.navigateBack('');
+      this.router.navigate(['login']);
     })
     .catch(error => {
       console.log(error);
@@ -565,6 +537,7 @@ ionViewDidEnter(){
     });
     alert.present();
   }
+
 
   async onEventSelectedKine(event) {
     await new Promise<any>((resolve, reject) => {
@@ -621,6 +594,15 @@ ionViewDidEnter(){
         }
         
           this.userServ.setUser(user);
+          this.sesion.id = event.id;
+          this.sesion.fecha = event.fecha;
+          this.sesion.fechaEmision = event.fechaEmision;
+          this.sesion.idAlumno = event.idAlumno;
+          this.sesion.idKine = event.idKine;
+          this.sesion.nombreAlumno = event.nombreAlumno;
+          this.sesion.nombreKine = event.nombreKine;
+          
+          this.sesService.setSesion(this.sesion);
           this.router.navigate(['/tabs/perfil']);
           resolve();
        } else {

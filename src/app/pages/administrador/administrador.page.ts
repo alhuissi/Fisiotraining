@@ -83,14 +83,6 @@ export class AdministradorPage implements OnInit {
 
  openListaUsers(){
   this.router.navigate(['/tabs/ver-listas-usuarios']);
-   /*
-    this.modal.create({
-      component: ListaUsuariosComponent,
-      componentProps : {
-       
-      }
-    }).then( (modal) => modal.present())
-    */
   }
 
   openVerSolicitudes(){
@@ -117,7 +109,7 @@ export class AdministradorPage implements OnInit {
     this.authService.logoutUser()
     .then(res => {
       console.log(res);
-      this.navCtrl.navigateBack('');
+      this.router.navigate(['login']);
     })
     .catch(error => {
       console.log(error);

@@ -85,7 +85,7 @@ export class MensajeriaPage implements OnInit {
   logout(){
     this.authService.logoutUser().then(res => {
       console.log(res);
-      this.navCtrl.navigateBack('');
+      this.router.navigate(['login']);
     })
     .catch(error => {
       console.log(error);

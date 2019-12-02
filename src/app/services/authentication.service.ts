@@ -3,13 +3,17 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+
  
 export interface User {
   name: string,
   lastName: string,
   mail: string,
+  phone: string,
   role: string,
   uid: string,
+  kine: string,
+  kineID: string,
 }
 
 @Injectable({ providedIn: 'root'})
@@ -20,16 +24,23 @@ export class AuthenticateService {
   currentUser: User = {
     name: '',
     lastName: '',
+    phone: '',
     mail: '',
     role: '',
     uid: '' ,
+    kine: '',
+    kineID: '',
   };
  
   
  
-  constructor(private AFauth: AngularFireAuth, private authService: AuthenticateService, private router: Router, private db: AngularFirestore){}
+  constructor(private AFauth: AngularFireAuth, 
+    private authService: AuthenticateService, 
+    private router: Router, 
+    private db: AngularFirestore
+    ){}
  
-  registerUser(email: string, password: string, name: string, lastName: string){
+  registerUser(email: string, password: string, phone: string, name: string, lastName: string){
 
     this.currentUser.mail = email;
     if (email === 'alfredolhuissier@gmail.com' || email === 'matthieu.manas@gmail.com'){
@@ -44,9 +55,12 @@ export class AuthenticateService {
        this.db.collection('users').doc(uid).set({
          name: name,
          lastName: lastName,
+         phone: phone,
          mail: email.toLowerCase(),    //para evitar problemas con mayúsculas
          role: 'visita',
-         uid: uid
+         uid: uid,
+         kine:'',
+         kineID:'',
        })
       resolve(res)
     }).catch(err => reject(err));
@@ -72,6 +86,7 @@ async loginUser(email:string, password:string){
           this.currentUser.lastName = doc.data().lastName;
           this.currentUser.mail = doc.data().mail;
           this.currentUser.role = doc.data().role;
+          this.currentUser.phone = doc.data().phone;
           resolve(user) 
       } else {
           // doc.data() will be undefined in this case
@@ -94,6 +109,7 @@ async getInfo(){
   var stuff = []; //for names
   var stoff = []; //for lastNames
   var steff = [];  //for role
+  var stiff = []; 
 
   await docRef.get().toPromise().then( doc => {
   
@@ -101,6 +117,7 @@ async getInfo(){
       stuff = stuff.concat(doc.data().name);
       stoff = stoff.concat(doc.data().lastName);
       steff = steff.concat(doc.data().role);
+      stiff = stiff.concat(doc.data().phone);
      } else {
       // doc.data() will be undefined in this case
       console.log("No existe");
@@ -112,9 +129,11 @@ async getInfo(){
     let X = stuff.toString();
     let Y = stoff.toString();
     let Z = steff.toString();
+    let W = stiff.toString();
     this.currentUser.name = X;
     this.currentUser.lastName = Y;
     this.currentUser.role = Z;
+    this.currentUser.phone = W;
     this.currentUser.uid = this.userDetails().uid;
 
   }
@@ -126,14 +145,18 @@ async getInfo(){
   logoutUser(){
     return new Promise((resolve, reject) => {
       this.AFauth.auth.signOut().then(() => {
-        this.router.navigate(['/login']);
         this.currentUser = {
           name: '',
           lastName: '',
           mail: '',
+          phone: '',
           role: '',
           uid: '' ,
+          kine: '',
+          kineID: '',
         };
+        this.router.navigate(['/login']);
+        
       })
     })
   }
@@ -156,6 +179,12 @@ async getInfo(){
   getRole(){
     return this.currentUser.role
   }
+  getKine(){
+    return this.currentUser.kine
+  }
+  getKineID(){
+    return this.currentUser.kineID
+}
 
 
   updateUser(){
@@ -168,6 +197,10 @@ async getInfo(){
 
   whatRole(){
     return this.currentUser.role;
+  }
+
+  getPhone(){
+    return this.currentUser.phone;
   }
 
   isAdmin(){

@@ -28,7 +28,7 @@ export class TabsPage implements OnInit {
     if(this.authservice.whatRole() === 'admin' ){
       this.authIsAdmin = true;
   }
-    if(this.authservice.whatRole() === 'admin' || this.authservice.whatRole() === 'profesor' ){
+    if(this.authservice.whatRole() === 'profesor' ){
       this.authIsKine = true;
   }
   if(this.authservice.whatRole() === 'cliente' ){
@@ -41,7 +41,28 @@ if(this.authservice.whatRole() === 'cliente' || this.authservice.whatRole() === 
   this.authIsAlgo = true;
 }
 
+}
+
+async ionViewDidEnter(){
+  await this.authservice.getInfo();
+    this.userRole = this.authservice.whatRole();
+    console.log('this.authservice.whatRole(): ' + this.userRole)
+    if(this.authservice.whatRole() === 'admin' ){
+      this.authIsAdmin = true;
   }
+    if(this.authservice.whatRole() === 'profesor' ){
+      this.authIsKine = true;
+  }
+  if(this.authservice.whatRole() === 'cliente' ){
+    this.authIsUsuario = true;
+}
+if(this.authservice.whatRole() === 'visita' ){
+  this.authIsVisita = true;
+}
+if(this.authservice.whatRole() === 'cliente' || this.authservice.whatRole() === 'admin' || this.authservice.whatRole() === 'profesor'){
+  this.authIsAlgo = true;
+}
+}
 
   async presentAlert() {
     const alert = await this.alertController.create({

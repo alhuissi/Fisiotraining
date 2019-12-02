@@ -3,26 +3,36 @@
 <ion-content padding class="background">
     <div class="login-container">
         <div class="animated fadeIn slower" text-center>
-            <img src="assets/Logo_fisiotraining.png" width='170px' alt="logo"> 
+            <img src="assets/Logo_fisiotraining.png" width='100px' alt="logo"> 
           </div>
     <form class="animated fadeIn slow" [formGroup]="registerForm" (submit)="tryRegister()" class="formulario" novalidate>
 
         <ion-item>
           <ion-label position="floating" color="primary">Nombre</ion-label>
+          <br>
           <ion-input tappable formControlName="profileName" type="text" placeholder="" [class.invalid]="!registerForm.controls.profileName.valid && registerForm.controls.profileName.dirty"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label position="floating" color="primary">Apellido</ion-label>
+            <br>
             <ion-input tappable formControlName="profileLastName" type="text" placeholder="" [class.invalid]="!registerForm.controls.profileName.valid && registerForm.controls.profileName.dirty"></ion-input>
           </ion-item>
   
         <ion-item>
           <ion-label position="floating" color="primary">Email</ion-label>
+          <br>
           <ion-input tappable formControlName="email" type="email" placeholder="" [class.invalid]="!registerForm.controls.email.valid && registerForm.controls.email.dirty"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" color="primary">Teléfono</ion-label>
+          <br>
+          <ion-input tappable formControlName="phone" type="text" placeholder=""></ion-input>
         </ion-item>
   
         <ion-item>
           <ion-label position="floating" color="primary">Password</ion-label>
+          <br>
           <ion-input tappable formControlName="password" type="password" placeholder="" [class.invalid]="!registerForm.controls.password.valid && registerForm.controls.password.dirty"></ion-input>
         </ion-item>
   
@@ -38,9 +48,22 @@
         </ion-item>
       
       <br>
-      <ion-button class="animated fadeIn slower" shape="round" (click)="tryRegister()" color="tertiary" expand="block" strong="true">Crear</ion-button>
-      <br>
-      <ion-button class="animated fadeIn slower" shape="round" (click)="goLoginPage()" color="primary" expand="block" strong="true">Ya tengo una cuenta</ion-button>
+      <ion-grid>
+          <ion-row>
+              <ion-col class="ion-text-center">
+      <ion-button class="animated fadeIn slower" shape="round" (click)="tryRegister()" color="tertiary" expand="block">
+          <ion-label color="dark">Crear Cuenta</ion-label></ion-button>
+        </ion-col>
+      </ion-row>
+      
+          <ion-row>
+              <ion-col class="ion-text-center">
+      <ion-button class="animated fadeIn slower" shape="round" (click)="goLoginPage()" color="tertiary" expand="block">
+          <ion-label color="dark">Ya tengo una Cuenta</ion-label></ion-button>
+        </ion-col>
+      </ion-row>
+        
+  </ion-grid>
     </form>
       </div>
   </ion-content>

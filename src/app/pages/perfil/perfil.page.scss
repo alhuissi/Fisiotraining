@@ -1,9 +1,9 @@
-:host {
+/*:host {
     ion-content.background{
-        --background: url(../../../assets/bck4.jpg) 0 0/100% 100% no-repeat;
+       --background: url(../../../assets/bck4.jpg) 0 0/100% 100% no-repeat;
     }
     }
-
+*/
     rating {
         ion-icon {
           color: gray;
@@ -13,3 +13,9 @@
           }
         }
       }
+
+      ion-card-title{
+        font-size: 14px;
+      }
+
+    

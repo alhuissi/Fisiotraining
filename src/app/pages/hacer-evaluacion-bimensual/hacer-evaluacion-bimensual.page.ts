@@ -8,6 +8,13 @@ import { evaluacionBimensual } from '../../services/evaluacion-bimensual.service
 import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
 import { AlertController } from '@ionic/angular';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
+import { EvaluacionSesionService, evaluacionSesion } from '../../services/evaluacion-sesion.service';
+import { Platform } from '@ionic/angular';
+import { FichaClinicaService, fichaClinica } from '../../services/ficha-clinica.service';
+import { SesionService, sesionFisio } from '../../services/sesiones.service';
+import { timer, interval } from 'rxjs';
 
 
 @Component({
@@ -16,6 +23,24 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./hacer-evaluacion-bimensual.page.scss'],
 })
 export class HacerEvaluacionBimensualPage implements OnInit {
+
+  public fichaClinica: fichaClinica ={
+    nombre: '',
+    edad: 0,
+    ocupacion: '',
+    ayudasTecnicas: '',
+    actividadDeportiva: '',
+    fecha: '',
+    intervencionesQX: '',
+    traumas: '',
+    ocupacionActualTrabajo: '',
+    antecedentes: '',
+    habitos: '',
+    medicamentos: '',
+    objetivos: '',
+    userid: '',
+    formid: '',
+  };
 
   userName: string;
   userLastName: string;
@@ -63,17 +88,69 @@ export class HacerEvaluacionBimensualPage implements OnInit {
   rateRangosActPas: number;
   rateTGL: number;
 
-  evaluacionPrueba: evaluacionBimensual;
+  fechaToday;
+
+  evaluacionPrueba: evaluacionBimensual ={
+    actividadDeportiva: '',
+    antecedentes: '',
+    ayudasTecnicas: '',
+    colesterol: 0,
+    diagnostico: '',
+    dolor: '',
+    edad: 0,
+    examenKinesico: 0,
+    fcMaxima: 0,
+    fcReposo: 0,
+    fecha: this.fechaToday,
+    fms: 0,
+    fuerza: 0,
+    funcionCardiaca: 0,
+    habitos: '',
+    indiceCardiovascular: 0,
+    intervencionesQx: '',
+    ldl: 0,
+    medicamentos: '',
+    motivo: '',
+    nombre: '',
+    objetivo: '',
+    objetivosEspecificos: '',
+    objetivosGenerales: '',
+    observacion: '',
+    ocupacion: '',
+    ocupacionActualTrabajo: '',
+    oxigeno: '',
+    palpacion: '',
+    planoFrontal: '',
+    planoLateral: '',
+    planoPosterior: '',
+    potencia: 0,
+    presionArterial: 0,
+    pruebasEspeciales: '',
+    rangosActivosPasivos: 0,
+    tgl: 0,
+    traumas: '',
+    userid: '',
+    formid: '',
+
+  };;
 
   public evaForm: any;
+  collapseCard;
+  collapseCard2;
+  collapseCard3;
+  collapseCard4;
  
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticateService,
     private router: Router,
+    private platform: Platform,
+    private fichaClinicaServ: FichaClinicaService,
     private userServ: UserService,
     private db: AngularFirestore,
     public alertController: AlertController,
+    private appAvailability: AppAvailability,
+    private inAppBrowser: InAppBrowser,
  
   ) {
     /*
@@ -85,52 +162,12 @@ export class HacerEvaluacionBimensualPage implements OnInit {
       */
   }
  
-  ngOnInit(){
+  async ngOnInit(){
+    this.fechaToday = Date.now();
     
     if(this.authService.userDetails()){
-      this.evaluacionPrueba ={
-        actividadDeportiva: '',
-        antecedentes: '',
-        ayudasTecnicas: '',
-        colesterol: 0,
-        diagnostico: '',
-        dolor: '',
-        edad: 0,
-        examenKinesico: 0,
-        fcMaxima: 0,
-        fcReposo: 0,
-        fecha: this.fecha,
-        fms: 0,
-        fuerza: 0,
-        funcionCardiaca: 0,
-        habitos: '',
-        indiceCardiovascular: 0,
-        intervencionesQx: '',
-        ldl: 0,
-        medicamentos: '',
-        motivo: '',
-        nombre: '',
-        objetivo: '',
-        objetivosEspecificos: '',
-        objetivosGenerales: '',
-        observacion: '',
-        ocupacion: '',
-        ocupacionActualTrabajo: '',
-        oxigeno: '',
-        palpacion: '',
-        planoFrontal: '',
-        planoLateral: '',
-        planoPosterior: '',
-        potencia: 0,
-        presionArterial: 0,
-        pruebasEspeciales: '',
-        rangosActivosPasivos: 0,
-        tgl: 0,
-        traumas: '',
-        userid: '',
-        formid: '',
+      
 
-      };
       this.evaluacionPrueba.fecha = firestore.FieldValue.serverTimestamp();
       this.fecha = this.evaluacionPrueba.fecha;
       this.evaluacionPrueba.nombre = this.userName;
@@ -142,6 +179,89 @@ export class HacerEvaluacionBimensualPage implements OnInit {
       this.userLastName = this.userServ.getLastName();
       this.userRole = this.userServ.getRole();
       this.fecha = Timestamp;
+
+      var Snombre = [];
+    var Sedad = [];
+    var Socupacion = [];
+    var SayudasTecnicas = [];
+    var SactividadDeportiva = [];
+    var Sfecha = [];
+    var SintervencionesQX = [];
+    var Straumas = [];
+    var SocupacionActualTrabajo = [];
+    var Santecedentes = [];
+    var Shabitos = [];
+    var Smedicamentos = [];
+    var Sobjetivos = [];
+    var Suserid = [];
+    var Sformid = [];
+
+      var docRef = this.db.collection("fichas-clinicas").doc(this.userServ.getUID());
+
+    await docRef.get().toPromise().then(function(doc) {
+     if (doc.exists) {
+          console.log("Document data:", doc.data());
+          Snombre = Snombre.concat(doc.data().nombre);
+          Sedad = Sedad.concat(doc.data().edad);
+          Socupacion = Socupacion.concat(doc.data().ocupacion);
+          SayudasTecnicas = SayudasTecnicas.concat(doc.data().ayudasTecnicas);
+          SactividadDeportiva = SactividadDeportiva.concat(doc.data().actividadDeportiva);
+          Sfecha = Sfecha.concat(doc.data().fecha);
+          SintervencionesQX = SintervencionesQX.concat(doc.data().intervencionesQX);
+          Straumas = Straumas.concat(doc.data().traumas);
+          SocupacionActualTrabajo = SocupacionActualTrabajo.concat(doc.data().ocupacionActualTrabajo);
+          Santecedentes = Santecedentes.concat(doc.data().antecedentes);
+          Shabitos = Shabitos.concat(doc.data().habitos);
+          Smedicamentos = Smedicamentos.concat(doc.data().medicamentos);
+          Sobjetivos = Sobjetivos.concat(doc.data().objetivos);
+          Suserid = Suserid.concat(doc.data().userid);
+          Sformid = Sformid.concat(doc.data().formid);
+    } else {
+          console.log("No such document!");
+          }
+      }).catch(function(error) {
+          console.log("Error getting document:", error);
+      });
+      
+      console.log('aaaa?', SayudasTecnicas);
+      let SSnombre = Snombre.toString();
+      let SSedad = Number(Sedad.toString());
+      let SSocupacion = Socupacion.toString();
+      let SSayudasTecnicas = SayudasTecnicas.toString();
+      let SSactividadDeporiva = SactividadDeportiva.toString();
+      let SSfecha = Sfecha.toString();
+      let SSintervencionesQX = SintervencionesQX.toString();
+      let SStraumas = Straumas.toString();
+      let SSocupacionActualTRabajo = SocupacionActualTrabajo.toString();
+      let SSantecedentes = Santecedentes.toString();
+      let SShabitos = Shabitos.toString();
+      let SSmedicamentos = Smedicamentos.toString();
+      let SSobjetivos = Sobjetivos.toString();
+      let SSuserid = Suserid.toString();
+      let SSformid = Sformid.toString();
+
+      this.fichaClinica.nombre = SSnombre;
+      this.fichaClinica.edad = SSedad;
+      this.fichaClinica.ocupacion = SSocupacion;
+      this.fichaClinica.ayudasTecnicas = SSayudasTecnicas;
+      this.fichaClinica.actividadDeportiva = SSactividadDeporiva;
+      if(this.fichaClinica.fecha === ''){
+        this.fichaClinica.fecha = Date.now();
+      }
+      else{
+        this.fichaClinica.fecha = SSfecha;
+      }
+      this.fichaClinica.intervencionesQX = SSintervencionesQX;
+      this.fichaClinica.traumas = SStraumas;
+      this.fichaClinica.ocupacionActualTrabajo = SSocupacionActualTRabajo;
+      this.fichaClinica.antecedentes = SSantecedentes;
+      this.fichaClinica.habitos = SShabitos;
+      this.fichaClinica.medicamentos = SSmedicamentos;
+      this.fichaClinica.objetivos = SSobjetivos;
+      this.fichaClinica.userid = SSuserid;
+      this.fichaClinica.formid = SSformid;
+
+
     }else{
       this.navCtrl.navigateBack('');
     }
@@ -182,7 +302,45 @@ export class HacerEvaluacionBimensualPage implements OnInit {
     await alert.present();
   });
   }
- 
+
+  openSpotify(){
+    const browser: InAppBrowserObject = this.inAppBrowser.create('https://www.spotify.com/');
+  }
+
+  startTimer(){
+    const numbers = timer(1000);
+    numbers.subscribe(x => console.log(x));
+  }
+  
+  openInstagram(name) {
+    let app;
+  
+    if (this.platform.is('ios')) {
+      app = 'instagram://';
+    } else if (this.platform.is('android')) {
+      app = 'com.instagram.android';
+    } else {
+      const browser: InAppBrowserObject = this.inAppBrowser.create('https://www.instagram.com/' + name);
+      return;
+    }
+  
+    this.appAvailability.check(app)
+      .then(
+        (yes: boolean) => {
+          console.log(app + ' is available')
+          // Success
+          // App exists
+          const browser: InAppBrowserObject = this.inAppBrowser.create('instagram://user?username=' + name, '_system');
+        },
+        (no: boolean) => {
+          // Error
+          // App does not exist
+          // Open Web URL
+          const browser: InAppBrowserObject = this.inAppBrowser.create('https://www.instagram.com/' + name, '_system');
+        }
+      );
+  }
+
   logout(){
     this.authService.logoutUser()
     .then(res => {
@@ -199,6 +357,10 @@ export class HacerEvaluacionBimensualPage implements OnInit {
   }
 
   /*Strings*/
+  onModelEdad($event){
+    this.evaluacionPrueba.edad = $event.target.value;
+    console.log('Edad: '+ this.evaluacionPrueba.actividadDeportiva);
+  }
   onModelChangeActividadDeportiva($event){
     this.evaluacionPrueba.actividadDeportiva = $event.target.value;
     console.log('Actividad Deportiva: '+ this.evaluacionPrueba.actividadDeportiva);
@@ -331,6 +493,8 @@ export class HacerEvaluacionBimensualPage implements OnInit {
     console.log('TGL: '+ this.evaluacionPrueba.tgl);
   }
 
+  
+
   async guardarEvaluacion(){
 
     const uid = this.db.createId();
@@ -338,8 +502,9 @@ export class HacerEvaluacionBimensualPage implements OnInit {
     
     if (confirmation){
       this.db.collection('evaluacion-bimensual').doc(uid).set({
-          antecedentes: this.evaluacionPrueba.antecedentes,
-          ayudasTecnicas: this.evaluacionPrueba.ayudasTecnicas,
+          antecedentes: this.fichaClinica.antecedentes,
+          ayudasTecnicas: this.fichaClinica.ayudasTecnicas,
+          actividadDeportiva: this.fichaClinica.actividadDeportiva,
           colesterol: this.evaluacionPrueba.colesterol,
           diagnostico: this.evaluacionPrueba.diagnostico,
           dolor: this.evaluacionPrueba.dolor,
@@ -351,19 +516,19 @@ export class HacerEvaluacionBimensualPage implements OnInit {
           fms: this.evaluacionPrueba.fms,
           fuerza: this.evaluacionPrueba.fuerza,
           funcionCardiaca: this.evaluacionPrueba.funcionCardiaca,
-          habitos: this.habitos,
+          habitos: this.fichaClinica.habitos,
           indiceCardiovascular: this.evaluacionPrueba.indiceCardiovascular,
-          intervencionesQx: this.evaluacionPrueba.intervencionesQx,
+          intervencionesQx: this.fichaClinica.intervencionesQX,
           ldl: this.evaluacionPrueba.ldl,
-          medicamentos: this.evaluacionPrueba.medicamentos,
+          medicamentos: this.fichaClinica.medicamentos,
           motivos: this.evaluacionPrueba.motivo,
           nombre: this.evaluacionPrueba.nombre,
-          objetivo: this.evaluacionPrueba.objetivo,
+          objetivo: this.fichaClinica.objetivos,
           objetivosEspecificos: this.evaluacionPrueba.objetivosEspecificos,
           objetivosGenerales: this.evaluacionPrueba.objetivosGenerales,
           observacion: this.evaluacionPrueba.observacion,
-          ocupacion: this.evaluacionPrueba.ocupacion,
-          ocupacionActualTrabajo: this.evaluacionPrueba.ocupacionActualTrabajo,
+          ocupacion: this.fichaClinica.ocupacion,
+          ocupacionActualTrabajo: this.fichaClinica.ocupacionActualTrabajo,
           oxigeno: this.evaluacionPrueba.oxigeno,
           palpacion: this.evaluacionPrueba.palpacion,
           planoFrontal: this.evaluacionPrueba.planoFrontal,
@@ -374,12 +539,12 @@ export class HacerEvaluacionBimensualPage implements OnInit {
           pruebasEspeciales: this.evaluacionPrueba.pruebasEspeciales,
           rangosActivosPasivos: this.evaluacionPrueba.rangosActivosPasivos,
           tgl: this.evaluacionPrueba.tgl,
-          traumas: this.evaluacionPrueba.traumas,
+          traumas: this.fichaClinica.traumas,
           userid: this.evaluacionPrueba.userid,
           formid: this.evaluacionPrueba.formid
 
         })
-          console.log('Evaluacion guardada con éxito en la base de datos: '+ this.evaluacionPrueba);
+          console.log('Evaluacion Fisiotraining guardada con éxito en la base de datos: '+ this.evaluacionPrueba);
           this.router.navigate(['/tabs/perfil']);
       }
        else {

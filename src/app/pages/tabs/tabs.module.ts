@@ -14,9 +14,14 @@ const routes: Routes = [
     children: [
       { path: 'first', loadChildren: '../first/first.module#FirstPageModule' },
       { path: 'escritorio-admin', loadChildren: '../escritorio-admin/escritorio-admin.module#EscritorioAdminPageModule'},
+ 
+      { path: 'escritorio-profesor', loadChildren: '../escritorio-profe/escritorio-profe.module#EscritorioProfePageModule'},
+      { path: 'escritorio-cliente', loadChildren: '../escritorio-cliente/escritorio-cliente.module#EscritorioClientePageModule'},
+      { path: 'escritorio-visita', loadChildren: '../escritorio-visita/escritorio-visita.module#EscritorioVisitaPageModule'},
       { path: 'mensajeria', loadChildren: '../mensajeria/mensajeria.module#MensajeriaPageModule'},
       { path: 'buscar-usuario', loadChildren: '../buscar-usuario/buscar-usuario.module#BuscarUsuarioPageModule'},
       { path: 'perfil', loadChildren: '../perfil/perfil.module#PerfilPageModule'},
+      { path: 'perfil2', loadChildren: '../perfil2/perfil2.module#Perfil2PageModule'},
       { path: 'hacer-evaluacion-diaria', loadChildren: '../hacer-evaluacion-diaria/hacer-evaluacion-diaria.module#HacerEvaluacionDiariaPageModule'},
       { path: 'hacer-evaluacion-bimensual', loadChildren: '../hacer-evaluacion-bimensual/hacer-evaluacion-bimensual.module#HacerEvaluacionBimensualPageModule'},
       { path: 'ver-evaluaciones', loadChildren: '../ver-evaluaciones/ver-evaluaciones.module#VerEvaluacionesPageModule' },
@@ -33,6 +38,7 @@ const routes: Routes = [
       { path: 'administrador', loadChildren: '../administrador/administrador.module#AdministradorPageModule' },
       { path: 'ver-listas-usuarios', loadChildren: '../ver-listas-usuarios/ver-listas-usuarios.module#VerListasUsuariosPageModule' },
       { path: 'mi-ficha', loadChildren: '../mi-ficha/mi-ficha.module#MiFichaPageModule' },
+      { path: 'perfil-kine', loadChildren: '../perfil-kine/perfil-kine.module#PerfilKinePageModule' },
     ]
   },
 ];

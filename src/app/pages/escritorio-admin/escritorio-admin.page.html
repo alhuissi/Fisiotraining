@@ -3,170 +3,43 @@
     <ion-button slot="end"  (click)="presentActionSheet()">
        <ion-icon  name="power"></ion-icon>  
     </ion-button>
-    <ion-title text-center>Inicio</ion-title>
+    <ion-title class="ion-text-center">Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
  
 <ion-content color="dark" fullscreen>
 
 
-    <div class="list">
-        <ion-list *ngIf="authIsKine">
-          <ion-item no-lines ion-item href="https://fisiotraining.cl" no-padding>
-            <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/yoga.jpg)','background-repeat': 'no-repeat', 
+
+        <ion-list>
+          <ion-item no-lines ion-item (click)="openMisPacientes()" class="ion-no-padding">
+            <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/yoga.jpg)','background-repeat': 'no-repeat', 
           'height':'40% 100px', 'background-size': 'cover '}">
               <div class="inner">
-                <h1><b>¿QUE ES FISIOTRAINING?</b></h1>
+                <b>MIS PACIENTES</b>
               </div>
             </div>
 
           </ion-item>
-          <ion-item no-lines ion-item (click)="openProximoPaciente()" no-padding>
-            <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/bb.jpg)','background-repeat': 'no-repeat', 
+          <ion-item no-lines ion-item (click)="openProximoPaciente()" class="ion-no-padding">
+            <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/bb.jpg)','background-repeat': 'no-repeat', 
           'height':'40% 100px', 'background-size': 'cover '}">
               <div class="inner">
-                <h1><b>PROXIMO ENTRENAMIENTO </b></h1>
+                <b>PRÓXIMO ENTRENAMIENTO </b>
               </div>
             </div>
           </ion-item>
 
-          <ion-item no-lines ion-item (click)="openCalendario()" no-padding>
-              <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/appBackground.jpg)','background-repeat': 'no-repeat', 
+          <ion-item no-lines ion-item (click)="openCalendario()" class="ion-no-padding">
+              <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/appBackground.jpg)','background-repeat': 'no-repeat', 
             'height':'40% 100px', 'background-size': 'cover '}">
                 <div class="inner">
-                  <h1><b>HORAS TRABAJADAS: 15</b></h1>
+                  <b>HORAS TRABAJADAS: 15</b>
                 </div>
               </div>
             </ion-item>
         </ion-list>
 
-        <ion-list *ngIf="authIsUsuario">
-            <ion-item no-lines ion-item (click)="openMiFicha()" no-padding>
-              <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/yoga.jpg)','background-repeat': 'no-repeat', 
-            'height':'40% 100px', 'background-size': 'cover '}">
-                <div class="inner">
-                  <h1><b>MI FICHA</b></h1>
-                </div>
-              </div>
-  
-            </ion-item>
-            <ion-item no-lines ion-item (click)="openProximoPaciente()" no-padding>
-              <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/bb.jpg)','background-repeat': 'no-repeat', 
-            'height':'40% 100px', 'background-size': 'cover '}">
-                <div class="inner">
-                  <h1><b>PROXIMO ENTRENAMIENTO </b></h1>
-                </div>
-              </div>
-            </ion-item>
-<!--  
-            <ion-item no-lines ion-item (click)="openCalendario()" no-padding>
-                <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/appBackground.jpg)','background-repeat': 'no-repeat', 
-              'height':'40% 100px', 'background-size': 'cover '}">
-                  <div class="inner">
-                    <h1><b>HORAS PENDIENTES </b></h1>
-                  </div>
-                </div>
-              </ion-item>
--->
-              <ion-item no-lines ion-item (click)="openInstagram('fisiotraininglc')" no-padding>
-                  <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/fitness.jpg)','background-repeat': 'no-repeat', 
-                'height':'40% 100px', 'background-size': 'cover '}">
-                <ion-icon name="logo-instagram" slot="start" color="tertiary"></ion-icon>
-                    <div class="inner">
-                      <h1><b>INSTAGRAM</b></h1>
-                    </div>
-                    <ion-icon name="logo-instagram" slot="end" color="tertiary"></ion-icon>
-                  </div>
-                </ion-item>
-          </ion-list>
-
-          <ion-list *ngIf="authIsVisita">
-              <ion-item no-lines ion-item href="https://fisiotraining.cl" no-padding>
-                <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/yoga.jpg)','background-repeat': 'no-repeat', 
-              'height':'40% 100px', 'background-size': 'cover '}">
-                  <div class="inner">
-                    <h1><b>¿QUE ES FISIOTRAINING?</b></h1>
-                  </div>
-                </div>
-              </ion-item>
-
-              <ion-item no-lines ion-item (click)="openProximoPaciente()" no-padding>
-                <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/bb.jpg)','background-repeat': 'no-repeat', 
-              'height':'40% 100px', 'background-size': 'cover '}">
-                  <div class="inner">
-                    <h1><b>SOLICITAR UNA SESION</b></h1>
-                  </div>
-                </div>
-              </ion-item>
-    
-              <ion-item no-lines ion-item (click)="openInstagram('fisiotraininglc')" no-padding>
-                  <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(88, 87, 88, 0.3),rgba(94, 93, 94, 0.3)),url(assets/imgs/appBackground.jpg)','background-repeat': 'no-repeat', 
-                'height':'40% 100px', 'background-size': 'cover '}">
-                <ion-icon name="logo-instagram" slot="start" color="tertiary"></ion-icon>
-                    <div class="inner">
-                      <h1><b>INSTAGRAM</b></h1>
-                    </div>
-                    <ion-icon name="logo-instagram" slot="end" color="tertiary"></ion-icon>
-                  </div>
-                </ion-item>
-
-            </ion-list>
-      </div>
-
-
-<!--   <ion-grid>
-    <br>
-
-    <ion-row *ngIf="authIsKine" >
-      <ion-col text-center> 
-          <ion-button class="animated fadeIn slow"  color="tertiary"  href="https://fisiotraining.cl"  expand="block" shape="round">
-              ¿Qué es Fisiotraining?
-          </ion-button>       
-      </ion-col>
-    </ion-row>
-
-    <ion-row *ngIf="authIsKine">
-        <ion-col text-center>
-            <ion-button  class="animated fadeIn slow"  color="tertiary" (click)="openProximoPaciente()" expand="block" shape="round">
-              Próximo Paciente
-            </ion-button>       
-        </ion-col>
-    </ion-row>
-  <ion-row>
-      <ion-col text-center>
-          <ion-button *ngIf="authIsKine" class="animated fadeIn slow"  color="tertiary" (click)="openAgregarSesion()" expand="block" shape="round">
-              Agregar Sesión
-          </ion-button>       
-      </ion-col>
-  </ion-row>      
-  <br>
-  <ion-row *ngIf="authIsKine">
-    <ion-col>
-      <ion-label><h2>Horas trabajadas: </h2></ion-label>
- 
-    </ion-col>
-  </ion-row>
-
-
-  <ion-row *ngIf="authIsUsuario">
-      <ion-col text-center>
-          <ion-button  class="animated fadeIn slow" color="tertiary" (click)="openMiFicha()" expand="block" shape="round">
-                      Mi Ficha
-          </ion-button>       
-      </ion-col>
-  </ion-row>
-  
-
-
-  <ion-row>
-        <ion-col text-center>
-            <ion-button *ngIf="authIsVisita" class="animated fadeIn slow" color="tertiary" (click)="openSolicitarSesion()" expand="block" shape="round">
-                        Solicitar una Sesión
-            </ion-button>       
-        </ion-col>
-  </ion-row>
-  </ion-grid>  
-  
--->
+        
 </ion-content>
 

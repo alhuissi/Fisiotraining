@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="dark">
       <ion-button slot="start" fill="clear" (click)="goBack()">
           <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
         </ion-button>
@@ -12,7 +12,7 @@
   
       <ion-row>
         <ion-col class="animated fadeIn">
-          <b>Lista de Solicitudes </b>
+          <b>Lista de Solicitudes: </b>
         </ion-col>
       </ion-row>
   
@@ -21,9 +21,10 @@
                 <ion-icon name="list-box" size="small" slot="start"></ion-icon> 
   
           <ion-label class="animated fadeIn slow">
-            <h2><b>Fecha solicitada: {{solicitud.fecha}}</b></h2>
-            <p>{{solicitud.nombre}} {{solicitud.apellido}}</p>
+            <h2><b>{{solicitud.nombre}} {{solicitud.apellido}}</b></h2>           
             <p>{{solicitud.mail}}</p>
+            <p>{{solicitud.phone}}</p>
+            <p>{{solicitud.fecha}}</p>
           </ion-label>
   
         </ion-item>

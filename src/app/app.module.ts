@@ -25,6 +25,8 @@ import { SolicitudService } from './services/solicitud.service';
 import { AngularFirestore, AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { ChatComponent } from './pages/chat/chat.component';
 
+import { AyudaModalComponent } from './pages/ayuda-modal/ayuda-modal.component';
+
 import { FormsModule } from '@angular/forms';
 import { EscogerUsuarioComponent } from './pages/escoger-usuario/escoger-usuario.component';
 import { EscogerUsuario2Component } from './pages/escoger-usuario2/escoger-usuario2.component';
@@ -33,6 +35,9 @@ import { ListaClientesComponent } from './pages/lista-clientes/lista-clientes.co
 import { ListaClientesSelectComponent } from './pages/lista-clientes-select/lista-clientes-select.component';
 import { ListaCoachsComponent } from './pages/lista-coachs/lista-coachs.component';
 import { ListaCoachsSelectComponent } from './pages/lista-coachs-select/lista-coachs-select.component';
+import { ListaCoachsSelectKineComponent } from './pages/lista-coachs-select-kine/lista-coachs-select-kine.component';
+import { MisPacientesComponent } from './pages/mis-pacientes/mis-pacientes.component';
+
 import { ListaAdminsComponent } from './pages/lista-admins/lista-admins.component';
 import { ListaVisitaComponent } from './pages/lista-visita/lista-visita.component';
 
@@ -47,8 +52,8 @@ import { SesionService } from './services/sesiones.service';
  
  
 @NgModule({
-  declarations: [AppComponent, ListaClientesComponent, ListaCoachsComponent, ListaCoachsSelectComponent, ListaClientesSelectComponent, ListaAdminsComponent, ListaVisitaComponent, ListaUsuariosComponent, EscogerUsuario2Component, EscogerUsuarioComponent, ChatComponent, VerUltimaEvaluacionComponent, FisiotrainingTutoComponent],
-  entryComponents: [ChatComponent, ListaCoachsComponent, ListaClientesComponent, ListaCoachsSelectComponent, ListaClientesSelectComponent, ListaAdminsComponent, ListaVisitaComponent, ListaUsuariosComponent, EscogerUsuario2Component, EscogerUsuarioComponent, VerUltimaEvaluacionComponent, FisiotrainingTutoComponent],
+  declarations: [AppComponent, AyudaModalComponent, MisPacientesComponent, ListaClientesComponent, ListaCoachsComponent, ListaCoachsSelectComponent, ListaCoachsSelectKineComponent, ListaClientesSelectComponent, ListaAdminsComponent, ListaVisitaComponent, ListaUsuariosComponent, EscogerUsuario2Component, EscogerUsuarioComponent, ChatComponent, VerUltimaEvaluacionComponent, FisiotrainingTutoComponent],
+  entryComponents: [ChatComponent, AyudaModalComponent,  MisPacientesComponent, ListaCoachsComponent, ListaClientesComponent, ListaCoachsSelectComponent, ListaCoachsSelectKineComponent, ListaClientesSelectComponent, ListaAdminsComponent, ListaVisitaComponent, ListaUsuariosComponent, EscogerUsuario2Component, EscogerUsuarioComponent, VerUltimaEvaluacionComponent, FisiotrainingTutoComponent],
   imports: [
     FormsModule,
     BrowserModule, 

@@ -13,6 +13,7 @@ export interface solicitudFisio {
     userID: string,
     fechaEmision: string,
     fecha: string,
+    phone: string,
     id: string,
 }
 
@@ -47,5 +48,15 @@ export class SolicitudService {
         let fichaID: solicitudFisio;
         return this.db.collection('solicitudes').doc(uid);
     }
+
+    getSolicitudUserID(){
+        return this.solicitud.userID;
+    }
+
+
+    getIDSol(){
+        return this.solicitud.id;
+    }
+
 
 }

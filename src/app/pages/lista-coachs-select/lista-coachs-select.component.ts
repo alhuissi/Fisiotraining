@@ -1,3 +1,5 @@
+//Selecciona Coach desde Calendario para agendar una Sesión
+
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
@@ -55,7 +57,7 @@ export class ListaCoachsSelectComponent implements OnInit {
       this.navCtrl.navigateBack('');
     }
 
-      this.UserCollection = this.afs.collection('users', ref => ref.where('role', '==', 'profesor')) //this.afs.collection('users', ref => ref.orderBy('name'));
+      this.UserCollection = this.afs.collection('users', ref => ref.where('role', 'in', ['profesor', 'admin']));
       this.ListaUsers = this.UserCollection.valueChanges();
   }
 

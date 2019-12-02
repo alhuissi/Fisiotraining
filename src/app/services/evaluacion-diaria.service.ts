@@ -24,6 +24,7 @@ export interface evaluacionDiaria {
     mailAutor: string,
     nombreAutor: string,
     IDAutor: string,
+    idSesion: string,
 }
 
 @Injectable()

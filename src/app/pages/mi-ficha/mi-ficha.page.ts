@@ -72,6 +72,7 @@ export class MiFichaPage implements OnInit {
     mailAutor: '',
     nombreAutor: '',
     IDAutor: '',
+    idSesion: '',
   };
 
   constructor(

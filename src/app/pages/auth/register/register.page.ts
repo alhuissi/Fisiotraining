@@ -34,6 +34,7 @@ export class RegisterPage implements OnInit {
             profileName: ['', Validators.compose([Validators.minLength(2), Validators.required])],
             profileLastName: ['', Validators.compose([Validators.minLength(2), Validators.required])],
             password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+            phone: ['', Validators.compose([Validators.minLength(6), Validators.required])],
       });
   }
  
@@ -44,7 +45,8 @@ export class RegisterPage implements OnInit {
 
 
     this.loadingController.create({
-      message: 'Verificando datos...'
+      message: 'Verificando datos...',
+      duration: 2000,
     }).then((overlay) => {
       this.loading = overlay;
       this.loading.present();
@@ -57,6 +59,7 @@ export class RegisterPage implements OnInit {
         this.authService.registerUser(
             this.registerForm.value.email, 
             this.registerForm.value.password,
+            this.registerForm.value.phone,
             this.registerForm.value.profileName, 
             this.registerForm.value.profileLastName)
         .then(() => {

@@ -13,21 +13,23 @@
       --padding-start: 0;
     }
     }
+   
 
         .label {
           margin: 0;
        }
        :host{
        .imagediv{
-          height:200px;
+          height:165px;
           justify-content: center;
           display: flex;
           vertical-align: middle;
           align-items: center;
           width: 100%;
-           font-size: 30px;
+          // font-size: 30px;
         color:white;
        }
+       
        }
         :host {
           ion-list{
