@@ -1,54 +1,54 @@
 <ion-header>
-    <ion-toolbar color="dark">
+    <ion-toolbar color="medium">
         <ion-button slot="start" fill="clear" (click)="goBack()">
             <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
           </ion-button>
-      <ion-title text-center>Listas de Usuarios</ion-title>
+      <ion-title class="ion-text-center">Listas de Usuarios</ion-title>
     </ion-toolbar>
   </ion-header>
 
-<ion-content padding>
+<ion-content>
     <ion-grid> 
         <br>
     <ion-row>
-        <ion-col text-center>
-            <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaAdmins()" expand="block" shape="round">
-                    <ion-label color="dark">Lista de Administradores</ion-label>
+        <ion-col class="ion-text-center">
+            <ion-button *ngIf="authIsAdmin" color="primary" (click)="openListaAdmins()" expand="block" shape="round" fill="outline">
+                    ADMINISTRADORES
             </ion-button>       
         </ion-col>
       </ion-row>
       <ion-row>
-          <ion-col text-center>
-              <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaCoachs()" expand="block" shape="round">
-                    <ion-label color="dark">Lista de Coachs</ion-label>
+          <ion-col class="ion-text-center">
+              <ion-button *ngIf="authIsAdmin" color="primary" (click)="openListaCoachs()" expand="block" shape="round" fill="outline">
+                    COACHS
               </ion-button>       
           </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col text-center>
-                <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaPacientes()" expand="block" shape="round">
-                        <ion-label color="dark">Lista de Pacientes</ion-label>
+            <ion-col class="ion-text-center">
+                <ion-button *ngIf="authIsAdmin" color="primary" (click)="openListaPacientes()" expand="block" shape="round" fill="outline">
+                        PACIENTES
                 </ion-button>       
             </ion-col>
           </ion-row>
           <ion-row>
-              <ion-col text-center>
-                  <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaVisitas()" expand="block" shape="round">
-                        <ion-label color="dark">Lista de Visitas</ion-label>
+              <ion-col class="ion-text-center">
+                  <ion-button *ngIf="authIsAdmin" color="primary" (click)="openListaVisitas()" expand="block" shape="round" fill="outline">
+                        VISITAS
                   </ion-button>       
               </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col text-center>
-                    <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaUsers()" expand="block" shape="round">
-                            <ion-label color="dark">Lista completa de Usuarios </ion-label>
+                <ion-col class="ion-text-center">
+                    <ion-button *ngIf="authIsAdmin" color="primary" (click)="openListaUsers()" expand="block" shape="round" fill="outline">
+                            LISTA COMPLETA DE USUARIOS
                     </ion-button>       
                 </ion-col>
               </ion-row>
-              <ion-row>
-                  <ion-col text-center>
-                      <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="goBack()" expand="block" shape="round">
-                            <ion-label color="dark">Volver</ion-label>
+              <ion-row style="margin-top: 10px;">
+                  <ion-col class="ion-text-center">
+                      <ion-button *ngIf="authIsAdmin" color="primary" (click)="goBack()" shape="round">
+                            VOLVER
                       </ion-button>       
                   </ion-col>
                 </ion-row>

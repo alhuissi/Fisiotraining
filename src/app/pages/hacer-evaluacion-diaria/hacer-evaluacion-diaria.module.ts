@@ -6,6 +6,7 @@ import { IonicRatingModule } from 'ionic4-rating';
 import { IonicModule } from '@ionic/angular';
 
 import { HacerEvaluacionDiariaPage } from './hacer-evaluacion-diaria.page';
+import { StarRatingModule } from 'ionic4-star-rating';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     IonicRatingModule,
     FormsModule,
     IonicModule,
+    StarRatingModule,
     RouterModule.forChild(routes)
   ],
   declarations: [HacerEvaluacionDiariaPage]

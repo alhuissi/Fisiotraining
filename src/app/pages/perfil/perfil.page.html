@@ -1,150 +1,211 @@
 <ion-header>
   <ion-toolbar color="dark">
-
-
-    <ion-title class="ion-text-center">{{userName}} {{userLastName}}</ion-title>
+    <ion-button color="dark" fill="clear" style="box-shadow: 0px 0px 0px" slot="start">
+      <ion-icon></ion-icon>
+    </ion-button>
+    <ion-button color="secondary" fill="outline" slot="end" class="boton" (click)="presentActionSheetBoton()">
+      <ion-icon style="color:#fff; font-size: 25px" name="menu"></ion-icon>
+    </ion-button>
+    <ion-title class="ion-text-center">{{this.userName}} {{this.userLastName}}</ion-title>
 
   </ion-toolbar>
 </ion-header>
- 
-<ion-content class="background">
-  
+
+<ion-content>
+
   <ion-grid>
-    <!--
     <br>
     <ion-row>
-        <ion-col class="ion-text-center">
-        <ion-card-title color='dark' class="ion-text-center">
-          <b>  </b>
-        </ion-card-title>
+      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+      <ion-col size="4">
+        <div>
+          <ion-avatar (click)="agregarFoto()">
+            <img src="assets/add-profile.png">
+          </ion-avatar>
+        </div>
       </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col class="ion-text-center">
-            <ion-text>  </ion-text> 
-          </ion-col>
+      <ion-col>
+        <div>
+          <ion-row>
+            <ion-col>
+              <ion-label *ngIf="authIsKine" color="dark" class="ion-text-wrap" style="font-size:12px;margin-bottom:0px;">
+                {{this.userEdad}} años
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-label *ngIf="authIsKine" color="dark" class="ion-text-wrap" style="font-size:12px;margin-top:0px;margin-bottom:0px;">
+                <ion-icon name="pin"></ion-icon>
+                {{this.direccion}}
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-label color="dark" class="perfil-label ion-text-wrap"
+              style="margin-left:5px;margin-top:0px;margin-bottom:5px;font-size:15px;">
+              <b> {{this.nEntrenamientos}}</b><span style="font-size:12px;margin-left:5px;">entrenamientos</span>
+            </ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-button size="small" color="dark" (click)="openFichaClinicaPage()" shape="round">
+              FICHA CLÍNICA
+            </ion-button>
+          </ion-row>
 
+          <!--
+          <ion-row>
+            <ion-label color="dark">
+              31 años
+            </ion-label>
+          </ion-row>
+          -->
 
-      <ion-col *ngIf="authIsAdmin" class="animated fadeIn" text-center>
-      <ion-button (click)="presentActionSheet()">
-       <ion-icon name="more"></ion-icon>
-       
-      </ion-button>
-    </ion-col> 
-  {{fechaToday | date: 'dd/MM/yyyy'}}
+        </div>
+
+      </ion-col>
+
     </ion-row>
-     -->
-
-       
-                  <ion-row>
-                    <ion-col class="animated fadeIn slow" class="ion-text-center">
-                        <ion-button *ngIf="authIsKine" color="warning" (click)="openHacerEvaluacionDiariaPage()" expand="block" shape="round">
-                            <ion-label color="dark">¡Comenzar Entrenamiento!</ion-label> 
-                        </ion-button>       
-                      </ion-col>
-                    </ion-row>
-
-                      <ion-card *ngIf="authIsKine" class="animated fadeIn slow">
-                          <ion-card-header color="medium" tappable (click)="collapseCard = !collapseCard">
-                              <ion-card-title color='dark' class="ion-text-wrap ion-text-center"><b>Entrenamiento Anterior {{evaluacion.fecha | date:'dd/MM/yyyy'}}</b></ion-card-title>
-                          </ion-card-header>
-                          <ion-card-content *ngIf="!collapseCard">
-                                
-                               <ion-row>
-                                 <ion-col class="ion-text-center">
-                                   <ion-label class="ion-text-center">Core </ion-label></ion-col>
-                                 
-                                    <rating [(ngModel)]="rateCore"
-                                    readonly="true" 
-                                    size="default"
-                                    >
-                                    </rating>
-                                  
-                                </ion-row>  
-                            
-                              
-                               <ion-row>
-                                  <ion-col class="ion-text-center">
-                                    <ion-label class="ion-text-center"> Tren Inf </ion-label>
-                                  </ion-col>
-                                  
-                                      <rating [(ngModel)]="rateInf"
-                                      readonly="true" 
-                                      size="default"
-                                      >
-                                      </rating>
-                               </ion-row>  
-                        
+    <br>
+    <ion-row class="borde">
+      <canvas #barChart></canvas>
+    </ion-row>
 
 
-                              
-                                  <ion-row>
-                                   <ion-col class="ion-text-center">
-                                     <ion-label class="ion-text-center">Tren Sup </ion-label></ion-col>
-                                    
-                                      <rating [(ngModel)]="rateSup"
-                                      readonly="true" 
-                                      size="default"
-                                      >
-                                      </rating>
-                                    </ion-row>                                                                   
-                         
+    <!--   Entrenamiento Anterior -->
+    <ion-card style="background-color:white;">
+      <ion-card-header tappable (click)="collapseCard = !collapseCard">
+        <ion-card-title color='primary' class="ion-text-wrap ion-text-center"><b>VER ENTRENAMIENTO ANTERIOR</b> &nbsp;
+          <ion-icon *ngIf="collapseCard" size="medium" name="arrow-dropright"></ion-icon>
+          <ion-icon *ngIf="!collapseCard" size="medium" name="arrow-dropdown"></ion-icon>
+        </ion-card-title>
 
-                              
-                                  <ion-row>
-                                      <ion-col class="ion-text-center"><ion-label>Cardio/Fuerza</ion-label></ion-col>
+      </ion-card-header>
+      <ion-card-content [@visibilityChanged] *ngIf="collapseCard">
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center ion-text-wrap">{{evaluacion.fecha | date:'dd/MM/yyyy'}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
 
-                                      </ion-row>
-                                      <ion-row>
-                                    <ion-range [(ngModel)]="rateCardio" min="1" max="10" color="primary" disabled="true">
-                                    <ion-icon  slot="start" name="heart"></ion-icon>
-                                    <ion-icon  slot="end" src="assets/strength.svg"></ion-icon>
+        <ion-row>
+          <ion-col class="ion-text-center ion-text-wrap">
+            <ion-label>Core</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-range [(ngModel)]="rateCore" min="1" max="10" color="primary" disabled="true">
+            <ion-icon slot="start" name="sad"></ion-icon>
+            <ion-icon slot="end" name="happy"></ion-icon>
+          </ion-range>
+        </ion-row>
 
-                                  </ion-range>
-                                </ion-row> 
-                              
-                          </ion-card-content>
-                     </ion-card>
-                   
+        <!--
+        <ion-row>
+          <ion-col>
+            <ion-label class="ion-text-wrap">Core </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateCore" readonly="true" size="default">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center ion-text-wrap">
+            <ion-label>Tren Inferior</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-range [(ngModel)]="rateInf" min="1" max="10" color="primary" disabled="true">
+            <ion-icon slot="start" name="sad"></ion-icon>
+            <ion-icon slot="end" name="happy">></ion-icon>
+          </ion-range>
+        </ion-row>
+
+        <!--
+        <ion-row>
+          <ion-col>
+            <ion-label class="ion-text-wrap"> Tren Inf </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateInf" readonly="true" size="default">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center ion-text-wrap">
+            <ion-label>Tren Superior</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-range [(ngModel)]="rateSup" min="1" max="10" color="primary" disabled="true">
+            <ion-icon slot="start" name="sad"></ion-icon>
+            <ion-icon slot="end" name="happy">></ion-icon>
+          </ion-range>
+        </ion-row>
+
+        <!--
+        <ion-row>
+          <ion-col>
+            <ion-label class="ion-text-center ion-text-wrap">Tren Sup </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateSup" readonly="true" size="default">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center ion-text-wrap">
+            <ion-label>Enfoque del Entrenamiento</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-range [(ngModel)]="rateCardio" min="1" max="10" color="primary" disabled="true">
+            <ion-icon slot="start" name="heart"></ion-icon>
+            <ion-icon slot="end" src="assets/strength.svg"></ion-icon>
+          </ion-range>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button *ngIf="authIsKine" color="primary" (click)="openHacerEvaluacionDiariaPage()" expand="block"
+          shape="round" fill="outline">
+          COMENZAR ENTRENAMIENTO
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button *ngIf="authIsKine" (click)="openHacerEvaluacionBimensualPage()" color="primary" expand="block"
+          shape="round" fill="outline">
+          EVALUACIÓN FISIOTRAINING
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button color="primary" (click)="openVerEvaluacionesPage()" expand="block" shape="round" fill="outline">
+          VER EVALUACIONES ANTERIORES
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button *ngIf="authIsAdmin" color="danger" (click)="cambiarRol()" expand="block" shape="round"
+          fill="outline">
+          CAMBIAR ROL DEL USUARIO
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 
 
-                        <ion-row>
-                          <ion-col class="animated fadeIn slow" class="ion-text-center">
-                              <ion-button *ngIf="authIsKine" color="warning" (click)="openHacerEvaluacionBimensualPage()" expand="block" shape="round">
-                                <ion-label color="dark">Evaluación Fisiotraining</ion-label> 
-                                </ion-button>       
-                            </ion-col>
-                          </ion-row>
-
-                          <ion-row>
-                              <ion-col class="animated fadeIn slow" class="ion-text-center">
-                                  <ion-button color="tertiary" (click)="openFichaClinicaPage()" expand="block" shape="round">
-                                      <ion-label color="dark">Ficha Clínica</ion-label> 
-                                    </ion-button>      
-                                </ion-col>
-                              </ion-row>
-                    
-                   <ion-row>
-                        <ion-col class="animated fadeIn slow" class="ion-text-center">
-                            <ion-button color="tertiary" (click)="openVerEvaluacionesPage()" expand="block" shape="round">
-                                <ion-label color="dark">Ver Evaluaciones Anteriores</ion-label> 
-                              </ion-button>       
-                          </ion-col>
-                        </ion-row>
-
-                  <ion-row>
-                      <ion-col class="animated fadeIn slow delay-2s" class="ion-text-center">  
-                            <ion-button *ngIf="authIsAdmin" color="tertiary" (click)="cambiarRol()" expand="block" shape="round">
-                               <ion-label color="dark">Cambiar Rol del Usuario</ion-label> 
-                            </ion-button>  
-                        </ion-col>
-                      </ion-row> 
-
-                      
-                   
-                  
-                  
-  </ion-grid>  
-  
-  
 </ion-content>

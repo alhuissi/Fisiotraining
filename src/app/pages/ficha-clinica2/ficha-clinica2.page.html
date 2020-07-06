@@ -1,0 +1,101 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="tabs/perfil"></ion-back-button>
+        </ion-buttons>
+        <ion-title text-center>Ficha Clínica</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="background" padding>
+    <!-- <ion-grid> -->
+    <ion-grid>
+        <ion-item>
+
+            <ion-label position="stacked">Nombre: </ion-label>
+            <ion-text class="ion-text-wrapper"> {{this.userName}} {{this.userLastName}} </ion-text>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Edad: </ion-label>
+            <ion-text class="ion-text-wrapper"> {{this.fichaClinica.edad}}</ion-text>
+        </ion-item>
+
+        <ion-item class="ion-text-wrap">
+            <ion-label position="stacked">Dirección: </ion-label>
+            <ion-text tappable type="text" [(ngModel)]="this.fichaClinica.dir"></ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Fecha de evaluación: </ion-label>
+            <ion-text class="ion-text-wrapper">{{this.fichaClinica.fecha | date: 'dd/MM/yyyy'}}</ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Ocupación: </ion-label>
+            <ion-text class="ion-text-wrapper"> {{this.fichaClinica.ocupacion}} </ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Ayudas técnicas: </ion-label>
+            <ion-text class="ion-text-wrapper"> {{this.fichaClinica.ayudasTecnicas}} </ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Actividad deportiva: </ion-label>
+            <ion-text class="ion-text-wrapper"> {{this.fichaClinica.actividadDeportiva}} </ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Intervenciones qx: </ion-label>
+            <ion-text class="ion-text-wrapper"> {{this.fichaClinica.intervencionesQX}} </ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Traumas M-E: </ion-label>
+            <ion-text class="ion-text-wrapper"> {{this.fichaClinica.traumas}} </ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Actividad en el trabajo: </ion-label>
+            <ion-text class="ion-text-wrapper">{{this.fichaClinica.ocupacionActualTrabajo}} </ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Antecedentes: </ion-label>
+            <ion-text class="ion-text-wrapper">{{this.fichaClinica.antecedentes}}</ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Hábitos: </ion-label>
+            <ion-text class="ion-text-wrapper">{{this.fichaClinica.habitos}} </ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Medicamentos: </ion-label>
+            <ion-text class="ion-text-wrapper"> {{this.fichaClinica.medicamentos}} </ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Objetivos: </ion-label>
+            <ion-text class="ion-text-wrapper">{{this.fichaClinica.objetivos}}</ion-text>
+        </ion-item>
+
+    </ion-grid>
+
+
+    <br>
+
+    <ion-row>
+        <ion-col class="ion-text-center">
+            <ion-button expand="block" shape="round" fill="outline" color="primary" (click)="goBack()">
+                VOLVER
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+
+
+
+</ion-content>

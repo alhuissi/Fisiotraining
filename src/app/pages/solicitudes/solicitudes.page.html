@@ -3,15 +3,15 @@
       <ion-button slot="start" fill="clear" (click)="goBack()">
           <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
         </ion-button>
-    <ion-title text-center>Solicitudes</ion-title>
+    <ion-title class="ion-text-center">Solicitudes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
     <ion-grid>
   
       <ion-row>
-        <ion-col class="animated fadeIn">
+        <ion-col class="ion-text-center">
           <b>Lista de Solicitudes: </b>
         </ion-col>
       </ion-row>
@@ -33,9 +33,9 @@
   
         <br>
         <ion-row>
-              <ion-col text-center>
-                  <ion-button class="animated fadeIn slow" color="tertiary" (click)="goBack()">
-                      Volver
+              <ion-col class="ion-text-center">
+                  <ion-button  color="primary" shape="round" fill="outline" (click)="goBack()">
+                      VOLVER
                     </ion-button>       
                 </ion-col>
             </ion-row>

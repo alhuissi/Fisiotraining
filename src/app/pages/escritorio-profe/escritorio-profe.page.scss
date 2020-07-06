@@ -18,19 +18,40 @@
       margin: 0;
    }
    :host{
-   .imagediv{
-      height:165px;
-      justify-content: center;
-      display: flex;
-      vertical-align: middle;
-      align-items: center;
-      width: 100%;
-      // font-size: 30px;
-    color:white;
-   }
-   }
-    :host {
-      ion-list{
-margin: 0;
+    .imagediv{
+     height: 28vh;
+     justify-content: center;
+     display: flex;
+     vertical-align: middle;
+     align-items: center;
+     width: 100%;
+     font-size: 20px;
+     color:white;
+     text-shadow: 0px 0px 10px #000000;
+     border-style: solid;
+     border-width: 1px;
+     border-color: #b7ce48;
     }
+    }
+     :host {
+       ion-list{
+         margin: 0px;
+         padding:0px;
+     }
+   }
+
+   .boton{
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #888888;
+  }
+
+   .centro{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   }
+
+   ion-button{
+    border-radius: 25px;
+    box-shadow: 0px 0px 10px #888888;
   }

@@ -1,5 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
+
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NgCalendarModule } from 'ionic2-calendar';
@@ -23,6 +28,11 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgCalendarModule,
   ],
+  
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es-CL' }
+],
+
   declarations: [CalendarioPage]
 })
 export class CalendarioPageModule {}

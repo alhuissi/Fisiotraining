@@ -1,19 +1,19 @@
 <ion-header>
-    <ion-toolbar color="dark">
+    <ion-toolbar color="medium">
       <ion-button slot="start" fill="clear" (click)="closeComponent()">
         <ion-icon style="color:#fff; font-size: 25px" name="close"></ion-icon>
       </ion-button>
-      <ion-title text-center>Lista de Usuarios</ion-title>
+      <ion-title class="ion-text-center">Lista de Usuarios</ion-title>
     </ion-toolbar>
   </ion-header>
   
-<ion-content padding>
+<ion-content>
     <ion-grid>
   
   
         <ion-list>
-            <ion-item *ngFor= "let user of ListaUsers | async" (click)="openProfile(user)" [routerLink]="user.url" routerDirection="root" [class.active-item]="selectedPath === user.url">
-                  <ion-icon name="happy" size="large" slot="start"></ion-icon> 
+            <ion-item *ngFor="let user of ListaUsers | async" (click)="openProfile(user)" [routerLink]="user.url" routerDirection="root" [class.active-item]="selectedPath === user.url">
+                  <ion-icon name="person" size="large" slot="start"></ion-icon> 
     
             <ion-label class="animated fadeIn slow">
               <h2><b>{{user.name}} {{user.lastName}}</b></h2>
@@ -26,9 +26,9 @@
   
         <br>
         <ion-row>
-              <ion-col text-center>
-                  <ion-button class="animated fadeIn slow" color="tertiary" (click)="closeComponent()">
-                      Volver
+              <ion-col class="ion-text-center">
+                  <ion-button color="primary" (click)="closeComponent()" shape="round">
+                      VOLVER
                     </ion-button>       
                 </ion-col>
             </ion-row>

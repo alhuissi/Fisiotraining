@@ -16,29 +16,30 @@ import { Router } from '@angular/router';
 })
 export class FichaClinicaPage implements OnInit {
 
-  public fichaClinica: fichaClinica ={
-    nombre: '',
+  public fichaClinica: fichaClinica = {
+    nombre: ' ',
     edad: 0,
-    ocupacion: '',
-    ayudasTecnicas: '',
-    actividadDeportiva: '',
-    fecha: '',
-    intervencionesQX: '',
-    traumas: '',
-    ocupacionActualTrabajo: '',
-    antecedentes: '',
-    habitos: '',
-    medicamentos: '',
-    objetivos: '',
-    userid: '',
-    formid: '',
+    ocupacion: ' ',
+    ayudasTecnicas: ' ',
+    actividadDeportiva: ' ',
+    fecha: ' ',
+    intervencionesQX: ' ',
+    traumas: ' ',
+    ocupacionActualTrabajo: ' ',
+    antecedentes: ' ',
+    habitos: ' ',
+    medicamentos: ' ',
+    objetivos: ' ',
+    userid: ' ',
+    formid: ' ',
+    dir: ' ',
   };
 
   userName: string;
   userLastName: string;
 
 
-  fechaToday ;
+  fechaToday;
 
   constructor(
     private navCtrl: NavController,
@@ -50,12 +51,12 @@ export class FichaClinicaPage implements OnInit {
     public alertController: AlertController
   ) { }
 
-async ngOnInit() {
+  async ngOnInit() {
 
     this.fechaToday = Date.now();
     this.fichaClinica.fecha = this.fechaToday;
-    
-    if(this.authService.userDetails()){
+
+    if (this.authService.userDetails()) {
 
       this.userName = this.userServ.getName();
       this.userLastName = this.userServ.getLastName();
@@ -63,29 +64,28 @@ async ngOnInit() {
       this.fichaClinica.nombre = this.userServ.getName();
 
 
-    var Snombre = [];
-    var Sedad = [];
-    var Socupacion = [];
-    var SayudasTecnicas = [];
-    var SactividadDeportiva = [];
-    var Sfecha = [];
-    var SintervencionesQX = [];
-    var Straumas = [];
-    var SocupacionActualTrabajo = [];
-    var Santecedentes = [];
-    var Shabitos = [];
-    var Smedicamentos = [];
-    var Sobjetivos = [];
-    var Suserid = [];
-    var Sformid = [];
+      var Snombre = [];
+      var Socupacion = [];
+      var SayudasTecnicas = [];
+      var SactividadDeportiva = [];
+      var Sfecha = [];
+      var SintervencionesQX = [];
+      var Straumas = [];
+      var SocupacionActualTrabajo = [];
+      var Santecedentes = [];
+      var Shabitos = [];
+      var Smedicamentos = [];
+      var Sobjetivos = [];
+      var Suserid = [];
+      var Sformid = [];
+      let Sdir = [];
 
       var docRef = this.db.collection("fichas-clinicas").doc(this.userServ.getUID());
 
-    await docRef.get().toPromise().then(function(doc) {
-     if (doc.exists) {
+      await docRef.get().toPromise().then(function (doc) {
+        if (doc.exists) {
           console.log("Document data:", doc.data());
           Snombre = Snombre.concat(doc.data().nombre);
-          Sedad = Sedad.concat(doc.data().edad);
           Socupacion = Socupacion.concat(doc.data().ocupacion);
           SayudasTecnicas = SayudasTecnicas.concat(doc.data().ayudasTecnicas);
           SactividadDeportiva = SactividadDeportiva.concat(doc.data().actividadDeportiva);
@@ -99,16 +99,15 @@ async ngOnInit() {
           Sobjetivos = Sobjetivos.concat(doc.data().objetivos);
           Suserid = Suserid.concat(doc.data().userid);
           Sformid = Sformid.concat(doc.data().formid);
-    } else {
+          Sdir = Sdir.concat(doc.data().dir);
+        } else {
           console.log("No such document!");
-          }
-      }).catch(function(error) {
-          console.log("Error getting document:", error);
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
       });
-      
-      console.log('aaaa?', SayudasTecnicas);
+
       let SSnombre = Snombre.toString();
-      let SSedad = Number(Sedad.toString());
       let SSocupacion = Socupacion.toString();
       let SSayudasTecnicas = SayudasTecnicas.toString();
       let SSactividadDeporiva = SactividadDeportiva.toString();
@@ -122,16 +121,17 @@ async ngOnInit() {
       let SSobjetivos = Sobjetivos.toString();
       let SSuserid = Suserid.toString();
       let SSformid = Sformid.toString();
+      let SSdir = Sdir.toString();
 
       this.fichaClinica.nombre = SSnombre;
-      this.fichaClinica.edad = SSedad;
+      this.fichaClinica.edad = this.userServ.getEdad();
       this.fichaClinica.ocupacion = SSocupacion;
       this.fichaClinica.ayudasTecnicas = SSayudasTecnicas;
       this.fichaClinica.actividadDeportiva = SSactividadDeporiva;
-      if(this.fichaClinica.fecha === ''){
+      if (this.fichaClinica.fecha === '') {
         this.fichaClinica.fecha = Date.now();
       }
-      else{
+      else {
         this.fichaClinica.fecha = SSfecha;
       }
       this.fichaClinica.intervencionesQX = SSintervencionesQX;
@@ -143,22 +143,23 @@ async ngOnInit() {
       this.fichaClinica.objetivos = SSobjetivos;
       this.fichaClinica.userid = SSuserid;
       this.fichaClinica.formid = SSformid;
+      this.fichaClinica.dir = SSdir;
 
 
-    }else{
+    } else {
       this.navCtrl.navigateBack('');
     }
   }
 
-async ionViewDidEnter(){
+  async ionViewDidEnter() {
 
     this.fechaToday = Date.now();
 
-    if(this.fichaClinica.fecha === ''){
+    if (this.fichaClinica.fecha === '') {
       this.fichaClinica.fecha = Date.now();
     }
-    
-    if(this.authService.userDetails()){
+
+    if (this.authService.userDetails()) {
 
       this.userName = this.userServ.getName();
       this.userLastName = this.userServ.getLastName();
@@ -167,29 +168,28 @@ async ionViewDidEnter(){
 
       console.log(this.userServ);
 
-    var Snombre = [];
-    var Sedad = [];
-    var Socupacion = [];
-    var SayudasTecnicas = [];
-    var SactividadDeportiva = [];
-    var Sfecha = [];
-    var SintervencionesQX = [];
-    var Straumas = [];
-    var SocupacionActualTrabajo = [];
-    var Santecedentes = [];
-    var Shabitos = [];
-    var Smedicamentos = [];
-    var Sobjetivos = [];
-    var Suserid = [];
-    var Sformid = [];
+      var Snombre = [];
+      var Socupacion = [];
+      var SayudasTecnicas = [];
+      var SactividadDeportiva = [];
+      var Sfecha = [];
+      var SintervencionesQX = [];
+      var Straumas = [];
+      var SocupacionActualTrabajo = [];
+      var Santecedentes = [];
+      var Shabitos = [];
+      var Smedicamentos = [];
+      var Sobjetivos = [];
+      var Suserid = [];
+      var Sformid = [];
+      let Sdir = [];
 
       var docRef = this.db.collection("fichas-clinicas").doc(this.userServ.getUID());
 
-    await docRef.get().toPromise().then(function(doc) {
-     if (doc.exists) {
+      await docRef.get().toPromise().then(function (doc) {
+        if (doc.exists) {
           console.log("Document data:", doc.data());
           Snombre = Snombre.concat(doc.data().nombre);
-          Sedad = Sedad.concat(doc.data().edad);
           Socupacion = Socupacion.concat(doc.data().ocupacion);
           SayudasTecnicas = SayudasTecnicas.concat(doc.data().ayudasTecnicas);
           SactividadDeportiva = SactividadDeportiva.concat(doc.data().actividadDeportiva);
@@ -203,19 +203,18 @@ async ionViewDidEnter(){
           Sobjetivos = Sobjetivos.concat(doc.data().objetivos);
           Suserid = Suserid.concat(doc.data().userid);
           Sformid = Sformid.concat(doc.data().formid);
-    } else {
-              // doc.data() will be undefined in this case
+          Sdir = Sdir.concat(doc.data().dir);
+        } else {
+          // doc.data() will be undefined in this case
           console.log("No such document!");
-          }
-      }).catch(function(error) {
-          console.log("Error getting document:", error);
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
       });
-      //this.fichaClinicaServ.setFicha(); 
+      // this.fichaClinicaServ.setFicha();
       // this.fichaClinicaServ.getFichaID(this.userServ.getUID());
-      
-      console.log('aaaa?', SayudasTecnicas);
+
       let SSnombre = Snombre.toString();
-      let SSedad = Number(Sedad.toString());
       let SSocupacion = Socupacion.toString();
       let SSayudasTecnicas = SayudasTecnicas.toString();
       let SSactividadDeporiva = SactividadDeportiva.toString();
@@ -229,16 +228,17 @@ async ionViewDidEnter(){
       let SSobjetivos = Sobjetivos.toString();
       let SSuserid = Suserid.toString();
       let SSformid = Sformid.toString();
+      let SSdir = Sdir.toString();
 
       this.fichaClinica.nombre = SSnombre;
-      this.fichaClinica.edad = SSedad;
+      this.fichaClinica.edad = this.userServ.getEdad();
       this.fichaClinica.ocupacion = SSocupacion;
       this.fichaClinica.ayudasTecnicas = SSayudasTecnicas;
       this.fichaClinica.actividadDeportiva = SSactividadDeporiva;
-      if(this.fichaClinica.fecha === ''){
+      if (this.fichaClinica.fecha === '') {
         this.fichaClinica.fecha = Date.now();
       }
-      else{
+      else {
         this.fichaClinica.fecha = SSfecha;
       }
       this.fichaClinica.intervencionesQX = SSintervencionesQX;
@@ -250,11 +250,9 @@ async ionViewDidEnter(){
       this.fichaClinica.objetivos = SSobjetivos;
       this.fichaClinica.userid = SSuserid;
       this.fichaClinica.formid = SSformid;
+      this.fichaClinica.dir = SSdir;
 
-      console.log(SSnombre);
-      console.log(SSayudasTecnicas);
-
-    }else{
+    } else {
       this.navCtrl.navigateBack('');
     }
 
@@ -262,96 +260,100 @@ async ionViewDidEnter(){
 
 
 
-  goBack(){
-    if(this.authService.currentUser.role == 'cliente'){
+  goBack() {
+    if (this.authService.currentUser.role == 'cliente') {
       this.navCtrl.navigateBack('/tabs/perfil2');
     }
-    else{
+    else {
       this.navCtrl.navigateBack('/tabs/perfil');
     }
-    
+
   }
 
 
   async presentAlertConfirm() {
     return new Promise(async (resolve) => {
-    const alert = await this.alertController.create({
-      header: 'Guardando Ficha Clínica...',
-      message: '<strong>Verifica que los datos fueron bien ingresados.</strong>',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Guardado cancelado');
-            return resolve(false);
-          }
-        }, {
-          text: 'Ok',
-          handler: () => {
-            console.log('Guardando ficha...');
-            return resolve(true);
-          }
-        }
-      ]
-    });
-  
-    await alert.present();
-  });
-  }
-  
-    async guardarEvaluacion(){
-  
-          const uid = this.userServ.getUID()
-          const confirmation = await this.presentAlertConfirm();
-          
-          if (confirmation){
-            this.fichaClinicaServ.setFicha({
-              nombre: this.userName,
-              edad: this.fichaClinica.edad,
-              ocupacion: this.fichaClinica.ocupacion,
-              ayudasTecnicas: this.fichaClinica.ayudasTecnicas,
-              actividadDeportiva: this.fichaClinica.actividadDeportiva,
-              fecha: Date.now(),
-              intervencionesQX: this.fichaClinica.intervencionesQX,
-              traumas: this.fichaClinica.traumas,
-              ocupacionActualTrabajo: this.fichaClinica.ocupacionActualTrabajo,
-              antecedentes: this.fichaClinica.antecedentes,
-              habitos: this.fichaClinica.habitos,
-              medicamentos: this.fichaClinica.medicamentos,
-              objetivos: this.fichaClinica.objetivos,
-              userid: uid,
-              formid: uid,
-                          
-              });
-            this.db.collection('fichas-clinicas').doc(uid).set({
-              nombre: this.userName,
-              edad: this.fichaClinica.edad,
-              ocupacion: this.fichaClinica.ocupacion,
-              ayudasTecnicas: this.fichaClinica.ayudasTecnicas,
-              actividadDeportiva: this.fichaClinica.actividadDeportiva,
-              fecha: Date.now(),
-              intervencionesQX: this.fichaClinica.intervencionesQX,
-              traumas: this.fichaClinica.traumas,
-              ocupacionActualTrabajo: this.fichaClinica.ocupacionActualTrabajo,
-              antecedentes: this.fichaClinica.antecedentes,
-              habitos: this.fichaClinica.habitos,
-              medicamentos: this.fichaClinica.medicamentos,
-              objetivos: this.fichaClinica.objetivos,
-              userid: uid,
-              formid: uid,
-                          
-              })
-                console.log('Ficha Clínica guardada con éxito en la base de datos: '+ this.fichaClinica);
-                this.router.navigate(['/tabs/perfil']);
+      const alert = await this.alertController.create({
+        header: 'Guardando Ficha Clínica...',
+        message: '<strong>Verifica que los datos fueron bien ingresados.</strong>',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Guardado cancelado');
+              return resolve(false);
             }
-             else {
-                console.log('Error. No se pudo grabar la ficha en la base de datos.');
-                return; 
-             }
-           
+          }, {
+            text: 'Ok',
+            handler: () => {
+              console.log('Guardando ficha...');
+              return resolve(true);
+            }
+          }
+        ]
+      });
+
+      await alert.present();
+    });
+  }
+
+  async guardarEvaluacion() {
+
+    const uid = this.userServ.getUID()
+    const confirmation = await this.presentAlertConfirm();
+
+    if (confirmation) {
+      this.fichaClinicaServ.setFicha({
+        nombre: this.userName,
+        edad: this.fichaClinica.edad,
+        ocupacion: this.fichaClinica.ocupacion,
+        ayudasTecnicas: this.fichaClinica.ayudasTecnicas,
+        actividadDeportiva: this.fichaClinica.actividadDeportiva,
+        fecha: Date.now(),
+        intervencionesQX: this.fichaClinica.intervencionesQX,
+        traumas: this.fichaClinica.traumas,
+        ocupacionActualTrabajo: this.fichaClinica.ocupacionActualTrabajo,
+        antecedentes: this.fichaClinica.antecedentes,
+        habitos: this.fichaClinica.habitos,
+        medicamentos: this.fichaClinica.medicamentos,
+        objetivos: this.fichaClinica.objetivos,
+        dir: this.fichaClinica.dir,
+        userid: uid,
+        formid: uid,
+
+      });
+      this.db.collection('fichas-clinicas').doc(uid).set({
+        nombre: this.userName,
+        edad: this.fichaClinica.edad,
+        ocupacion: this.fichaClinica.ocupacion,
+        ayudasTecnicas: this.fichaClinica.ayudasTecnicas,
+        actividadDeportiva: this.fichaClinica.actividadDeportiva,
+        fecha: Date.now(),
+        intervencionesQX: this.fichaClinica.intervencionesQX,
+        traumas: this.fichaClinica.traumas,
+        ocupacionActualTrabajo: this.fichaClinica.ocupacionActualTrabajo,
+        antecedentes: this.fichaClinica.antecedentes,
+        habitos: this.fichaClinica.habitos,
+        medicamentos: this.fichaClinica.medicamentos,
+        objetivos: this.fichaClinica.objetivos,
+        dir: this.fichaClinica.dir,
+        userid: uid,
+        formid: uid,
+      })
+      this.db.collection('users').doc(uid).set({
+        direccion: this.fichaClinica.dir
+      })
+      console.log('Ficha Clínica guardada con éxito en la base de datos: ' + this.fichaClinica);
+      this.router.navigate(['/tabs/perfil']);
     }
-  
+    else {
+      console.log('Error. No se pudo grabar la ficha en la base de datos.');
+      return;
+    }
+
+  }
+
 
 }

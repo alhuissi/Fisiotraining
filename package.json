@@ -1,6 +1,6 @@
 {
-    "name": "Fisiotraining2",
-    "version": "0.5.1",
+    "name": "fisiotraining",
+    "version": "2.3.1",
     "author": "Balamboo",
     "homepage": "https://fisiotraining.cl",
     "scripts": {
@@ -35,6 +35,8 @@
         "@ionic-native/status-bar": "^5.16.0",
         "@ionic/angular": "^4.11.3",
         "animate.css": "^3.7.2",
+        "chart.js": "^2.9.3",
+        "chartjs-plugin-zoom": "^0.7.5",
         "cordova-android": "8.0.0",
         "cordova-ios": "5.0.1",
         "cordova-plugin-app-launcher": "^0.4.0",
@@ -54,10 +56,13 @@
         "firebase": "^7.5.0",
         "firebase-admin": "^8.8.0",
         "firebase-firestore-timestamp": "^1.0.4",
+        "install": "^0.13.0",
         "ionic-selectable": "^4.4.1",
         "ionic2-calendar": "^0.5.7",
         "ionic3-star-rating": "^1.1.5",
         "ionic4-rating": "^1.0.9",
+        "ionic4-star-rating": "^1.1.1",
+        "ng2-charts": "^2.3.0",
         "rxfire": "^3.9.2",
         "rxjs": "^6.5.3",
         "zone.js": "~0.8.29"

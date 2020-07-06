@@ -1,11 +1,11 @@
 <ion-tabs>
 
-  <ion-tab-bar *ngIf="authIsAdmin"slot="bottom" class="tabs">
+  <ion-tab-bar *ngIf="authIsAdmin" slot="bottom" class="tabs">
 
     <ion-tab-button class="tab-button" tab="administrador" (click)="adminTabSelected()">
-      <ion-icon name="glasses" size="large"></ion-icon>
+      <ion-icon name="star" size="large"></ion-icon>
     </ion-tab-button>
-    
+
     <ion-tab-button class="tab-button" tab="escritorio-admin" (click)="escritorioTabSelected()">
       <ion-icon name="home" size="large"></ion-icon>
     </ion-tab-button>
@@ -14,17 +14,22 @@
       <ion-icon name="calendar" size="large"></ion-icon>
     </ion-tab-button>
 
+    <ion-tab-button class="tab-button" tab="perfil-kine" (click)="perfilKineTabSelected()">
+      <ion-icon name="person" size="large"></ion-icon>
+    </ion-tab-button>
 
+    <!-- 
     <ion-tab-button class="tab-button" tab="mensajeria" (click)="mensajeriaTabSelected()">
       <ion-icon name="mail" size="large"></ion-icon>
     </ion-tab-button>
+    -->
 
   </ion-tab-bar>
 
 
 
-  <ion-tab-bar *ngIf="authIsKine"slot="bottom" class="tabs">
-    
+  <ion-tab-bar *ngIf="authIsKine" slot="bottom" class="tabs">
+
     <ion-tab-button class="tab-button" tab="escritorio-profesor" (click)="escritorioTabSelected()">
       <ion-icon name="home" size="large"></ion-icon>
     </ion-tab-button>
@@ -34,19 +39,21 @@
     </ion-tab-button>
 
 
+    <ion-tab-button class="tab-button" tab="perfil-kine" (click)="perfilKineTabSelected()">
+      <ion-icon name="person" size="large"></ion-icon>
+    </ion-tab-button>
+
+    <!-- 
     <ion-tab-button class="tab-button" tab="mensajeria" (click)="mensajeriaTabSelected()">
       <ion-icon name="mail" size="large"></ion-icon>
     </ion-tab-button>
-
-    <ion-tab-button class="tab-button" tab="ayuda" (click)="ayudaTabSelected()">
-      <ion-icon name="help-circle" size="large"></ion-icon>
-    </ion-tab-button>
+    -->
 
   </ion-tab-bar>
 
 
-  <ion-tab-bar *ngIf="authIsUsuario"slot="bottom" class="tabs">
-    
+  <ion-tab-bar *ngIf="authIsUsuario" slot="bottom" class="tabs">
+
     <ion-tab-button class="tab-button" tab="escritorio-cliente" (click)="escritorioTabSelected()">
       <ion-icon name="home" size="large"></ion-icon>
     </ion-tab-button>
@@ -56,25 +63,27 @@
     </ion-tab-button>
 
 
-    <ion-tab-button class="tab-button" tab="mensajeria" (click)="mensajeriaTabSelected()">
-      <ion-icon name="mail" size="large"></ion-icon>
+    <ion-tab-button class="tab-button" tab="perfil" (click)="perfilTabSelected()">
+      <ion-icon name="person" size="large"></ion-icon>
     </ion-tab-button>
 
+    <!-- 
     <ion-tab-button class="tab-button" tab="ayuda" (click)="ayudaTabSelected()">
       <ion-icon name="help-circle" size="large"></ion-icon>
     </ion-tab-button>
+    -->
 
   </ion-tab-bar>
 
 
-
+  
   <ion-tab-bar *ngIf="authIsVisita" slot="bottom" class="tabs">
     
     <ion-tab-button class="tab-button" tab="escritorio-visita" (click)="escritorioTabSelected()">
       <ion-icon name="home" size="large"></ion-icon>
     </ion-tab-button>
 
-    <ion-tab-button class="tab-button" tab="calendario" (click)="calendarioTabSelected()">
+    <ion-tab-button class="tab-button" (click)="registrate()">
       <ion-icon name="calendar" size="large"></ion-icon>
     </ion-tab-button>
 
@@ -83,5 +92,6 @@
     </ion-tab-button>
 
   </ion-tab-bar>
+  
 
 </ion-tabs>

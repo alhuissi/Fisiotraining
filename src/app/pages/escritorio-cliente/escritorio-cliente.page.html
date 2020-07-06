@@ -1,53 +1,56 @@
-<ion-header translucent>
+<ion-header>
   <ion-toolbar color="dark">
-    <ion-button slot="end"  (click)="presentActionSheet()">
-       <ion-icon  name="power"></ion-icon>  
+    <ion-button color="dark" fill="clear" style="box-shadow: 0px 0px 0px" slot="start">
+      <ion-icon></ion-icon>
+    </ion-button>
+    <ion-button color="secondary" fill="outline" slot="end" class="boton" (click)="presentActionSheet()">
+      <ion-icon style="color:#fff; font-size: 25px" name="menu"></ion-icon>
     </ion-button>
     <ion-title class="ion-text-center">Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
- 
+
 <ion-content color="dark" fullscreen>
 
+  <ion-list>
+    <ion-item no-lines ion-item (click)="openEvaluarCoach()">
+      <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 1)),url(assets/imgs/white.jpg)','background-repeat': 'no-repeat', 
+             'background-size': 'cover '}">
+        <ion-grid>
+          <ion-row class="ion-text-center centro">
+            <b>EVALUAR COACH</b>
+          </ion-row>
+          <ion-row class="ion-text-center centro">
+          <div *ngIf="this.debeEvaluar" style="font-size:12px;">Tienes 1 evaluación pendiente</div>
+          <div *ngIf="!this.debeEvaluar" style="font-size:12px;">No tienes evaluaciones pendientes</div>
+        </ion-row>
+        </ion-grid>
+      </div>
+    </ion-item>
 
-  
-        
+    <ion-item no-lines ion-item (click)="openProximoPaciente()">
+      <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 1)),url(assets/imgs/white.jpg)','background-repeat': 'no-repeat', 
+             'background-size': 'cover '}">
+        <ion-grid>
+          <ion-row class="ion-text-center centro"><b>PRÓXIMO ENTRENAMIENTO: </b></ion-row>
+          <ion-row *ngIf="this.existeProxSesion" class="ion-text-center ion-text-wrapper centro">
+            <ion-label style="margin-top:10px;max-width:95vw;font-size:14px;">
+              {{this.proxSesionFecha | date:'dd/MM/yyy HH:mm'}} <br />con<br />
+              {{this.proxSesionKine}} </ion-label>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-item>
 
-        <ion-list>
-            <ion-item no-lines ion-item (click)="openMiFicha()" class="ion-no-padding">
-              <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/yoga.jpg)','background-repeat': 'no-repeat', 
-            'height':'40% 100px', 'background-size': 'cover '}">
-                <div class="inner">
-                  <b>MI FICHA</b>
-                </div>
-              </div>
-  
-            </ion-item>
-            <ion-item no-lines ion-item (click)="openProximoPaciente()" class="ion-no-padding">
-              <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/bb.jpg)','background-repeat': 'no-repeat', 
-            'height':'40% 100px', 'background-size': 'cover '}">
-                <div class="inner">
-                  <b>PRÓXIMO ENTRENAMIENTO </b>
-                </div>
-              </div>
-            </ion-item>
+    <ion-item no-lines ion-item (click)="openInstagram('fisiotraininglc')">
+      <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 1)),url(assets/imgs/white.jpg)','background-repeat': 'no-repeat', 
+               'background-size': 'cover '}">
 
-              <ion-item no-lines ion-item (click)="openInstagram('fisiotraininglc')" class="ion-no-padding">
-                  <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/fitness.jpg)','background-repeat': 'no-repeat', 
-                'height':'40% 100px', 'background-size': 'cover '}">
-                <ion-icon name="logo-instagram" slot="start" color="tertiary"></ion-icon>
-                    <div class="inner">
-                      <b>INSTAGRAM</b>
-                    </div>
-                    <ion-icon name="logo-instagram" slot="end" color="tertiary"></ion-icon>
-                  </div>
-                </ion-item>
-          </ion-list>
+        <b>INSTAGRAM</b>
 
+      </div>
+    </ion-item>
 
-
-
+  </ion-list>
 
 </ion-content>
-
-

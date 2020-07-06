@@ -8,10 +8,22 @@
         color: white;
     }
 
+    .calendar-day{
+        background-color: rosybrown;
+    }
+
+    .calendar-hour-column[_ngcontent-jto-c5]{
+        width: 70px !important;
+        max-width: 70px !important;
+    }
+
+    .boton{
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px #888888;
+      }
 
     .fecha{
-        font-size: 14px;
-        width: 50px;
+        font-size: 18px;
     }
     
     }
@@ -35,6 +47,36 @@
         background-color: rgb(192, 192, 192); // black
       }
 
-      ion-card-title{
+    ion-card-title{
         font-size: 14px;
+    }
+
+    .solicitud{
+        //background-color: yellow;
+    }
+
+    .sesion{
+        //background-color: greenyellow;
+    }
+
+    .verdeSesionHecha{
+        color: rgba(0, 200, 50, 0.9);
+    }
+
+    .rojoSesionHecha{
+        color: rgba(250, 20, 20, 0.737);
+    }
+
+    .azulSolicitud{
+        color: rgba(56, 128, 255, 0.737);
+    }
+
+    .icon {
+        display: inline-block;
+        vertical-align: middle;
+       }
+
+       ion-button{
+        border-radius: 25px;
+        box-shadow: 0px 0px 10px #888888;
       }

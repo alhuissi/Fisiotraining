@@ -4,6 +4,7 @@ import { NavController, ModalController, LoadingController } from '@ionic/angula
 import { AuthenticateService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { ChatsService, chat } from '../../services/chats.service';
+import { UserService } from '../../services/user.service';
 import { ChatComponent } from '../chat/chat.component';
 import { EscogerUsuarioComponent } from '../escoger-usuario/escoger-usuario.component';
 import { ListaUsuariosComponent } from '../lista-usuarios/lista-usuarios.component';
@@ -33,6 +34,7 @@ export class AdministradorPage implements OnInit {
     public actionSheetController: ActionSheetController,
     public chatservice: ChatsService, 
     private modal: ModalController,
+    public userServ: UserService,
     private router: Router,
     ) { }
 
@@ -65,30 +67,28 @@ export class AdministradorPage implements OnInit {
 
   ionViewDidEnter(){
     this.userEmail = this.authService.userDetails().email;
-      this.userID = this.authService.userDetails().uid;
-      this.userName = this.authService.getName();
-      this.userLastName = this.authService.getLastName();
-      this.userRole = this.authService.getRole();
+    this.userID = this.authService.userDetails().uid;
+    this.userName = this.authService.getName();
+    this.userLastName = this.authService.getLastName();
+    this.userRole = this.authService.getRole();
   }
 
   openEscogerUser(){
     this.modal.create({
       component: EscogerUsuarioComponent,
       componentProps : {
-       
       }
     }).then( (modal) => modal.present())
   
   }
 
- openListaUsers(){
+  openListaUsers(){
   this.router.navigate(['/tabs/ver-listas-usuarios']);
   }
 
   openVerSolicitudes(){
     this.router.navigate(['/tabs/solicitudes']);
   }
-
 
   openChat(chat){
 
@@ -103,6 +103,10 @@ export class AdministradorPage implements OnInit {
 
   openEnviarNotificacion(){
     
+  }
+
+  openCalendarioGlobal(){
+    this.router.navigate(['/tabs/calendario-global']);
   }
 
   logout(){
@@ -123,34 +127,49 @@ export class AdministradorPage implements OnInit {
         text: this.userName + ' ' + this.userLastName,
         icon: 'person',
         handler: () => {
-          console.log('Nombre clicked');
+          console.log('Nombre');
+          if(this.authIsUsuario){
+            this.userServ.setUser(this.authService.currentUser);
+            this.router.navigate(['/tabs/perfil']);
+          }
+          if(this.authIsAdmin || this.authIsKine){
+            this.userServ.setUser(this.authService.currentUser);
+            this.router.navigate(['/tabs/perfil-kine']);
+          }
         }
       }, /*{
-        text: 'Compartir',
-        icon: 'share',
+      text: 'Compartir',
+      icon: 'share',
+      handler: () => {
+        console.log('Compartir clicked');
+      }
+    }, */{
+        text: 'Ayuda',
+        role: 'destructive',
+        icon: 'help-circle',
         handler: () => {
-          console.log('Compartir clicked');
+          console.log('Help clicked');
+          this.router.navigate(['/tabs/ayuda']);
         }
-      }, */ {
-        text: 'Desconectarse',
+      },
+       {
+        text: 'Cerrar Sesión',
         role: 'destructive',
         icon: 'log-out',
         handler: () => {
           this.logout();
-          console.log('Delete clicked');
+          console.log('Desconectado');
         }
       }, {
         text: 'Cancelar',
         icon: 'close',
         role: 'cancel',
         handler: () => {
-          console.log('Cancel clicked');
+          console.log('Cancelar');
         }
       }]
     });
     await actionSheet.present();
   }
-
-
 
 }

@@ -1,7 +1,6 @@
 <ion-header>
     <ion-toolbar color="dark">
   
-  
       <ion-title class="ion-text-center">Mi Ficha</ion-title>
   
     </ion-toolbar>
@@ -28,15 +27,15 @@
          
                     <ion-row>
                       <ion-col class="animated fadeIn slow" class="ion-text-center">
-                          <ion-button *ngIf="authIsUsuario" color="warning" (click)="openHacerEvaluacionSesion()" expand="block" shape="round">
+                          <ion-button *ngIf="debeEvaluar" color="warning" (click)="openHacerEvaluacionSesion()" expand="block" shape="round">
                               <ion-label color="dark">Evaluar Coach</ion-label> 
                           </ion-button>       
                         </ion-col>
-                      </ion-row>
+                    </ion-row>
   
                         <ion-card *ngIf="authIsUsuario" class="animated fadeIn slow">
                             <ion-card-header color="medium" tappable (click)="collapseCard = !collapseCard">
-                                <ion-card-title color='dark' class="ion-text-wrap ion-text-center"><b>Entrenamiento Anterior {{evaluacion.fecha | date:'dd/MM/yyyy'}}</b></ion-card-title>
+                                <ion-card-title color='dark' class="ion-text-wrap ion-text-center"><b>Entrenamiento Anterior: {{evaluacion.fecha | date:'dd/MM/yyyy'}}</b></ion-card-title>
                             </ion-card-header>
                             <ion-card-content *ngIf="collapseCard">
                                   

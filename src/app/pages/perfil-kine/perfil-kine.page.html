@@ -1,12 +1,83 @@
 <ion-header>
-    <ion-toolbar color="dark">
-  
-  
-      <ion-title class="ion-text-center">Perfil Profesor</ion-title>
-  
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="dark">
+    <ion-button color="dark" fill="clear" style="box-shadow: 0px 0px 0px" slot="start">
+      <ion-icon></ion-icon>
+    </ion-button>
+    <ion-button color="secondary" fill="outline" slot="end" class="boton" (click)="presentActionSheetBoton()">
+      <ion-icon style="color:#fff; font-size: 25px" name="menu"></ion-icon>
+    </ion-button>
+    <ion-title class="ion-text-center">{{this.userName}} {{this.userLastName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content class="background">
+<ion-content>
+
+  <ion-grid>
+    <br>
+    <ion-row>
+      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+      <ion-col size="4">
+        <div>
+          <br>
+          <ion-avatar (click)="agregarFoto()">
+            <img src="assets/add-profile.png">
+          </ion-avatar>
+        </div>
+      </ion-col>
+
+      <ion-col>
+
+        <div>
+          <br>
+          <br>
+        <ion-row><ion-label class="ion-text-wrapper">Kinesiólogo </ion-label></ion-row>
+        
+        <ion-row><ion-label class="ion-text-wrapper" style="font-size:13px;">{{this.edad}} años</ion-label></ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+        <ion-item lines="none" class="ion-text-wrap">
+          <ion-label class="ion-text-wrap label-perfil-kine" style="font-size: 12px;">Motivación </ion-label>
+          <rating [(ngModel)]="rateMot" readonly="true" size="default">
+          </rating>
+        </ion-item>
+        <ion-item lines="none" class="ion-text-wrap">
+          <ion-label class="ion-text-wrap label-perfil-kine" style="font-size: 12px;">Profesionalismo </ion-label>
+          <rating [(ngModel)]="ratePro" readonly="true" size="default">
+          </rating>
+        </ion-item>
+        <ion-item lines="none" class="ion-text-wrap">
+          <ion-label class="ion-text-wrap label-perfil-kine" style="font-size: 12px;">Puntualidad </ion-label>
+          <rating [(ngModel)]="ratePun" readonly="true" size="default">
+          </rating>
+        </ion-item>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+    <br/>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button class="boton" color="primary" (click)="contactarKine()" shape="round" fill="outline">
+          CONTACTAR
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <!--ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button class="boton" color="primary" (click)="openEvaluarCoach()" shape="round" fill="outline">
+          EVALUAR COACH
+        </ion-button>
+      </ion-col>
+    </ion-row-->
+
+
+
+
+
+  </ion-grid>
 
 </ion-content>

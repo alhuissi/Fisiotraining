@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from '../../services/authentication.service';
 import { Router, RouterEvent } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { UserService } from '../../services/user.service';
+
+
+
 
 @Component({
   selector: 'app-tabs',
@@ -19,93 +23,131 @@ export class TabsPage implements OnInit {
   public authIsVisita: boolean = false;
   public authIsAlgo: boolean = false;
 
-  constructor(public alertController: AlertController, public authservice: AuthenticateService, private router: Router) { }
+  constructor(
+    public alertController: AlertController,
+    public authservice: AuthenticateService,
+    private router: Router,
+    public userServ: UserService) { }
 
   async ngOnInit() {
     await this.authservice.getInfo();
     this.userRole = this.authservice.whatRole();
-    console.log('this.authservice.whatRole(): ' + this.userRole)
-    if(this.authservice.whatRole() === 'admin' ){
+    if (this.authservice.whatRole() === 'admin') {
       this.authIsAdmin = true;
-  }
-    if(this.authservice.whatRole() === 'profesor' ){
+      this.authIsKine = false;
+      this.authIsUsuario = false;
+      this.authIsVisita = false;
+    }
+    if (this.authservice.whatRole() === 'profesor') {
       this.authIsKine = true;
+      this.authIsAdmin = false;
+      this.authIsUsuario = false;
+      this.authIsVisita = false;
+    }
+    if (this.authservice.whatRole() === 'cliente') {
+      this.authIsUsuario = true;
+      this.authIsAdmin = false;
+      this.authIsKine = false;
+      this.authIsVisita = false;
+    }
+    if (this.authservice.whatRole() === 'visita') {
+      this.authIsVisita = true;
+      this.authIsAdmin = false;
+      this.authIsKine = false;
+      this.authIsUsuario = false;
+    }
+    if (this.authservice.whatRole() === 'cliente' || this.authservice.whatRole() === 'admin' || this.authservice.whatRole() === 'profesor') {
+      this.authIsAlgo = true;
+    }
+
   }
-  if(this.authservice.whatRole() === 'cliente' ){
-    this.authIsUsuario = true;
-}
-if(this.authservice.whatRole() === 'visita' ){
-  this.authIsVisita = true;
-}
-if(this.authservice.whatRole() === 'cliente' || this.authservice.whatRole() === 'admin' || this.authservice.whatRole() === 'profesor'){
-  this.authIsAlgo = true;
-}
 
-}
-
-async ionViewDidEnter(){
-  await this.authservice.getInfo();
+  async ionViewDidEnter() {
+    await this.authservice.getInfo();
     this.userRole = this.authservice.whatRole();
-    console.log('this.authservice.whatRole(): ' + this.userRole)
-    if(this.authservice.whatRole() === 'admin' ){
+    if (this.authservice.whatRole() === 'admin') {
       this.authIsAdmin = true;
-  }
-    if(this.authservice.whatRole() === 'profesor' ){
+      this.authIsKine = false;
+      this.authIsUsuario = false;
+      this.authIsVisita = false;
+    }
+    if (this.authservice.whatRole() === 'profesor') {
       this.authIsKine = true;
+      this.authIsAdmin = false;
+      this.authIsUsuario = false;
+      this.authIsVisita = false;
+    }
+    if (this.authservice.whatRole() === 'cliente') {
+      this.authIsUsuario = true;
+      this.authIsAdmin = false;
+      this.authIsKine = false;
+      this.authIsVisita = false;
+    }
+    if (this.authservice.whatRole() === 'visita') {
+      this.authIsVisita = true;
+      this.authIsAdmin = false;
+      this.authIsKine = false;
+      this.authIsUsuario = false;
+    }
+    if (this.authservice.whatRole() === 'cliente' || this.authservice.whatRole() === 'admin' || this.authservice.whatRole() === 'profesor') {
+      this.authIsAlgo = true;
+    }
   }
-  if(this.authservice.whatRole() === 'cliente' ){
-    this.authIsUsuario = true;
-}
-if(this.authservice.whatRole() === 'visita' ){
-  this.authIsVisita = true;
-}
-if(this.authservice.whatRole() === 'cliente' || this.authservice.whatRole() === 'admin' || this.authservice.whatRole() === 'profesor'){
-  this.authIsAlgo = true;
-}
-}
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Función Bloqueada',
+      header: 'Calendario Bloqueada',
       subHeader: '',
-      message: 'Debes ser miembro para acceder a esta función.',
+      message: 'Debes suscribirte para acceder a esta función.',
       buttons: ['OK']
     });
 
     await alert.present();
   }
 
-
-  escritorioTabSelected(){
-   
+  registrate(){
+    this.presentAlert();
   }
 
-  buscarTabSelected(){
 
-  }
-
-  misPacientesTabSelected(){
+  escritorioTabSelected() {
 
   }
 
-  adminTabSelected(){
-    
-  }
-
-  ayudaTabSelected(){
+  buscarTabSelected() {
 
   }
 
-  calendarioTabSelected(){
+  misPacientesTabSelected() {
+
+  }
+
+  adminTabSelected() {
+
+  }
+
+  ayudaTabSelected() {
+
+  }
+
+  calendarioTabSelected() {
 
 
   }
 
-  sesionesTabSelected(){
+  sesionesTabSelected() {
 
   }
 
-  mensajeriaTabSelected(){
-    
+  mensajeriaTabSelected() {
+
+  }
+
+  perfilTabSelected() {
+    this.userServ.setUser(this.authservice.currentUser);
+  }
+
+  perfilKineTabSelected() {
+    this.userServ.setUser(this.authservice.currentUser);
   }
 }

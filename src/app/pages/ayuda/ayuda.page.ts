@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { ChatsService, chat } from '../../services/chats.service';
+import { Router } from '@angular/router';
 import { ChatComponent } from '../chat/chat.component';
 import { NavController, ModalController, LoadingController } from '@ionic/angular';
 import { AuthenticateService } from '../../services/authentication.service';
@@ -29,6 +30,7 @@ export class AyudaPage implements OnInit {
     private authService: AuthenticateService,
     public actionSheetController: ActionSheetController,
     public chatservice: ChatsService, 
+    private router: Router,
     private modal: ModalController,
     ) { }
 
@@ -102,8 +104,17 @@ export class AyudaPage implements OnInit {
         handler: () => {
           console.log('Compartir clicked');
         }
-      }, */{
-        text: 'Desconectarse',
+      }, */
+      {
+        text: 'Ayuda',
+        role: 'destructive',
+        icon: 'help-circle',
+        handler: () => {
+          console.log('Help clicked');
+          this.router.navigate(['/tabs/ayuda']);
+        }
+      },{
+        text: 'Cerrar Sesión',
         role: 'destructive',
         icon: 'log-out',
         handler: () => {

@@ -20,6 +20,7 @@ export interface fichaClinica {
     objetivos: string,
     userid: string,
     formid: string,
+    dir: string,
 }
 
 @Injectable()

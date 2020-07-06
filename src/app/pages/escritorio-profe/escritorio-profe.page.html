@@ -1,43 +1,67 @@
-<ion-header translucent>
+<ion-header>
   <ion-toolbar color="dark">
-    <ion-button slot="end"  (click)="presentActionSheet()">
-       <ion-icon  name="power"></ion-icon>  
+    <ion-button color="dark" fill="clear" style="box-shadow: 0px 0px 0px" slot="start">
+      <ion-icon></ion-icon>
+    </ion-button>
+    <ion-button color="secondary" fill="outline" slot="end" class="boton" (click)="presentActionSheet()">
+      <ion-icon style="color:#fff; font-size: 25px;" name="menu"></ion-icon>
     </ion-button>
     <ion-title class="ion-text-center">Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
- 
+
 <ion-content color="dark" fullscreen>
 
-        <ion-list>
-          <ion-item no-lines ion-item (click)="openMisPacientes()" class="ion-no-padding">
-            <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/yoga.jpg)','background-repeat': 'no-repeat', 
-          'height':'40% 100px', 'background-size': 'cover '}">
-              <div class="inner">
-                <b>¿QUÉ ES FISIOTRAINING?</b>
-              </div>
-            </div>
+  <ion-list>
+    <ion-item no-lines ion-item (click)="openMisPacientes()" class="ion-no-padding">
+      <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 1)),url(assets/imgs/white.jpg)','background-repeat': 'no-repeat', 
+           'background-size': 'cover '}">
 
-          </ion-item>
-          <ion-item no-lines ion-item (click)="openProximoPaciente()" class="ion-no-padding">
-            <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/bb.jpg)','background-repeat': 'no-repeat', 
-          'height':'40% 100px', 'background-size': 'cover '}">
-              <div class="inner">
-                <b>PRÓXIMO ENTRENAMIENTO </b>
-              </div>
-            </div>
-          </ion-item>
+        <b>MIS PACIENTES</b>
 
-          <ion-item no-lines ion-item (click)="openCalendario()" class="ion-no-padding">
-              <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/appBackground.jpg)','background-repeat': 'no-repeat', 
-            'height':'40% 100px', 'background-size': 'cover '}">
-                <div class="inner">
-                  <b>HORAS TRABAJADAS: 15</b>
-                </div>
-              </div>
-            </ion-item>
-        </ion-list>
+      </div>
+
+    </ion-item>
+    <ion-item no-lines ion-item (click)="openProximoPaciente()" class="ion-no-padding">
+      <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 1)),url(assets/imgs/white.jpg)','background-repeat': 'no-repeat', 
+           'background-size': 'cover '}">
+        <ion-grid>
+          <ion-row class="ion-text-center centro"><b>PRÓXIMO ENTRENAMIENTO: </b></ion-row>
+          <ion-row *ngIf="this.existeProxSesion" class="ion-text-center ion-text-wrapper centro">
+            <ion-label style="margin-top:10px;max-width:95vw;font-size:14px;">{{this.proxSesionFecha | date:'dd/MM/yyy HH:mm'}}<br/>con<br/>
+              {{this.proxSesionAlumno}} </ion-label>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-item>
+
+    <ion-item no-lines ion-item (click)="openHorasTrabajadas()" class="ion-no-padding">
+      <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 1)),url(assets/imgs/white.jpg)','background-repeat': 'no-repeat', 
+           'background-size': 'cover '}">
+        <!--
+        <ion-grid>
+          <ion-row class="ion-text-center centro"><b>HORAS TRABAJADAS ESTE MES:</b></ion-row>
+          <ion-row class="ion-text-center ion-text-wrapper centro">
+            <ion-label style="margin-top: 15px;">{{this.fechaToday2 | date:'MMMM'}}: {{horasTrabajadas}}</ion-label>
+          </ion-row>
+          <ion-row class="ion-text-center ion-text-wrapper centro">
+            <ion-label style="font-size: 15px; margin-top: 10px;">{{this.fechaMesAnterior | date:'MMMM'}}: {{horasTrabajadasMesAnterior}}</ion-label>
+          </ion-row>
+        </ion-grid>
+        -->
+        <ion-grid>
+          <ion-row class="ion-text-center centro"><b>HORAS TRABAJADAS ESTE MES:</b></ion-row>
+          <ion-row class="ion-text-center ion-text-wrapper centro">
+            <ion-label style="margin-top: 10px;">{{horasTrabajadas}}</ion-label>
+          </ion-row>
+          <ion-row class="ion-text-center ion-text-wrapper centro">
+            <ion-label style="font-size: 15px; margin-top: 15px;">({{horasTrabajadasMesAnterior}} el mes anterior)
+            </ion-label>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-item>
+  </ion-list>
 
 
 </ion-content>
-

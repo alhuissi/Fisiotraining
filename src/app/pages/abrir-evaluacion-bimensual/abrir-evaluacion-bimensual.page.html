@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="start" fill="clear" (click)="goBack()">
+      <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+    </ion-button>
+    <ion-title class="ion-text-center">Evaluación Fisiotraining</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        Paciente: {{userName}} {{userLastName}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        Coach: {{nameAutor}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        Fecha: {{evaluacion.fecha.toDate()}}
+      </ion-col>
+    </ion-row>
+
+    <br>
+  <ion-card class="animated fadeIn slow card">
+    <ion-card-header color="light" tappable (click)="collapseCard2 = !collapseCard2">
+        <ion-card-title color="dark" class="ion-text-center ion-text-wrap"><b>EVALUACIÓN</b> &nbsp;
+            <ion-icon *ngIf="collapseCard" size="medium" name="arrow-dropright"></ion-icon>
+            <ion-icon *ngIf="!collapseCard" size="medium" name="arrow-dropdown"></ion-icon>
+        </ion-card-title>
+    </ion-card-header>
+    <ion-card-content [@visibilityChanged] *ngIf="collapseCard2">
+
+        <div class="linea">
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>Función Cardiaca</b></h2>
+                </ion-label>
+            </ion-row>
+            <br>
+            <!-- <ion-input tappable type="text" placeholder="this.evaluacionPrueba.funcionCardiaca" [(ngModel)]="this.evaluacionPrueba.funcionCardiaca" inputmode="text"></ion-input> -->
+            <ion-row>
+                <ion-label class="ion-text-wrap">FC Reposo: &nbsp;</ion-label>
+                <ion-input disabled="true" type="number" [(ngModel)]="rateFcReposo"
+                    inputmode="number"></ion-input>
+            </ion-row>
+            <ion-row>
+                <ion-label class="ion-text-wrap">FC Máxima: &nbsp;</ion-label>
+                <ion-input disabled="true" type="number" [(ngModel)]="rateFcMaxima"
+                    inputmode="number"></ion-input>
+            </ion-row>
+            <ion-row>
+                <ion-label class="ion-text-wrap">Presión Arterial: &nbsp;</ion-label>
+                <ion-input disabled="true" type="number" [(ngModel)]="ratePresionArterial"
+                    inputmode="number"></ion-input>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>Puntaje Final (%): &nbsp;</b></h2>
+                </ion-label>
+            </ion-row>
+            <ion-row>
+                <ion-range [(ngModel)]="rateFuncionCardiaca" pin="true" snaps="true" ticks="false" min="0"
+                    max="100" color="secondary" value='100' disabled="true"
+                    (ngModelChange)="onModelChangeFuncionCardiaca($event)"></ion-range>
+            </ion-row>
+        </div>
+
+        <div class="linea">
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>Indice Cardiovascular</b></h2>
+                </ion-label>
+            </ion-row>
+            <br>
+            <!-- <ion-input tappable type="text" placeholder="this.evaluacionPrueba.funcionCardiaca" [(ngModel)]="this.evaluacionPrueba.funcionCardiaca" inputmode="text"></ion-input> -->
+            <ion-row>
+                <ion-label class="ion-text-wrap">Colesterol: &nbsp;</ion-label>
+                <ion-input disabled="true" type="number" [(ngModel)]="rateColesterol"
+                    inputmode="number"></ion-input>
+            </ion-row>
+            <ion-row>
+                <ion-label class="ion-text-wrap">LDL: &nbsp;</ion-label>
+                <ion-input disabled="true" type="number" [(ngModel)]="rateLDL" inputmode="number">
+                </ion-input>
+            </ion-row>
+            <ion-row>
+                <ion-label class="ion-text-wrap">TGL: &nbsp;</ion-label>
+                <ion-input disabled="true" type="number" [(ngModel)]="rateTGL" inputmode="number">
+                </ion-input>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>Puntaje Final (%): &nbsp;</b></h2>
+                </ion-label>
+            </ion-row>
+            <ion-row>
+                <ion-range [(ngModel)]="rateIndiceCardiovascular" pin="true" snaps="true" ticks="false" min="0"
+                    max="100" color="secondary" value='100' disabled="true"
+                    (ngModelChange)="onModelChangeIndiceCardiovascular($event)"></ion-range>
+            </ion-row>
+        </div>
+
+        <div class="linea">
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>FMS</b></h2>
+                </ion-label>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">Resultado: &nbsp;{{this.rateFms}}</ion-label>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>Puntaje Final (%): &nbsp;</b></h2>
+                </ion-label>
+            </ion-row>
+            <ion-row>
+                <ion-range [(ngModel)]="rateFmsPorcentaje" pin="true" snaps="true" ticks="false" min="0"
+                    max="100" color="secondary" value='100' disabled="true"
+                    (ngModelChange)="onModelChangeFms($event)"></ion-range>
+            </ion-row>
+        </div>
+
+        <div class="linea">
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>Consumo de Oxígeno</b></h2>
+                </ion-label>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-label class="ion-text-wrap">Test Naveta: &nbsp;</ion-label>
+                <ion-input disabled="true" type="number" [(ngModel)]="rateOxigeno"
+                    inputmode="number"></ion-input>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>Puntaje Final (%): &nbsp;</b></h2>
+                </ion-label>
+            </ion-row>
+            <ion-row>
+                <ion-range [(ngModel)]="rateOxigenoProcentaje" pin="true" snaps="true" ticks="false" min="0" max="100"
+                    color="secondary" value='100' disabled="true"
+                    (ngModelChange)="onModelChangeOxigeno($event)"></ion-range>
+            </ion-row>
+        </div>
+
+        <div>
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>Fuerza</b></h2>
+                </ion-label>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-label class="text-center ion-text-wrap">
+                    <h2><b>Puntaje Final (%): &nbsp;</b></h2>
+                </ion-label>
+            </ion-row>
+            <ion-row>
+                <ion-range [(ngModel)]="rateFuerza" pin="true" snaps="true" ticks="false" min="0" max="100"
+                    color="secondary" value='100' disabled="true"
+                    (ngModelChange)="onModelChangeFuerza($event)"></ion-range>
+            </ion-row>
+        </div>
+
+    </ion-card-content>
+</ion-card>
+
+<br>
+<ion-row>
+  <ion-col class="ion-text-center">
+    <ion-button color="primary" shape="round" fill="outline" (click)="goBack()">
+      VOLVER
+    </ion-button>
+  </ion-col>
+</ion-row>
+<br>
+
+</ion-grid>
+</ion-content>

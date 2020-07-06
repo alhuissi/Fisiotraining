@@ -8,28 +8,41 @@ rating {
   }
 }
 
-.center {
+ion-button{
+  border-radius: 25px;
+  box-shadow: 0px 0px 10px #888888;
+}
 
+.center {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
 
-  
+.boton{
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px #888888;
 }
 
 ion-card-title{
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .img{
   border-radius: 25px;
 }
 
+ion-card{
+  border: 1px solid black;
+  border-radius: 25px;
+  box-shadow: 0px 0px 10px #888888;
+}
+
 
 
 :host {
   ion-content.background{
-      --background: url(../../../assets/background2.jpg) 0 0/100% 100% no-repeat;
+  //    --background: url(../../../assets/background2.jpg) 0 0/100% 100% no-repeat;
   }
   }
 

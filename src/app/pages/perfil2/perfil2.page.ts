@@ -1,4 +1,4 @@
-// Perfil de Paciente, visto por Paciente
+// Perfil de Paciente
 
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from '../../services/authentication.service';
@@ -50,6 +50,7 @@ export class Perfil2Page implements OnInit {
   public authIsAdmin: boolean = false;
   public authIsUsuario: boolean = false;
   public authIsVisita: boolean = false;
+  public debeEvaluar: boolean = false;
 
   private loading;
 
@@ -108,6 +109,9 @@ export class Perfil2Page implements OnInit {
       if(this.authService.whatRole() === 'visita' ){
         this.authIsVisita = true;
        }
+       if(this.authService.getDebeEvaluar() == 'si'){
+         this.debeEvaluar = true;
+       }
 
     }else{
       this.navCtrl.navigateBack('');
@@ -120,6 +124,7 @@ export class Perfil2Page implements OnInit {
   }
 
  async ionViewWillEnter(){
+
   /*this.loadingController.create({
     message: 'Cargando',
     duration: 1000,
@@ -128,6 +133,7 @@ export class Perfil2Page implements OnInit {
     this.loading.present();
   });
   */
+ 
   this.fechaToday = Date.now();
     if(this.authService.userDetails()){
       if(this.authService.whatRole() === 'admin' ){
@@ -143,13 +149,16 @@ export class Perfil2Page implements OnInit {
       if(this.authService.whatRole() === 'visita' ){
         this.authIsVisita = true;
        }
+       if(this.authService.getDebeEvaluar() == ',si'){
+        this.debeEvaluar = true;
+      }
 
     }else{
       this.navCtrl.navigateBack('');
     }
     
     if(this.authService.userDetails()){
-      
+      this.userServ.setUser(this.authService.currentUser);
 
       this.userID = this.userServ.getUID();
       this.userEmail = this.userServ.getEmail();
@@ -299,17 +308,19 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
  async openHacerEvaluacionSesion(){
     
     console.log(this.evaluacion);
-    const confirmation = await this.presentAlertConfirm();
+    /*const confirmation = await this.presentAlertConfirm();
     if (confirmation){
         return;
     }
      else {
         return; 
      }
+     */
+
     //this.evaDiServ.setEvaluacion(this.evaluacion);
 
     //leer última evaluación
-    //this.router.navigate(['/tabs/hacer-evaluacion-diaria']);
+    this.router.navigate(['/tabs/evaluar-coach']);
   }
 
   
@@ -321,7 +332,7 @@ await this.evaDiCollection.get().toPromise().then(function(querySnapshot) {
   }
 
   openFichaClinicaPage(){
-    this.router.navigate(['/tabs/ficha-clinica']);
+    this.router.navigate(['/tabs/ficha-clinica2']);
   }
 
 

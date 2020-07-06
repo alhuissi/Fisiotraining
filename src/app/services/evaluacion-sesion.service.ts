@@ -45,11 +45,23 @@ export class EvaluacionSesionService {
 
     getEvaluacion(){
         //return this.db.collection('evaluacion-diaria').doc(this.evaluacionDi.userid).valueChanges()
-        return this.evaluacionSesion
+        return this.evaluacionSesion;
     }
+
+    getID(){
+     return this.evaluacionSesion.idSesion;
+    }
+    getIDProfe(){
+      return this.evaluacionSesion.idProfe;
+     }
 
     guardarEvaluacion(){
 
     }
+
+    getSesionID(uid: string){
+      let sesionID: evaluacionSesion;
+      return this.db.collection('evaluacion-sesion').doc(uid);
+  }
 
 }

@@ -1,46 +1,56 @@
-<ion-header translucent>
+<ion-header>
   <ion-toolbar color="dark">
-    <ion-button slot="end"  (click)="presentActionSheet()">
-       <ion-icon  name="power"></ion-icon>  
+    <ion-button color="dark" fill="clear" style="box-shadow: 0px 0px 0px" slot="start">
+      <ion-icon></ion-icon>
+    </ion-button>
+    <ion-button color="secondary" fill="outline" slot="end" class="boton" (click)="presentActionSheet()">
+      <ion-icon style="color:#fff; font-size: 25px" name="menu"></ion-icon>
     </ion-button>
     <ion-title class="ion-text-center">Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
- 
+
 <ion-content color="dark" fullscreen>
 
-          <ion-list>
-              <ion-item no-lines ion-item (click)="openFisiotrainingTuto()" class="ion-no-padding">
-                <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/yoga.jpg)','background-repeat': 'no-repeat', 
-              'height':'40% 100px', 'background-size': 'cover '}">
-                  <div class="inner">
-                    <b>¿QUÉ ES FISIOTRAINING?</b>
-                  </div>
-                </div>
-              </ion-item>
+  <ion-list color="dark">
+    <ion-item no-lines ion-item color="dark-shade">
+      <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.7)),url(assets/imgs/fitness.jpg)','background-repeat': 'no-repeat', 
+               'background-size': 'cover '}">
 
-              <ion-item no-lines ion-item (click)="openProximoPaciente()" class="ion-no-padding">
-                <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/bb.jpg)','background-repeat': 'no-repeat', 
-              'height':'40% 100px', 'background-size': 'cover '}">
-                  <div class="inner">
-                    <b>SOLICITAR UNA SESIÓN</b>
-                  </div>
-                </div>
-              </ion-item>
-    
-              <ion-item no-lines ion-item (click)="openInstagram('fisiotraininglc')" class="ion-no-padding">
-                  <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)),url(assets/imgs/appBackground.jpg)','background-repeat': 'no-repeat', 
-                'height':'40% 100px', 'background-size': 'cover '}">
-                <ion-icon name="logo-instagram" slot="start" color="tertiary"></ion-icon>
-                    <div class="inner">
-                      <b>INSTAGRAM</b>
-                    </div>
-                    <ion-icon name="logo-instagram" slot="end" color="tertiary"></ion-icon>
-                  </div>
-                </ion-item>
+        <p style="font-size:16px;font-weight:600;">Bienvenid@, {{this.userName + ' ' + this.userLastName}}. Necesitas una suscripción activa para poder acceder a todas las
+          funciones de esta aplicación.</p>
 
-            </ion-list>
+      </div>
+    </ion-item>
+
+    <a href="mailto:asistencia@fisiotraining.cl" style="text-decoration: none">
+      <ion-item no-lines ion-item color="dark-shade">
+        <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 1)),rgba(236, 191, 62, 0.99)),url(assets/imgs/white.jpg)','background-repeat': 'no-repeat', 
+               'background-size': 'cover '}">
+          <div class="neon"
+            style="position:relative;animation:play1 500ms linear infinite;animation-direction:alternate-reverse;">
+            <ion-icon name="arrow-round-forward" color="tertiary"></ion-icon>
+          </div>
+          <b>SOLICITAR SUSCRIPCIÓN POR EMAIL</b>
+
+        </div>
+      </ion-item>
+    </a>
+
+    <ion-item no-lines ion-item (click)="openInstagram('fisiotraininglc')" color="dark-shade">
+      <div class="imagediv" [ngStyle]="{'background-image' :'linear-gradient(0deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 1)),url(assets/imgs/white.jpg)','background-repeat': 'no-repeat', 
+                'background-size': 'cover '}">
+        <!--   <ion-icon name="logo-instagram" slot="start" color="tertiary"></ion-icon> -->
+        <div class="neon"
+            style="position:relative;animation:play1 500ms linear infinite;animation-direction:alternate-reverse;">
+            <ion-icon name="arrow-round-forward" color="tertiary"></ion-icon>
+          </div>
+        <b>VISITAR INSTAGRAM</b>
+
+        <!--       <ion-icon name="logo-instagram" slot="end" color="tertiary"></ion-icon> -->
+      </div>
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>
-
-

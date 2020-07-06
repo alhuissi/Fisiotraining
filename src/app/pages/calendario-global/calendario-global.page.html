@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-button fill="clear" *ngIf="isWeekView" slot="start" (click)="changeMode('month')">
+      <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+      <ion-label color="light">{{event.startTime | date:'MMM'}}</ion-label>
+    </ion-button>
+    <ion-button fill="clear" *ngIf="isDayView" slot="start" (click)="changeMode('week')">
+      <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+    </ion-button>
+    <ion-button color="secondary" fill="outline" slot="end" class="boton" (click)="presentActionSheet()">
+      <ion-icon style="color:#fff; font-size: 25px" name="menu"></ion-icon>
+    </ion-button>
+    <ion-title class="ion-text-center">{{event.startTime | date}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+
+  <!-- Para coordinar un nuevo entrenamiento entre algún profe y algún alumno -->
+  <!--
+  <ion-card *ngIf="authIsAdmin">
+    <ion-card-header color="primary" tappable (click)="collapseCard = !collapseCard">
+      <ion-card-title class="ion-text-center" color='dark'>Coordinar un nuevo Entrenamiento
+        <ion-icon *ngIf="!collapseCard" size="medium" name="arrow-dropright"></ion-icon>
+        <ion-icon *ngIf="collapseCard" size="medium" name="arrow-dropdown"></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="collapseCard">
+
+      <ion-item>
+        <ion-label class="ion-text-wrap">Fecha: </ion-label>
+        <br>
+        <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime"
+          [min]="minDate"></ion-datetime>
+      </ion-item>
+        <ion-item>
+                    <ion-label>Termina:</ion-label>
+                    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
+                  </ion-item>
+                  
+      <ion-item (click)="openEscogerUser()">
+        <ion-label class="ion-text-wrap">{{userSelected}} {{userSelectedLastName}}</ion-label>
+      </ion-item>
+      <ion-item (click)="openEscogerKine()">
+        <ion-label class="ion-text-wrap">{{kineSelected}} {{kineSelectedLastName}}</ion-label>
+      </ion-item>
+      <ion-button expand="block" (click)="agregarSesion()" [disabled]="event.title == ''">Agregar</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+  -->
+
+  <!-- 
+  <ion-row>
+    -->
+  <!-- Change the displayed calendar mode -->
+  <!-- 
+    <ion-col size="4">
+      <ion-button expand="block" [color]="calendar.mode == 'month' ? 'primary' : 'secondary'"
+        (click)="changeMode('month')">Mes</ion-button>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button expand="block" [color]="calendar.mode == 'week' ? 'primary' : 'secondary'"
+        (click)="changeMode('week')">Semana</ion-button>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button expand="block" [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" (click)="changeMode('day')">
+        Día</ion-button>
+    </ion-col>
+
+  </ion-row>
+-->
+
+  <!--
+  <ion-grid>
+    <ion-row>
+-->
+  <!-- Move back one screen of the slides -->
+  <!--
+      <ion-col size="3">
+        <ion-button fill="clear" (click)="back()">
+          <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+      -->
+
+  <!-- Mes -->
+  <!--
+      <ion-col size="6">
+        <ion-label class="fecha ion-text-wrap">
+          {{ viewTitle}}
+        </ion-label>
+      </ion-col>
+      -->
+
+  <!-- Move forward one screen of the slides -->
+  <!--
+      <ion-col size="3">
+        <ion-button fill="clear" (click)="next()">
+          <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+      
+
+      <ion-col size="6">
+        <ion-label class="fecha ion-text-wrap">
+          {{event.startTime | date}}
+        </ion-label>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button color="dark" expand="block" shape="round" fill="outline" (click)="solicitarSesion()" [disabled]="event.title == ''">
+          <b>SOLICITAR ENTRENAMIENTO</b>
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+  -->
+
+  <!-- Calendario de admins -->
+  <calendar *ngIf="authIsAdmin" [eventSource]="eventSource" [calendarMode]="calendar.mode"
+    [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelectedKine($event)"
+    (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" (click)="goToDateView()"
+    [monthviewDisplayEventTemplate]="templateKineMonth" [weekviewNormalEventSectionTemplate]="templateKineWeek"
+    startHour="6" endHour="24" step="15" startingDayWeek="1" formatHourColumn="HH:mm" startingDayMonth="1">
+  </calendar>
+
+  <!-- Template Vista Mes -->
+  <ng-template #templateKineMonth let-view="view" let-row="row" let-col="col">
+    <div *ngIf="view.dates[row*7+col].events == ''">{{view.dates[row*7+col].label}}</div>
+    <div *ngFor="let obj of view.dates[row*7+col].events">
+      <p [ngStyle]="{'background': obj.eventColor, 'border-radius': '50%', 'margin': '0'}">
+        {{view.dates[row*7+col].label}}
+      </p>
+    </div>
+  </ng-template>
+
+  <!-- Template Vista Semana -->
+  <ng-template #templateKineWeek let-tm="tm" let-hourParts="hourParts" let-eventTemplate="eventTemplate">
+    <div [ngClass]="{'calendar-event-wrap': tm.events}" *ngIf="tm.events">
+      <div *ngFor="let displayEvent of tm.events" class="calendar-event" tappable
+        (click)="onEventSelectedKine(displayEvent.event)"
+        [ngStyle]="{'background': displayEvent.event.eventColor, top: (37*displayEvent.startOffset/hourParts)+'px',left: 100/displayEvent.overlapNumber*displayEvent.position+'%', width: 100/displayEvent.overlapNumber+'%', height: 37*(displayEvent.endIndex -displayEvent.startIndex - (displayEvent.endOffset + displayEvent.startOffset)/hourParts)+'px'}">
+        <ng-template [ngTemplateOutlet]="eventTemplate" [ngTemplateOutletContext]="{displayEvent:displayEvent}">
+        </ng-template>
+      </div>
+    </div>
+  </ng-template>
+
+</ion-content>

@@ -1,9 +1,65 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>evaluar-coach</ion-title>
+  <ion-toolbar color="dark">
+    <ion-button slot="start" fill="clear" (click)="goBack()">
+      <ion-icon style="color:#ffffff; font-size: 25px" name="arrow-round-back"></ion-icon>
+    </ion-button>
+    <ion-title style="color:#ffffff" class="ion-text-center">Evaluar Coach </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <br>
+    <ion-row>
+      <ion-label color="dark" class="ion-text-wrap ion-text-center"><b>Por favor, evalua la calidad de {{this.nombreProfe}}
+         en la sesión llevada a cabo el: </b> {{this.fecha}} </ion-label>
+    </ion-row>
+    <br>
 
+
+
+    <ion-item class="ion-text-wrap">
+      <ion-label class="ion-text-wrap" style="font-size: 12px;">
+        Motivación
+      </ion-label>
+      <rating [(ngModel)]="rateMotivacion" readonly="false" size="default"
+        (ngModelChange)="onModelChangeMotivacion($event)">
+      </rating>
+    </ion-item>
+    <ion-item class="ion-text-wrap">
+      <ion-label class="ion-text-wrap" style="font-size: 12px;">
+        Profesionalismo
+      </ion-label>
+      <rating [(ngModel)]="rateProfesionalismo" readonly="false" size="default"
+        (ngModelChange)="onModelChangeProfesionalismo($event)">
+      </rating>
+    </ion-item>
+    <ion-item class="ion-text-wrap">
+      <ion-label class="ion-text-wrap" style="font-size: 12px;">
+        Puntualidad
+      </ion-label>
+      <rating [(ngModel)]="ratePuntualidad" readonly="false" size="default"
+        (ngModelChange)="onModelChangePuntualidad($event)">
+      </rating>
+    </ion-item>
+
+    <br>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button fill="outline" shape="round" class="animated fadeIn slow" color="primary"
+          (click)="guardarEvaluacion()">
+          <ion-label>GUARDAR</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button fill="outline" shape="round" class="animated fadeIn slow" color="primary" (click)="goBack()">
+          <ion-label>VOLVER</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

@@ -1,43 +1,59 @@
-
-
-<ion-content padding class="background">
-    <div class="login-container">
-        <div class="animated fadeIn slower" text-center>
-            <img src="assets/Logo_fisiotraining.png" width='100px' alt="logo"> 
-          </div>
-    <form class="animated fadeIn slow" [formGroup]="registerForm" (submit)="tryRegister()" class="formulario" novalidate>
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <div class="animated fadeIn slower" class="ion-text-center">
+      <img src="assets/Logo_fisiotraining.png" width='100px' alt="logo">
+    </div>
+    <form class="animated fadeIn slow" [formGroup]="registerForm" (submit)="tryRegister()" class="formulario"
+      novalidate>
+      <ion-card class="animated fadeIn slow card" style="animation:cycle 10s linear infinite;animation-direction:alternate-reverse;">
 
         <ion-item>
-          <ion-label position="floating" color="primary">Nombre</ion-label>
-          <br>
-          <ion-input tappable formControlName="profileName" type="text" placeholder="" [class.invalid]="!registerForm.controls.profileName.valid && registerForm.controls.profileName.dirty"></ion-input>
+          <ion-label position="floating" class="ion-text-wrap login-label">Nombre</ion-label>
+
+          <ion-input tappable formControlName="profileName" type="text" placeholder=""
+            [class.invalid]="!registerForm.controls.profileName.valid && registerForm.controls.profileName.dirty">
+          </ion-input>
         </ion-item>
         <ion-item>
-            <ion-label position="floating" color="primary">Apellido</ion-label>
-            <br>
-            <ion-input tappable formControlName="profileLastName" type="text" placeholder="" [class.invalid]="!registerForm.controls.profileName.valid && registerForm.controls.profileName.dirty"></ion-input>
-          </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating" color="primary">Email</ion-label>
-          <br>
-          <ion-input tappable formControlName="email" type="email" placeholder="" [class.invalid]="!registerForm.controls.email.valid && registerForm.controls.email.dirty"></ion-input>
+          <ion-label position="floating" class="ion-text-wrap login-label">Apellido</ion-label>
+
+          <ion-input tappable formControlName="profileLastName" type="text" placeholder=""
+            [class.invalid]="!registerForm.controls.profileName.valid && registerForm.controls.profileName.dirty">
+          </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label position="floating" color="primary">Teléfono</ion-label>
-          <br>
+          <ion-label position="floating" class="ion-text-wrap login-label">Email</ion-label>
+
+          <ion-input tappable formControlName="email" type="email" placeholder=""
+            [class.invalid]="!registerForm.controls.email.valid && registerForm.controls.email.dirty"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" class="ion-text-wrap login-label">Fecha de Nacimiento</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" formControlName="birth" placeholder="Seleccionar Fecha"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" class="ion-text-wrap login-label">Dirección</ion-label>
+
+          <ion-input tappable formControlName="direccion" type="text" placeholder="">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" class="ion-text-wrap login-label">Teléfono</ion-label>
+
           <ion-input tappable formControlName="phone" type="text" placeholder=""></ion-input>
         </ion-item>
-  
+
         <ion-item>
-          <ion-label position="floating" color="primary">Password</ion-label>
-          <br>
-          <ion-input tappable formControlName="password" type="password" placeholder="" [class.invalid]="!registerForm.controls.password.valid && registerForm.controls.password.dirty"></ion-input>
+          <ion-label position="floating" class="ion-text-wrap login-label">Contraseña</ion-label>
+
+          <ion-input tappable formControlName="password" type="password" placeholder=""
+            [class.invalid]="!registerForm.controls.password.valid && registerForm.controls.password.dirty"></ion-input>
         </ion-item>
-  
-  
-        
+
         <ion-item class="error-message" lines="none">
           <p *ngIf="!registerForm.controls.profileName.valid  &&
                   registerForm.controls.profileName.dirty">*Por favor ingresa un nombre válido</p>
@@ -46,24 +62,36 @@
           <p *ngIf="!registerForm.controls.password.valid  &&
           registerForm.controls.password.dirty">*Los passwords debe tener al menos 6 caracteres</p>
         </ion-item>
-      
-      <br>
+
+      </ion-card>
       <ion-grid>
-          <ion-row>
-              <ion-col class="ion-text-center">
-      <ion-button class="animated fadeIn slower" shape="round" (click)="tryRegister()" color="tertiary" expand="block">
-          <ion-label color="dark">Crear Cuenta</ion-label></ion-button>
-        </ion-col>
-      </ion-row>
-      
-          <ion-row>
-              <ion-col class="ion-text-center">
-      <ion-button class="animated fadeIn slower" shape="round" (click)="goLoginPage()" color="tertiary" expand="block">
-          <ion-label color="dark">Ya tengo una Cuenta</ion-label></ion-button>
-        </ion-col>
-      </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-button class="animated fadeIn slower" shape="round" (click)="tryRegister()" color="primary"
+              expand="block">
+              CREAR CUENTA
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-button class="animated fadeIn slower" shape="round" (click)="goLoginPage()" color="primary"
+              expand="block">
+              YA TENGO UNA CUENTA
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
         
-  </ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center">
+              <ion-label color="dark" (click)="goForgotPage()" style="font-size:14px;text-decoration:underline;">Recuperar contraseña</ion-label>
+          </ion-col>
+        </ion-row>
+        
+
+      </ion-grid>
     </form>
-      </div>
-  </ion-content>
+  </div>
+</ion-content>

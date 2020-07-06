@@ -1,19 +1,22 @@
 <ion-header>
-    <ion-toolbar color="dark">
-        <ion-button slot="start" fill="clear" (click)="goBack()">
-            <ion-icon style="color:#ffffff; font-size: 25px" name="arrow-round-back"></ion-icon>
-          </ion-button>
-      <ion-title style="color:#ffffff" text-center>  </ion-title>
-    </ion-toolbar>
-  </ion-header>
-   
-  <ion-content class="background" padding>
-    <ion-grid>
-   <!--    
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/perfil"></ion-back-button>
+    </ion-buttons>
+    <ion-button color="danger" fill="outline" slot="end" class="boton" (click)="start()">
+      <ion-icon style="color:#fff; font-size: 25px" name="time"></ion-icon>
+    </ion-button>
+    <ion-title class="ion-text-center" (click)="reset()">{{time}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <!--    
       <ion-row>
             <p>{{userName}} {{userLastName}}</p>
       </ion-row>
-      -->
+      
         <ion-row>
           
           <ion-col>
@@ -34,201 +37,392 @@
             </div>
            </ion-col>
         </ion-row>
-      
+        -->
 
-        <ion-card class="animated fadeIn slow card">
-            <ion-card-header color="light" tappable (click)="collapseCard = !collapseCard">
-                <ion-card-title color="dark" text-center><ion-icon name="qr-scanner"></ion-icon>  <b>SCANNING</b> <ion-icon name="qr-scanner"></ion-icon></ion-card-title> 
-              
-            
-            </ion-card-header>
-            <ion-card-content *ngIf="collapseCard">
-      <ion-row>
-        <ion-col class="ion-text-center">
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-item>
+          <ion-label class="ion-text-center ion-text-wrapper" color="primary" style="font-size: 22px;"><b>EVALUACIÓN HÁBITOS</b>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-label class="ion-text-center" style="font-size: 15px;"><b>{{userName}} {{userLastName}}</b></ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-label class="ion-text-center" style="font-size: 15px;"><b>{{fechaToday2 | date:'dd/MM/yyyy'}}</b>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+    <br>
+    <!--   Scanning   -->
+    <ion-card class="animated fadeIn slow card">
+
+      <ion-card-header color="light" tappable (click)="collapseCard = !collapseCard">
+        <ion-card-title color="dark" class="ion-text-center"> <b>SCANNING</b>&nbsp;
+          <ion-icon *ngIf="collapseCard" size="medium" name="arrow-dropright"></ion-icon>
+          <ion-icon *ngIf="!collapseCard" size="medium" name="arrow-dropdown"></ion-icon>
+        </ion-card-title>
+
+      </ion-card-header>
+
+      <ion-card-content [@visibilityChanged] *ngIf="collapseCard">
+        <ion-row>
+          <ion-col class="ion-text-center">
             <ion-label class="ion-text-center">
-          Autopercepción
-        </ion-label>        
-        </ion-col>
+              Autopercepción
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <!--    
+        <ionic4-star-rating #rating
+          activeIcon = "ios-star"
+          defaultIcon = "ios-star-outline"
+          activeColor = "#488aff" 
+          defaultColor = "#f4f4f4"
+          readonly="false"
+          rating="3"
+          fontSize = "32px"
+          (ratingChanged)="onModelChangeAutopercepcion($event)">
+        </ionic4-star-rating>
+        -->
+
+
+        <!-- 
           <rating [(ngModel)]="rateAutopercepcion"
           readonly="false" 
           size="default"
           (ngModelChange)="onModelChangeAutopercepcion($event)">
           </rating>
-      </ion-row>
-      <ion-row>
-          <ion-col class="ion-text-center">
-              <ion-label class="ion-text-center">
-            Alimentación
-          </ion-label>        
-          </ion-col>
-            <rating [(ngModel)]="rateAlimentacion"
-            readonly="false" 
-            size="default"
-            (ngModelChange)="onModelChangeAlimentacion($event)">
-            </rating>
-        </ion-row>
+        -->
+
+        <ion-range [(ngModel)]="rateAutopercepcion" pin="true" snaps="true" ticks="true" min="1" max="10"
+          color="secondary" value='10' disabled="false" (ngModelChange)="onModelChangeAutopercepcion($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
+
         <ion-row>
-            <ion-col class="ion-text-center">
-                <ion-label class="ion-text-center">
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Alimentación
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="rateAlimentacion" pin="true" snaps="true" ticks="true" min="1" max="10"
+          color="secondary" value='10' disabled="false" (ngModelChange)="onModelChangeAlimentacion($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
+
+        <!-- 
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Alimentación
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateAlimentacion" readonly="false" size="default"
+            (ngModelChange)="onModelChangeAlimentacion($event)">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
               Hidratación
-            </ion-label>        
-            </ion-col>
-              <rating [(ngModel)]="rateHidratacion"
-              readonly="false" 
-              size="default"
-              (ngModelChange)="onModelChangeHidratacion($event)">
-              </rating>
-          </ion-row>
-          <ion-row>
-              <ion-col class="ion-text-center">
-                  <ion-label class="ion-text-center">
-                Stress
-              </ion-label>        
-              </ion-col>
-                <rating [(ngModel)]="rateStress"
-                readonly="false" 
-                size="default"
-                (ngModelChange)="onModelChangeStress($event)">
-                </rating>
-            </ion-row> 
-           
-            <ion-row>
-                <ion-col class="ion-text-center">
-                    <ion-label class="ion-text-center">
-                  Sueño
-                </ion-label>        
-                </ion-col>
-                  <rating [(ngModel)]="rateSueno"
-                  readonly="false" 
-                  size="default"
-                  (ngModelChange)="onModelChangeSueno($event)">
-                  </rating>
-              </ion-row> 
-            </ion-card-content>
-            </ion-card>
-            
-            
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="rateHidratacion" pin="true" snaps="true" ticks="true" min="1" max="10" color="secondary"
+          value='10' disabled="false" (ngModelChange)="onModelChangeHidratacion($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
 
-              <ion-card class="animated fadeIn slow card">
-                  <ion-card-header color="light" tappable (click)="collapseCard2 = !collapseCard2">
-                        <ion-card-title color="dark" text-center><ion-icon name="walk"></ion-icon>  <b>CIRCUITOS</b> <ion-icon name="walk"></ion-icon></ion-card-title> 
-                  </ion-card-header>
-                  <ion-card-content *ngIf="collapseCard2">
-          <ion-row>
-              <ion-col class="ion-text-center">
-                  <ion-label class="ion-text-center">
-                Circuito 1
-              </ion-label>        
-              </ion-col>
-                <rating [(ngModel)]="rateCircuito1"
-                readonly="false" 
-                size="default"
-                (ngModelChange)="onModelChangeCircuito1($event)">
-                </rating>
-            </ion-row>
-            
-            <ion-row>
-                <ion-col class="ion-text-center">
-                    <ion-label class="ion-text-center">
-                  Circuito 2
-                </ion-label>        
-                </ion-col>
-                  <rating [(ngModel)]="rateCircuito2"
-                  readonly="false" 
-                  size="default"
-                  (ngModelChange)="onModelChangeCircuito2($event)">
-                  </rating>
-              </ion-row>
-    
-              <ion-row>
-                  <ion-col class="ion-text-center">
-                      <ion-label class="ion-text-center">
-                    Circuito 3
-                  </ion-label>        
-                  </ion-col>
-                    <rating [(ngModel)]="rateCircuito3"
-                    readonly="false" 
-                    size="default"
-                    (ngModelChange)="onModelChangeCircuito3($event)">
-                    </rating>
-                </ion-row>
-              </ion-card-content>
-              </ion-card>
-               
-       
-                <ion-card class="animated fadeIn slow card">
-                    <ion-card-header color="light" tappable (click)="collapseCard3 = !collapseCard3">
-                         <ion-card-title color="dark" text-center><ion-icon name="bicycle"></ion-icon> <b>ENTRENAMIENTO</b> <ion-icon name="bicycle"></ion-icon></ion-card-title> 
-                    </ion-card-header>
-                    <ion-card-content *ngIf="collapseCard3">
-                    <ion-row>
-                        <ion-col class="ion-text-center">
-                            <ion-label class="ion-text-center">
-                          Core
-                        </ion-label>        
-                        </ion-col>
-                          <rating [(ngModel)]="rateCore"
-                          readonly="false" 
-                          size="default"
-                          (ngModelChange)="onModelChangeCore($event)">
-                          </rating>
-                      </ion-row>
-          
-            <ion-row>
-                <ion-col class="ion-text-center">
-                    <ion-label class="ion-text-center">
-                  Tren inferior
-                </ion-label>        
-                </ion-col>
-                  <rating [(ngModel)]="ratePiernas"
-                  readonly="false" 
-                  size="default"
-                  (ngModelChange)="onModelChangePiernas($event)">
-                  </rating>
-              </ion-row>
-           
-              <ion-row>
-                  <ion-col class="ion-text-center">
-                      <ion-label class="ion-text-center">
-                    Tren Superior
-                  </ion-label>        
-                  </ion-col>
-                    <rating [(ngModel)]="rateBrazos"
-                    readonly="false" 
-                    size="default"
-                    (ngModelChange)="onModelChangeBrazos($event)">
-                    </rating>
-                </ion-row>
-              
-                <br>
-                <ion-range [(ngModel)]="rateCardio" min="1" max="10" color="secondary" value='50' disabled="false" (ngModelChange)="onModelChangeCardio($event)">
-                    <ion-icon  slot="start" name="heart"></ion-icon>
-                    <ion-icon  slot="end" src="assets/strength.svg"></ion-icon>
+        <!-- 
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Hidratación
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateHidratacion" readonly="false" size="default"
+            (ngModelChange)="onModelChangeHidratacion($event)">
+          </rating>
+        </ion-row>
+        -->
 
-                  </ion-range>
-                 
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Stress
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="rateStress" pin="true" snaps="true" ticks="true" min="1" max="10" color="secondary"
+          value='10' disabled="false" (ngModelChange)="onModelChangeStress($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
 
-                  <br>
-                </ion-card-content>
-                </ion-card>   
-             
-              <ion-row>
-                  <ion-col text-center>
-                      <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="guardarEvaluacion()">
-                          <ion-label color="dark">Guardar</ion-label>
-                        </ion-button>       
-                    </ion-col>
-              </ion-row>
-              <ion-row>
-                    <ion-col text-center>
-                        <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="goBack()">
-                            <ion-label color="dark"> Volver</ion-label>
-                          </ion-button>       
-                      </ion-col>
-                  </ion-row>
-  
-          
-    </ion-grid>  
-    
-    
-  </ion-content>
+        <!--
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Stress
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateStress" readonly="false" size="default"
+            (ngModelChange)="onModelChangeStress($event)">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Sueño
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="rateSueno" pin="true" snaps="true" ticks="true" min="1" max="10" color="secondary"
+          value='10' disabled="false" (ngModelChange)="onModelChangeSueno($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
+
+        <!--
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Sueño
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateSueno" readonly="false" size="default" (ngModelChange)="onModelChangeSueno($event)">
+          </rating>
+        </ion-row>
+        -->
+      </ion-card-content>
+    </ion-card>
+
+    <!--   Circuitos   -->
+    <ion-card class="animated fadeIn slow card">
+      <ion-card-header color="light" tappable (click)="collapseCard2 = !collapseCard2">
+        <ion-card-title color="dark" class="ion-text-center"> <b>CIRCUITOS</b> &nbsp;
+          <ion-icon *ngIf="collapseCard" size="medium" name="arrow-dropright"></ion-icon>
+          <ion-icon *ngIf="!collapseCard" size="medium" name="arrow-dropdown"></ion-icon>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content [@visibilityChanged] *ngIf="collapseCard2">
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Circuito 1
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="rateCircuito1" pin="true" snaps="true" ticks="true" min="1" max="10" color="secondary"
+          value='10' disabled="false" (ngModelChange)="onModelChangeCircuito1($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
+
+        <!--
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Circuito 1
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateCircuito1" readonly="false" size="default"
+            (ngModelChange)="onModelChangeCircuito1($event)">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Circuito 2
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="rateCircuito2" pin="true" snaps="true" ticks="true" min="1" max="10" color="secondary"
+          value='10' disabled="false" (ngModelChange)="onModelChangeCircuito2($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
+
+        <!--
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Circuito 2
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateCircuito2" readonly="false" size="default"
+            (ngModelChange)="onModelChangeCircuito2($event)">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Circuito 3
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="rateCircuito3" pin="true" snaps="true" ticks="true" min="1" max="10" color="secondary"
+          value='10' disabled="false" (ngModelChange)="onModelChangeCircuito3($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
+
+        <!--
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Circuito 3
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateCircuito3" readonly="false" size="default"
+            (ngModelChange)="onModelChangeCircuito3($event)">
+          </rating>
+        </ion-row>
+        -->
+      </ion-card-content>
+    </ion-card>
+
+    <!--   Circuitos   -->
+    <ion-card class="animated fadeIn slow card">
+      <ion-card-header color="light" tappable (click)="collapseCard3 = !collapseCard3">
+        <ion-card-title color="dark" class="ion-text-center"> <b>ENTRENAMIENTO</b> &nbsp;
+          <ion-icon *ngIf="collapseCard" size="medium" name="arrow-dropright"></ion-icon>
+          <ion-icon *ngIf="!collapseCard" size="medium" name="arrow-dropdown"></ion-icon>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content [@visibilityChanged] *ngIf="collapseCard3">
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Core
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="rateCore" pin="true" snaps="true" ticks="true" min="1" max="10" color="secondary"
+          value='10' disabled="false" (ngModelChange)="onModelChangeCore($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
+
+        <!--
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Core
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateCore" readonly="false" size="default" (ngModelChange)="onModelChangeCore($event)">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Tren inferior
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="ratePiernas" pin="true" snaps="true" ticks="true" min="1" max="10" color="secondary"
+          value='10' disabled="false" (ngModelChange)="onModelChangePiernas($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
+
+        <!--
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Tren inferior
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="ratePiernas" readonly="false" size="default"
+            (ngModelChange)="onModelChangePiernas($event)">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Tren Superior
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-range [(ngModel)]="rateBrazos" pin="true" snaps="true" ticks="true" min="1" max="10" color="secondary"
+          value='10' disabled="false" (ngModelChange)="onModelChangeBrazos($event)">
+          <ion-icon slot="start" name="sad"></ion-icon>
+          <ion-icon slot="end" name="happy"></ion-icon>
+        </ion-range>
+
+        <!--
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Tren Superior
+            </ion-label>
+          </ion-col>
+          <rating [(ngModel)]="rateBrazos" readonly="false" size="default"
+            (ngModelChange)="onModelChangeBrazos($event)">
+          </rating>
+        </ion-row>
+        -->
+
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-label class="ion-text-center">
+              Enfoque del Entrenamiento
+            </ion-label>
+          </ion-col>
+        </ion-row>
+
+        <ion-range [(ngModel)]="rateCardio" min="1" max="10" color="secondary" value='50' disabled="false"
+          (ngModelChange)="onModelChangeCardio($event)">
+          <ion-icon slot="start" name="heart"></ion-icon>
+          <ion-icon slot="end" src="assets/strength.svg"></ion-icon>
+
+        </ion-range>
+
+
+        <br>
+      </ion-card-content>
+    </ion-card>
+
+    <br>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button color="primary" expand="block" shape="round" fill="outline" (click)="guardarEvaluacion()">
+          GUARDAR
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button color="primary" expand="block" shape="round" fill="outline" (click)="goBack()">
+          VOLVER
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

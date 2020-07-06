@@ -1,51 +1,71 @@
+<ion-content class="ion-padding">
+  <br>
+  <div class="login-container">
 
- 
-<ion-content padding class="background">
- <div class="login-container">
-   <div class="animated fadeIn slower" text-center>
-  <img src="assets/Logo_fisiotraining.png" width='120px' alt="logo"> 
-</div>
-  <form class="animated fadeIn slow"  [formGroup]="loginForm" (submit)="loginUser()" class="formulario" novalidate>
-      <ion-item>
-        <ion-label position="floating" color="primary">Email</ion-label>
-        <br>
-        <ion-input tappable #email placeholder="" type="email" formControlName="email" [class.invalid]="!loginForm.controls.email.valid &&loginForm.controls.email.dirty">
-        </ion-input>
-      </ion-item>
+    <div class="animated fadeIn slower" class="ion-text-center">
+      <img src="assets/Logo_fisiotraining.png" width='120px' alt="logo">
+    </div>
+    <form class="animated fadeIn slow" [formGroup]="loginForm" (submit)="loginUser()" class="formulario" novalidate>
+      <ion-card class="animated fadeIn slow card" style="animation:cycle 10s linear infinite;animation-direction:alternate-reverse;">
+        <ion-item>
+          <ion-label position="floating" class="ion-text-wrap login-label">Email</ion-label>
 
-      <ion-item>
-        <ion-label position="floating" color="primary">Contraseña</ion-label>
-        <br>
-        <ion-input tappable #password placeholder="" type="password" formControlName="password" [class.invalid]="!loginForm.controls.password.valid &&loginForm.controls.password.dirty">
-        </ion-input>
-      </ion-item>
+          <ion-input tappable #email placeholder="" type="email" formControlName="email"
+            [class.invalid]="!loginForm.controls.email.valid &&loginForm.controls.email.dirty">
+          </ion-input>
+        </ion-item>
 
-      <ion-item class="error-message" lines="none">
-        <p *ngIf="!loginForm.controls.email.valid  &&
+        <ion-item>
+          <ion-label position="floating" class="ion-text-wrap login-label">Contraseña</ion-label>
+
+          <ion-input tappable #password placeholder="" type="password" formControlName="password"
+            [class.invalid]="!loginForm.controls.password.valid &&loginForm.controls.password.dirty">
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="error-message" lines="none">
+          <p *ngIf="!loginForm.controls.email.valid  &&
                 loginForm.controls.email.dirty">*Debes ingresar un email válido</p>
-        <p *ngIf="!loginForm.controls.password.valid  &&
+          <p *ngIf="!loginForm.controls.password.valid  &&
                 loginForm.controls.password.dirty">*Los passwords deben tener un mínimo de 6 caracteres</p>
-      </ion-item>
+        </ion-item>
+      </ion-card>
 
       <div class="animated fadeIn slower">
-        <br>
         <ion-grid>
           <ion-row>
-              <ion-col class="ion-text-center">
-        <ion-button shape="round" (click)="loginUser()" color="tertiary" expand="block">
-          <ion-label color="dark">Ingresar</ion-label></ion-button>
-          </ion-col>
-         </ion-row>
+            <ion-col class="ion-text-center">
+              <ion-button shape="round" (click)="loginUser()" color="primary" expand="block">
+                INGRESAR
+              </ion-button>
+            </ion-col>
+          </ion-row>
 
           <ion-row>
-           <ion-col class="ion-text-center">
-        <ion-button shape="round" (click)="goToRegisterPage()" color="tertiary" expand="block">
-          <ion-label color="dark">Registrarse</ion-label></ion-button>
-           </ion-col>
+            <ion-col class="ion-text-center">
+              <ion-button shape="round" (click)="goToRegisterPage()" color="primary" expand="block">
+                REGISTRARSE
+              </ion-button>
+            </ion-col>
           </ion-row>
-            
-      </ion-grid>
-     </div>
+
+          <ion-row>
+            <ion-col class="ion-text-center">
+                <ion-label color="dark" (click)="goForgotPage()" style="font-size:14px;text-decoration:underline;">Recuperar contraseña</ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col class="ion-text-center">
+
+              <ion-label color="dark" style="font-size:10px;">v2.3.1</ion-label>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </div>
+
     </form>
+
   </div>
 </ion-content>

@@ -1,13 +1,11 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-button slot="start" fill="clear" (click)="goBack()">
-      <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
-    </ion-button>
-  <ion-title text-center>Evaluaciones</ion-title>
-</ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/perfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title text-center>Evaluaciones</ion-title>
+  </ion-toolbar>
 </ion-header>
-
-
 
 <ion-content padding>
   <ion-grid>
@@ -19,10 +17,11 @@
     </ion-row>
 
     <ion-list>
-        <ion-item *ngFor= "let evaluacion of evas | async" (click)="openEvaluacion(evaluacion)" [routerLink]="evaluacion.url" routerDirection="root" [class.active-item]="selectedPath === evaluacion.url">
-              <ion-icon name="list-box" size="large" slot="start"></ion-icon> 
+      <ion-item *ngFor="let evaluacion of evas | async" (click)="openEvaluacion(evaluacion)"
+        [routerLink]="evaluacion.url" routerDirection="root" [class.active-item]="selectedPath === evaluacion.url">
+        <ion-icon name="list-box" size="large" slot="start"></ion-icon>
 
-        <ion-label class="animated fadeIn slow ion-text-wrap">        
+        <ion-label class="animated fadeIn slow ion-text-wrap">
           <p>Coach: {{evaluacion.nombreAutor}}</p>
           <p>{{evaluacion.fecha.toDate() | date:'dd/MM/yyyy'}}</p>
         </ion-label>
@@ -32,18 +31,32 @@
     <br>
     <br>
     <ion-row>
-        <ion-col class="animated fadeIn">
-          <b>Evaluaciones Bimensuales: </b>
-        </ion-col>
-      </ion-row>
+      <ion-col class="animated fadeIn">
+        <b>Evaluaciones Bimensuales: </b>
+      </ion-col>
+    </ion-row>
 
-      <br>
-      <ion-row>
-            <ion-col text-center>
-                <ion-button class="animated fadeIn slow" color="tertiary" (click)="goBack()">
-                    Volver
-                  </ion-button>       
-              </ion-col>
-          </ion-row>
+    <ion-list>
+      <ion-item *ngFor="let evaluacion of evasBi | async" (click)="openEvaluacionBi(evaluacion)"
+        [routerLink]="evaluacion.url" routerDirection="root" [class.active-item]="selectedPath === evaluacion.url">
+        <ion-icon name="list-box" size="large" slot="start"></ion-icon>
+
+        <ion-label class="animated fadeIn slow ion-text-wrap">
+          <p>Coach: {{evaluacion.nombreAutor}}</p>
+          <p>{{evaluacion.fecha.toDate() | date:'dd/MM/yyyy'}}</p>
+        </ion-label>
+
+      </ion-item>
+    </ion-list>
+    <br>
+
+    <br>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button expand="block" shape="round" fill="outline" color="primary" (click)="goBack()">
+          VOLVER
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

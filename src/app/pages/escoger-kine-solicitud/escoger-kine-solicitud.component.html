@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="start" fill="clear" (click)="closeComponent()">
+      <ion-icon style="color:#fff; font-size: 25px" name="close"></ion-icon>
+    </ion-button>
+    <ion-title class="text-center">Solicitar Entrenamiento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-grid>
+    <ion-card>
+      <ion-card-header color="light">
+        <ion-card-title class="ion-text-center" color="dark"><b>SELECCIONAR HORA:</b></ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+        <ion-datetime class="fechaX" displayFormat="DD/MM/YYYY" pickerFormat="DD/MMM"
+          [(ngModel)]="event.startTime" min={{minDate}} monthShortNames="ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic"></ion-datetime>
+        </ion-col>
+        <ion-col>
+        <b><ion-datetime class="ion-text-center center fechaX" displayFormat="HH:mm" pickerFormat="HH:mm"
+          [(ngModel)]="event.startTime" minuteValues="0,15,30,45" color="dark"></ion-datetime></b>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header color="light">
+        <ion-card-title class="ion-text-center" color="dark"><b>SELECCIONAR KINESIÓLOGO:</b></ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-list>
+          <!--
+        <ion-select (ionChange)="seleccionarKine(user)">
+          <ion-select-option *ngFor="let user of ListaUsers | async">
+            {{user.name}} {{user.lastName}}</ion-select-option>
+        </ion-select>
+  -->
+
+          <ion-item *ngFor="let user of ListaUsers | async" (click)="seleccionarKine(user)" [routerLink]="user.url"
+            routerDirection="root" [class.active-item]="selectedPath === user.url">
+            <ion-icon name="person" size="large" slot="start" color="tertiary"></ion-icon>
+            <ion-label>
+              <h2><b>{{user.name}} {{user.lastName}}</b></h2>
+              <!-- <p>{{user.mail}}</p> -->
+            </ion-label>
+            <ion-icon *ngIf="user.uid == this.userServ.getUID()" color="primary" name="checkmark" size="large" slot="end"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button expand="block" shape="round" fill="outline" color="primary" (click)="enviar()">
+          ENVIAR
+        </ion-button>
+        <!--
+        <ion-button expand="block" shape="round" fill="outline" color="dark" (click)="printFecha()">
+          <ion-label color="dark">fecha</ion-label>
+        </ion-button>
+        -->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button color="primary" expand="block" shape="round" fill="outline" (click)="closeComponent()">
+          VOLVER
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,9 +1,49 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>forgot</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <br>
+  <div class="login-container">
 
-<ion-content>
+    <div class="animated fadeIn slower" class="ion-text-center">
+      <img src="assets/Logo_fisiotraining.png" width='120px' alt="logo">
+    </div>
+    <form class="animated fadeIn slow" [formGroup]="forgotForm" (submit)="recuperarContrasena()" class="formulario" novalidate>
+      <ion-card class="animated fadeIn slow card" style="animation:cycle 10s linear infinite;animation-direction:alternate-reverse;">
+        <ion-item>
+          <ion-label position="floating" class="ion-text-wrap login-label">Email</ion-label>
 
+          <ion-input tappable #email placeholder="" type="email" formControlName="email"
+            [class.invalid]="!forgotForm.controls.email.valid &&forgotForm.controls.email.dirty">
+          </ion-input>
+        </ion-item>
+
+
+        <ion-item class="error-message" lines="none">
+          <p *ngIf="!forgotForm.controls.email.valid  &&
+          forgotForm.controls.email.dirty">*Debes ingresar un email válido</p>
+        </ion-item>
+      </ion-card>
+
+      <div class="animated fadeIn slower">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-button shape="round" (click)="recuperarContrasena()" color="primary" expand="block">
+                RECUPERAR CONTRASEÑA
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-button shape="round" (click)="goLoginPage()" color="primary" expand="block">
+                VOLVER
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </div>
+
+    </form>
+
+  </div>
 </ion-content>

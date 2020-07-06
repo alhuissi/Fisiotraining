@@ -1,57 +1,75 @@
 <ion-header>
-  <ion-toolbar color="dark">
-    <ion-button slot="end"  (click)="presentActionSheet()">
-      <ion-icon name="power"></ion-icon>
+  <ion-toolbar color="medium">
+    <ion-button color="medium" fill="clear" style="box-shadow: 0px 0px 0px" slot="start">
+      <ion-icon></ion-icon>
     </ion-button>
-    <ion-title class="ion-text-center">Panel Administrador</ion-title>
+    <ion-button color="secondary" fill="outline" slot="end" class="boton" (click)="presentActionSheet()">
+      <ion-icon style="color:#fff; font-size: 25px" name="menu"></ion-icon>
+    </ion-button>
+    <ion-title class="ion-text-center">Admin</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding" class="background">
   <ion-grid>
     <br>
+    <!--
     <ion-row>
       <ion-col class="ion-text-center">
-          <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openVerSolicitudes()" expand="block" shape="round">
-              <ion-label color="dark">Ver Solicitudes</ion-label>
+          <ion-button *ngIf="authIsAdmin" color="primary" (click)="openVerSolicitudes()" expand="block" shape="round" fill="outline">
+              VER SOLICITUDES
             </ion-button>       
         </ion-col>
       </ion-row>
+      -->
 
-  <ion-row>
-    <ion-col class="ion-text-center">
-        <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openEscogerUser()" expand="block" shape="round">
-            <ion-label color="dark">Buscar Usuario</ion-label>
-        </ion-button>       
-    </ion-col>
-  </ion-row>
-  <ion-row>
+    <ion-row>
       <ion-col class="ion-text-center">
-          <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openListaUsers()" expand="block" shape="round">
-              <ion-label color="dark">Ver Listas de Usuarios</ion-label>
-          </ion-button>       
+        <ion-button *ngIf="authIsAdmin" color="primary" (click)="openEscogerUser()" expand="block" shape="round"
+          fill="outline">
+          BUSCAR USUARIO
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button *ngIf="authIsAdmin" color="primary" (click)="openListaUsers()" expand="block" shape="round"
+          fill="outline">
+          VER LISTAS DE USUARIOS
+        </ion-button>
       </ion-col>
     </ion-row>
 
-  <ion-row>
+    <ion-row>
       <ion-col class="ion-text-center">
-          <ion-button class="animated fadeIn slow" *ngIf="authIsAdmin" color="tertiary" (click)="openEnviarNotificacion()" expand="block" shape="round">
-              <ion-label color="dark">Enviar Notificación</ion-label>
-          </ion-button>       
+        <ion-button *ngIf="authIsAdmin" color="primary" (click)="openCalendarioGlobal()" expand="block" shape="round"
+          fill="outline">
+          CALENDARIO GLOBAL
+        </ion-button>
       </ion-col>
-  </ion-row>
+    </ion-row>
 
-  <ion-row>
-      <ion-col class="ion-text-center"> 
-      
-            <ion-button *ngFor= "let chat of chatRooms" class="animated fadeIn slow"  color="tertiary" (click)="openChat(chat)" expand="block" shape="round">
-                <ion-label color="dark">{{chat.name}}</ion-label>
-            </ion-button> 
+    <!--ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button *ngIf="authIsAdmin" color="primary" (click)="openEnviarNotificacion()" expand="block" shape="round"
+          fill="outline">
+          ENVIAR NOTIFICACIÓN
+        </ion-button>
+      </ion-col>
+    </ion-row-->
 
-     
-    </ion-col>
-    </ion-row>    
+    <ion-row>
+      <ion-col class="ion-text-center">
+
+        <ion-button *ngFor="let chat of chatRooms" color="primary" (click)="openChat(chat)" expand="block" shape="round"
+          fill="outline">
+          {{chat.name}}
+        </ion-button>
 
 
-    </ion-grid>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-grid>
 </ion-content>

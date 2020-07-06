@@ -1,94 +1,116 @@
 <ion-header>
     <ion-toolbar color="dark">
-        <ion-button slot="start" fill="clear" (click)="goBack()">
-            <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
-          </ion-button>
-      <ion-title text-center>Ficha Clínica</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="tabs/perfil"></ion-back-button>
+        </ion-buttons>
+        <ion-title text-center>Ficha Clínica</ion-title>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
 
 <ion-content class="background" padding>
-  <!-- <ion-grid> -->
+    <ion-card class="animated fadeIn slow">
 
 
-            <ion-grid> 
-    
-          <ion-item>
+        <ion-grid>
+
+            <ion-item>
 
 
-                <ion-label position="stacked">Nombre:  {{this.userName}} {{this.userLastName}}</ion-label>
+                <ion-label position="stacked">Nombre: </ion-label> {{this.userName}} {{this.userLastName}}
 
-          </ion-item>
+            </ion-item>
 
-          <ion-item>
-              <ion-label position="stacked">Edad: </ion-label> <ion-input tappable type="number" [(ngModel)]="this.fichaClinica.edad"></ion-input>  
-        </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Edad: </ion-label>
+                <ion-input tappable type="number" [(ngModel)]="this.fichaClinica.edad"></ion-input>
+            </ion-item>
 
-    <ion-item>
-        <ion-label position="stacked">Fecha de evaluación: </ion-label>{{this.fichaClinica.fecha | date: 'dd/MM/yyyy'}}
-    </ion-item>
+            <ion-item class="ion-text-wrap">
+                <ion-label position="stacked">Dirección: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.dir" inputmode="text"></ion-input>
+            </ion-item>
 
-    <ion-item>
-        <ion-label position="stacked">Ocupación: </ion-label><ion-input tappable type="text" placeholder="this.fichaClinica.ocupacion" [(ngModel)]="this.fichaClinica.ocupacion" inputmode="text"></ion-input>  
-    </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Fecha de evaluación: </ion-label>
+                {{this.fichaClinica.fecha | date: 'dd/MM/yyyy'}}
+            </ion-item>
 
-    <ion-item>
-        <ion-label position="stacked">Ayudas técnicas: </ion-label><ion-input tappable type="text" placeholder="this.fichaClinica.ayudasTecnicas" [(ngModel)]="this.fichaClinica.ayudasTecnicas" inputmode="text"></ion-input>  
-    </ion-item>
+            <ion-item class="ion-text-wrap">
+                <ion-label position="stacked">Ocupación: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.ocupacion" inputmode="text"></ion-input>
+            </ion-item>
 
-      <ion-item>
-          <ion-label position="stacked">Actividad deportiva: </ion-label> <ion-input tappable type="text" placeholder="this.fichaClinica.actividadDeportiva" [(ngModel)]="this.fichaClinica.actividadDeportiva" inputmode="text"></ion-input>  
-      </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Ayudas técnicas: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.ayudasTecnicas" inputmode="text">
+                </ion-input>
+            </ion-item>
 
-      <ion-item>
-          <ion-label position="stacked">Intervenciones qx: </ion-label><ion-input tappable type="text" placeholder="this.fichaClinica.intervencionesQX" [(ngModel)]="this.fichaClinica.intervencionesQX" inputmode="text"></ion-input>  
-      </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Actividad deportiva: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.actividadDeportiva" inputmode="text">
+                </ion-input>
+            </ion-item>
 
-      <ion-item>
-          <ion-label position="stacked">Traumas M-E: </ion-label><ion-input tappable type="text" placeholder="this.fichaClinica.traumas" [(ngModel)]="this.fichaClinica.traumas" inputmode="text"></ion-input>  
-      </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Intervenciones qx: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.intervencionesQX" inputmode="text">
+                </ion-input>
+            </ion-item>
 
-      <ion-item>
-          <ion-label position="stacked">Actividad en el trabajo: </ion-label><ion-input tappable type="text" placeholder="this.fichaClinica.ocupacionActualTrabajo" [(ngModel)]="this.fichaClinica.ocupacionActualTrabajo" inputmode="text"></ion-input>  
-      </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Traumas M-E: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.traumas" inputmode="text"></ion-input>
+            </ion-item>
 
-      <ion-item>
-          <ion-label position="stacked">Antecedentes: </ion-label><ion-input tappable type="text" placeholder="this.fichaClinica.antecedentes" [(ngModel)]="this.fichaClinica.antecedentes" inputmode="text"></ion-input>  
-      </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Actividad en el trabajo: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.ocupacionActualTrabajo" inputmode="text">
+                </ion-input>
+            </ion-item>
 
-      <ion-item>
-          <ion-label position="stacked">Hábitos: </ion-label><ion-input tappable type="text" placeholder="this.fichaClinica.habitos" [(ngModel)]="this.fichaClinica.habitos" inputmode="text"></ion-input>  
-      </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Antecedentes: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.antecedentes" inputmode="text">
+                </ion-input>
+            </ion-item>
 
-      <ion-item>
-          <ion-label position="stacked">Medicamentos: </ion-label><ion-input tappable type="text" placeholder="this.fichaClinica.medicamentos" [(ngModel)]="this.fichaClinica.medicamentos" inputmode="text"></ion-input>  
-      </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Hábitos: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.habitos" inputmode="text"></ion-input>
+            </ion-item>
 
-      <ion-item>
-          <ion-label position="stacked">Objetivos: </ion-label><ion-input tappable type="text" placeholder="this.fichaClinica.objetivos" [(ngModel)]="this.fichaClinica.objetivos" inputmode="text"></ion-input>  
-      </ion-item>
-    
-      </ion-grid>
+            <ion-item>
+                <ion-label position="stacked">Medicamentos: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.medicamentos" inputmode="text">
+                </ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Objetivos: </ion-label>
+                <ion-input tappable type="text" [(ngModel)]="this.fichaClinica.objetivos" inputmode="text"></ion-input>
+            </ion-item>
+
+        </ion-grid>
+    </ion-card>
+
+    <br>
+    <ion-row>
+        <ion-col class="ion-text-center">
+            <ion-button color="primary" expand="block" shape="round" fill="outline" (click)="guardarEvaluacion()">
+                GUARDAR
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col class="ion-text-center">
+            <ion-button color="primary" expand="block" shape="round" fill="outline" (click)="goBack()">
+                VOLVER
+            </ion-button>
+        </ion-col>
+    </ion-row>
 
 
-      <br>
-              <br>
-              <ion-row>
-                  <ion-col text-center>
-                      <ion-button expand="block" shape="round"  class="animated fadeIn slow" color="tertiary" (click)="guardarEvaluacion()">
-                          Guardar
-                        </ion-button>       
-                    </ion-col>
-              </ion-row>
-              <ion-row>
-                    <ion-col text-center>
-                        <ion-button expand="block" shape="round" class="animated fadeIn slow" color="tertiary" (click)="goBack()">
-                            Volver
-                          </ion-button>       
-                      </ion-col>
-                  </ion-row>
-      
-                  
 
 
 </ion-content>

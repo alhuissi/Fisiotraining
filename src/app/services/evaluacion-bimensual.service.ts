@@ -5,12 +5,16 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from "rxjs/operators";
 
 export interface evaluacionBimensual {
-
     nombre: string,
+    apellido: string,
     userid: string,
     formid: string,
     fecha: Timestamp,
     edad: number,
+
+    nombreAutor: string,
+    mailAutor: string,
+    IDAutor: string,
 
     //Evaluacion Fisiotraining
     funcionCardiaca: number,
@@ -24,9 +28,10 @@ export interface evaluacionBimensual {
     tgl: number,
     
     fms: number,
-    potencia: number,
+    fmsPorcentaje: number,
 
-    oxigeno: string,
+    oxigeno: number,
+    oxigenoPorcentaje: number,
 
     //Examen Kinésico
     dolor: string,
@@ -46,32 +51,161 @@ export interface evaluacionBimensual {
     pruebasEspeciales: string,
     rangosActivosPasivos: number,
 
-    
     actividadDeportiva: string,
     antecedentes: string,
     ayudasTecnicas: string,
     examenKinesico: number,
 
-    
     habitos: string,
     intervencionesQx: string,
     medicamentos: string,
     ocupacion: string,
     ocupacionActualTrabajo: string,
     traumas: string,
-
 }
 
 @Injectable()
 export class EvaluacionBimensualService {
-    private evaluacionBi: evaluacionBimensual
+    evaluacionBi: evaluacionBimensual ={
+        nombre: '',
+        apellido: '',
+        userid: '',
+        formid: '',
+        fecha: Date.now(),
+        edad: 0,
+        nombreAutor: '',
+        mailAutor: '',
+        IDAutor: '',
+    
+        //Evaluacion Fisiotraining
+        funcionCardiaca: 0,
+        fcMaxima: 0,
+        fcReposo: 0,
+        presionArterial: 0,
+    
+        indiceCardiovascular: 0,
+        colesterol: 0,
+        ldl: 0,
+        tgl: 0,
+        
+        fms: 0,
+        fmsPorcentaje: 0,
+    
+        oxigeno: 0,
+        oxigenoPorcentaje: 0,
+    
+        //Examen Kinésico
+        dolor: '',
+        diagnostico: '',
+        motivo: '',
+    
+        //Observación
+        planoFrontal: '',
+        planoLateral: '',
+        planoPosterior: '',
+        fuerza: 0,
+        objetivo: '',
+        objetivosEspecificos: '',
+        objetivosGenerales: '',
+        observacion: '',
+        palpacion: '',
+        pruebasEspeciales: '',
+        rangosActivosPasivos: 0,
+    
+        actividadDeportiva: '',
+        antecedentes: '',
+        ayudasTecnicas: '',
+        examenKinesico: 0,
+    
+        habitos: '',
+        intervencionesQx: '',
+        medicamentos: '',
+        ocupacion: '',
+        ocupacionActualTrabajo: '',
+        traumas: '',
+    };
+    
 
-    constructor(private db: AngularFirestore) {
-
+    constructor(private db: AngularFirestore){
     }
 
     setEvaluacion(evaluacionBi: evaluacionBimensual){
         this.evaluacionBi = evaluacionBi;
+    }
+
+    setFms(puntaje: number){
+        this.evaluacionBi.fms = puntaje;
+    }
+
+    getFms(){
+        if(this.evaluacionBi.fms){
+            return this.evaluacionBi.fms;
+        }
+        else{
+            return
+        }
+        
+    }
+
+    reset(){
+        this.evaluacionBi ={
+            nombre: '',
+            apellido: '',
+            userid: '',
+            formid: '',
+            fecha: Date.now(),
+            edad: 0,
+            nombreAutor: '',
+            mailAutor: '',
+            IDAutor: '',
+        
+            //Evaluacion Fisiotraining
+            funcionCardiaca: 0,
+            fcMaxima: 0,
+            fcReposo: 0,
+            presionArterial: 0,
+        
+            indiceCardiovascular: 0,
+            colesterol: 0,
+            ldl: 0,
+            tgl: 0,
+            
+            fms: 0,
+            fmsPorcentaje: 0,
+        
+            oxigeno: 0,
+            oxigenoPorcentaje: 0,
+        
+            //Examen Kinésico
+            dolor: '',
+            diagnostico: '',
+            motivo: '',
+        
+            //Observación
+            planoFrontal: '',
+            planoLateral: '',
+            planoPosterior: '',
+            fuerza: 0,
+            objetivo: '',
+            objetivosEspecificos: '',
+            objetivosGenerales: '',
+            observacion: '',
+            palpacion: '',
+            pruebasEspeciales: '',
+            rangosActivosPasivos: 0,
+        
+            actividadDeportiva: '',
+            antecedentes: '',
+            ayudasTecnicas: '',
+            examenKinesico: 0,
+        
+            habitos: '',
+            intervencionesQx: '',
+            medicamentos: '',
+            ocupacion: '',
+            ocupacionActualTrabajo: '',
+            traumas: '',
+        };
     }
 
     getEvaluaciones(){

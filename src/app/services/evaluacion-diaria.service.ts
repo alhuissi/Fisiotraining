@@ -51,7 +51,7 @@ export class EvaluacionDiariaService {
 
     getEvaluacion(){
         //return this.db.collection('evaluacion-diaria').doc(this.evaluacionDi.userid).valueChanges()
-        return this.evaluacionDi
+        return this.evaluacionDi;
     }
 
 

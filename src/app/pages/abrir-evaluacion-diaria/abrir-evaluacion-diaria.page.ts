@@ -6,6 +6,7 @@ import { UserService } from '../../services/user.service';
 import { Timestamp } from 'firebase-firestore-timestamp';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
+import { trigger, transition, animate, style } from '@angular/animations';
 import { AlertController } from '@ionic/angular';
 import { EvaluacionDiariaService, evaluacionDiaria } from '../../services/evaluacion-diaria.service';
 
@@ -13,6 +14,27 @@ import { EvaluacionDiariaService, evaluacionDiaria } from '../../services/evalua
   selector: 'app-abrir-evaluacion-diaria',
   templateUrl: './abrir-evaluacion-diaria.page.html',
   styleUrls: ['./abrir-evaluacion-diaria.page.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('200ms ease-in', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ opacity: 0 }))
+      ])
+    ]),
+    trigger('visibilityChanged', [
+      transition(':enter', [
+        style({ opacity: 0.5 }),
+        animate('100ms ease-in', style({ height: '100px', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('100ms ease-in', style({ height: '0px', opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class AbrirEvaluacionDiariaPage implements OnInit {
 
@@ -39,6 +61,11 @@ export class AbrirEvaluacionDiariaPage implements OnInit {
   rateStress: number;
   rateSueno: number;
 
+  collapseCard;
+  collapseCard2;
+  collapseCard3;
+  collapseCard4;
+
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticateService,
@@ -50,7 +77,6 @@ export class AbrirEvaluacionDiariaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
     if(this.authService.userDetails()){
       this.userID = this.userServ.getUID();
       this.userEmail = this.userServ.getEmail();

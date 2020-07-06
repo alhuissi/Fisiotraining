@@ -4,7 +4,6 @@ import { NavController, LoadingController, AlertController } from '@ionic/angula
 import { AuthenticateService } from '../../../services/authentication.service';
 import { Router } from '@angular/router';
 
- 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -16,83 +15,88 @@ export class LoginPage implements OnInit {
   email: string;
   password: string;
   private loading;
- 
+
   constructor(
- 
     private navCtrl: NavController,
     public router: Router,
     private authService: AuthenticateService,
     public alertController: AlertController,
-    public fb: FormBuilder, 
-    public alertCtrl: AlertController, 
+    public fb: FormBuilder,
+    public alertCtrl: AlertController,
     public loadingController: LoadingController,
- 
   ) {
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-      this.loginForm = fb.group({
-            email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])],
-            password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
-      });
-   }
- 
-  ngOnInit() {
- 
+    this.loginForm = fb.group({
+      email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+    });
   }
- 
 
- z
- 
-async loginUser(){
+  ngOnInit() {
 
-  
-      if (!this.loginForm.valid){
+  }
 
-          console.log("error");
-          alert('Los datos son incorrectos o no existe el usuario');
-      } else {
-        // this.presentLoadingWithOptions();
-        this.loadingController.create({
-          message: 'Verificando datos...',
-          duration: 2000,
-        }).then((overlay) => {
-          this.loading = overlay;
-          this.loading.present();
-        });
+  ionViewDidEnter() {
+    /*
+    this.authService.user.subscribe(res => {
+      if (res) {
+        this.authService.isLogged == true;
+        this.loginUser();
+        this.router.navigate(['/tabs/escritorio-admin']);
+      }
+    });
+    */
+  }
 
-       await this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
-        .then( authData => {
+  loginUser() {
+
+    if (!this.loginForm.valid) {
+      console.log("error");
+      alert('Los datos son incorrectos o no existe el usuario');
+    } else {
+      // this.presentLoadingWithOptions();
+      this.loadingController.create({
+      }).then((overlay) => {
+        this.loading = overlay;
+        this.loading.present();
+      });
+
+      this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
+        .then(authData => {
           console.log("Authentification completed");
-         this.authService.getInfo(); 
-         this.loading.dismiss();
-         if(this.authService.whatRole() === 'admin') {
-          this.router.navigate(['/tabs/escritorio-admin']);
-         }
-         if(this.authService.whatRole() === 'profesor') {
-          this.router.navigate(['/tabs/escritorio-profesor']);
-         }
-         if(this.authService.whatRole() === 'cliente') {
-          this.router.navigate(['/tabs/escritorio-cliente']);
-         }
-         if(this.authService.whatRole() === 'visita') {
-          this.router.navigate(['/tabs/escritorio-visita']);
-         }
-          
+          this.authService.isLogged == true;
+          this.authService.getInfo();
           this.loading.dismiss();
+          if (this.authService.whatRole() === 'admin') {
+            this.router.navigate(['/tabs/escritorio-admin']);
+          }
+          if (this.authService.whatRole() === 'profesor') {
+            this.router.navigate(['/tabs/escritorio-profesor']);
+          }
+          if (this.authService.whatRole() === 'cliente') {
+            this.router.navigate(['/tabs/escritorio-cliente']);
+          }
+          if (this.authService.whatRole() === 'visita') {
+            this.router.navigate(['/tabs/escritorio-visita']);
+          }
         }, error => {
           var errorMessage: string = error.message;
           this.loading.dismiss();
           console.log(errorMessage)
-          this.presentAlert(errorMessage);
+          this.presentAlert('El email no existe en nuestra base de datos');
         });
-      }
+    }
+  }
+
+  goForgotPage() {
+    this.router.navigate(['forgot']);
   }
   
- 
-  goToRegisterPage(){
+  goToRegisterPage() {
     this.navCtrl.navigateForward('/register');
   }
 
-  
+
   async presentAlert(error: string) {
     const alert = await this.alertController.create({
       message: error,
@@ -111,5 +115,5 @@ async loginUser(){
     });
     return await loading.present();
   }
- 
+
 }
