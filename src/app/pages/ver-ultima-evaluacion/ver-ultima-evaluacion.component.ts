@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController, NavController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Subject, Observable, combineLatest } from 'rxjs';
 import { Router, RouterEvent } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthenticateService } from '../../services/authentication.service';
-import { IonicSelectableComponent } from 'ionic-selectable';
-import { setDefaultService } from 'selenium-webdriver/chrome';
 
-import { Timestamp } from 'firebase-firestore-timestamp';
-
-import { firestore } from 'firebase';
 import { AlertController } from '@ionic/angular';
 import { EvaluacionDiariaService, evaluacionDiaria } from '../../services/evaluacion-diaria.service';
 

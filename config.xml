@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="231" id="io.fisiotraining" ios-CFBundleVersion="2.3.1" version="2.3.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="232" id="io.fisiotraining" ios-CFBundleVersion="2.3.2" version="2.3.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Fisiotraining</name>
     <description>Salud y Energia</description>
     <author email="alfredo@thedeval.com" href="https://thedeval.com/">deval</author>

@@ -18,8 +18,6 @@ import { EvaluacionDiariaService, evaluacionDiaria } from '../../services/evalua
 import { EscogerKineSolicitudComponent } from '../escoger-kine-solicitud/escoger-kine-solicitud.component';
 import { ListaClientesSelectComponent } from '../lista-clientes-select/lista-clientes-select.component';
 import { ListaCoachsSelectComponent } from '../lista-coachs-select/lista-coachs-select.component';
-import { myEnterAnimation } from '../../animations/enter';
-import { myLeaveAnimation } from '../../animations/leave';
 
 @Component({
   selector: 'app-calendario',
@@ -532,8 +530,6 @@ export class CalendarioPage implements OnInit {
   async openEscogerUser() {
     const modalEscoger: HTMLIonModalElement = await this.modal.create({
       component: ListaClientesSelectComponent,
-      enterAnimation: myEnterAnimation,
-      leaveAnimation: myLeaveAnimation,
       componentProps: {
 
       }
@@ -555,8 +551,6 @@ export class CalendarioPage implements OnInit {
   async openEscogerKine() {
     const modalEscoger: HTMLIonModalElement = await this.modal.create({
       component: ListaCoachsSelectComponent,
-      enterAnimation: myEnterAnimation,
-      leaveAnimation: myLeaveAnimation,
       componentProps: {
 
       }

@@ -9,10 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
-import { AuthenticateService } from './services/authentication.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { IonicSelectableModule } from 'ionic-selectable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -30,8 +28,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { ChatComponent } from './pages/chat/chat.component';
 
-import { AyudaModalComponent } from './pages/ayuda-modal/ayuda-modal.component';
-
 import { FormsModule } from '@angular/forms';
 import { EscogerUsuarioComponent } from './pages/escoger-usuario/escoger-usuario.component';
 import { EscogerKineSolicitudComponent } from './pages/escoger-kine-solicitud/escoger-kine-solicitud.component';
@@ -48,13 +44,9 @@ import { MisPacientesComponent } from './pages/mis-pacientes/mis-pacientes.compo
 import { ListaAdminsComponent } from './pages/lista-admins/lista-admins.component';
 import { ListaVisitaComponent } from './pages/lista-visita/lista-visita.component';
 
-
-import { FisiotrainingTutoComponent } from './pages/fisiotraining-tuto/fisiotraining-tuto.component';
 import { VerUltimaEvaluacionComponent } from './pages/ver-ultima-evaluacion/ver-ultima-evaluacion.component';
 import * as firebase from 'firebase';
 import { CurrentUserService } from './services/currentUser.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { SesionService } from './services/sesiones.service';
 
 import 'chartjs-plugin-zoom';
@@ -63,7 +55,6 @@ import 'chartjs-plugin-zoom';
 @NgModule({
   declarations: [
     AppComponent, 
-    AyudaModalComponent, 
     MisPacientesComponent, 
     ListaClientesComponent, 
     ListaCoachsComponent, 
@@ -78,11 +69,9 @@ import 'chartjs-plugin-zoom';
     EscogerUsuarioComponent, 
     EscogerKineSolicitudComponent,
     ChatComponent, 
-    VerUltimaEvaluacionComponent, 
-    FisiotrainingTutoComponent
+    VerUltimaEvaluacionComponent
   ],
   entryComponents: [ChatComponent, 
-    AyudaModalComponent, 
     MisPacientesComponent, 
     ListaCoachsComponent, 
     ListaClientesComponent, 
@@ -96,21 +85,18 @@ import 'chartjs-plugin-zoom';
     EscogerUsuario2Component, 
     EscogerUsuarioComponent, 
     EscogerKineSolicitudComponent,
-    VerUltimaEvaluacionComponent, 
-    FisiotrainingTutoComponent
+    VerUltimaEvaluacionComponent
   ],
   imports: [
     FormsModule,
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    FontAwesomeModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFireStorageModule,
-    IonicSelectableModule,
     AngularFirestoreModule.enablePersistence(),
   ],
   providers: [

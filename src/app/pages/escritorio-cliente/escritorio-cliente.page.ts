@@ -12,9 +12,7 @@ import { EscogerUsuarioComponent } from '../escoger-usuario/escoger-usuario.comp
 import { AlertController } from '@ionic/angular';
 import { ActionSheetController, ToastController } from '@ionic/angular';
 
-import { FisiotrainingTutoComponent } from '../fisiotraining-tuto/fisiotraining-tuto.component';
 import { UserService } from '../../services/user.service';
-import { CurrentUserService } from '../../services/currentUser.service';
 
 @Component({
   selector: 'app-escritorio-cliente',
@@ -201,11 +199,7 @@ export class EscritorioClientePage implements OnInit {
   printID() {
     this.userEmail = this.authService.userDetails().email;
     this.userID = this.authService.userDetails().uid;
-
     this.userName = this.authService.getName();
-    console.log('ID: ' + this.userID);
-    console.log('Nombre: ' + this.userName);
-    console.log('Mail: ' + this.userEmail);
   }
 
   openEscogerUser() {

@@ -6,8 +6,6 @@ import { Subject, Observable, combineLatest } from 'rxjs';
 import { AuthenticateService } from '../../services/authentication.service';
 import { Router, RouterEvent } from '@angular/router';
 import { UserService, user } from '../../services/user.service';
-import { myEnterAnimation } from '../../animations/enter';
-import { myLeaveAnimation } from '../../animations/leave';
 
 @Component({
   selector: 'app-mis-pacientes',

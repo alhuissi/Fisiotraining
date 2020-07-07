@@ -10,8 +10,6 @@ import { AuthenticateService } from '../../services/authentication.service';
 import { SolicitudService, solicitudFisio } from 'src/app/services/solicitud.service';
 import { ListaClientesSelectComponent } from '../lista-clientes-select/lista-clientes-select.component';
 import { ListaCoachsSelectKineComponent } from '../lista-coachs-select-kine/lista-coachs-select-kine.component';
-import { myEnterAnimation } from '../../animations/enter';
-import { myLeaveAnimation } from '../../animations/leave';
 
 @Component({
   selector: 'app-solicitudes',
@@ -129,8 +127,6 @@ async presentAlertConfirm() {
 async openEscogerKine(){
   const modalEscoger: HTMLIonModalElement = await this.modal.create({
   component: ListaCoachsSelectKineComponent,
-  enterAnimation: myEnterAnimation,
-  leaveAnimation: myLeaveAnimation,
   componentProps : {
    
   }

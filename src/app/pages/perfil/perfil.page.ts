@@ -12,7 +12,6 @@ import { ActionSheetController } from '@ionic/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EvaluacionDiariaService, evaluacionDiaria } from '../../services/evaluacion-diaria.service';
 import { Timestamp } from 'firebase-firestore-timestamp';
-import { SlideInOutAnimation } from '../../animations/slideInOut';
 
 import { Chart } from 'chart.js';
 

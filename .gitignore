@@ -11,6 +11,10 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
+fisiotraining.keystore
+Fisiotraining.apk
+app-release-unsigned.apk
+POLITICA_DE_PRIVACIDAD.docx
 
 .idea/
 .ionic/

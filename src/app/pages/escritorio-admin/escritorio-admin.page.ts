@@ -11,11 +11,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { EscogerUsuarioComponent } from '../escoger-usuario/escoger-usuario.component';
 import { MisPacientesComponent } from '../mis-pacientes/mis-pacientes.component';
 import { ActionSheetController } from '@ionic/angular';
-import { FisiotrainingTutoComponent } from '../fisiotraining-tuto/fisiotraining-tuto.component';
 import { UserService } from '../../services/user.service';
 import { CurrentUserService } from '../../services/currentUser.service';
-import { myEnterAnimation } from '../../animations/enter';
-import { myLeaveAnimation } from '../../animations/leave';
 import { OverlayEventDetail } from '@ionic/core';
 
 @Component({
@@ -98,7 +95,6 @@ export class EscritorioAdminPage implements OnInit {
         this.authIsAdmin = false;
         this.authIsUsuario = false;
         this.authIsVisita = false;
-        console.log('mesActual: ' + this.authService.currentUser.mesActual);
         if (this.authService.currentUser.mesActual != this.fechaToday2.getMonth()) {
           this.authService.currentUser.mesActual === this.fechaToday2.getMonth();
           this.authService.changeMesActual(this.fechaToday2.getMonth()); //reseta las horas trabajadas del mes actual y las asigna al mes anterior
@@ -134,7 +130,6 @@ export class EscritorioAdminPage implements OnInit {
     this.userRole = this.authService.getRole();
     this.horasTrabajadas = this.authService.getHorasTrabajadas();
     this.horasTrabajadasMesAnterior = this.authService.currentUser.horasTrabajadasMesAnterior;
-    console.log('this.authservice.whatRole(): ' + this.userRole)
     if (this.authService.userDetails()) {
       if (this.authService.whatRole() === 'admin') {
         this.authIsAdmin = true;
@@ -161,8 +156,6 @@ export class EscritorioAdminPage implements OnInit {
         this.authIsUsuario = false;
       }
 
-      console.log('Usuario actual: ');
-      console.log(this.authService.currentUser);
 
     } else {
       this.navCtrl.navigateBack('');
@@ -198,7 +191,6 @@ export class EscritorioAdminPage implements OnInit {
         this.eventSource = [];
         colSnap.forEach(snap => {
           let event: any = snap.payload.doc.data();
-          console.log(event.idAlumno);
           if (event.idAlumno === this.userID) {
             event.startTime = event.startTime.toDate();
             event.endTime = event.endTime.toDate();
@@ -245,8 +237,6 @@ export class EscritorioAdminPage implements OnInit {
   async openMisPacientes() {
     const modalEscoger: HTMLIonModalElement = await this.modal.create({
       component: MisPacientesComponent,
-      enterAnimation: myEnterAnimation,
-      leaveAnimation: myLeaveAnimation,
       componentProps: {
 
       }

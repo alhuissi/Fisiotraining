@@ -13,13 +13,9 @@ import { MisPacientesComponent } from '../mis-pacientes/mis-pacientes.component'
 import { AlertController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 
-import { FisiotrainingTutoComponent } from '../fisiotraining-tuto/fisiotraining-tuto.component';
 import { SolicitudService, solicitudFisio } from '../../services/solicitud.service';
 import { UserService } from '../../services/user.service';
-import { CurrentUserService } from '../../services/currentUser.service';
-import { myEnterAnimation } from '../../animations/enter';
-import { myLeaveAnimation } from '../../animations/leave';
-import { OverlayEventDetail } from '@ionic/core';
+
 
 @Component({
   selector: 'app-escritorio-profe',
@@ -101,7 +97,6 @@ export class EscritorioProfePage implements OnInit {
         this.authIsAdmin = false;
         this.authIsUsuario = false;
         this.authIsVisita = false;
-        console.log('mesActual: ' + this.authService.currentUser.mesActual);
         if (this.authService.currentUser.mesActual != this.fechaToday2.getMonth()) {
           this.authService.currentUser.mesActual === this.fechaToday2.getMonth();
           this.authService.changeMesActual(this.fechaToday2.getMonth()); //reseta las horas trabajadas del mes actual y las asigna al mes anterior
@@ -136,7 +131,6 @@ export class EscritorioProfePage implements OnInit {
     this.userRole = this.authService.getRole();
     this.horasTrabajadas = this.authService.getHorasTrabajadas();
     this.horasTrabajadasMesAnterior = this.authService.currentUser.horasTrabajadasMesAnterior;
-    console.log('this.authservice.whatRole(): ' + this.userRole)
     if (this.authService.userDetails()) {
       if (this.authService.whatRole() === 'admin') {
         this.authIsAdmin = true;
@@ -162,9 +156,6 @@ export class EscritorioProfePage implements OnInit {
         this.authIsKine = false;
         this.authIsUsuario = false;
       }
-
-      console.log('Usuario actual: ');
-      console.log(this.authService.currentUser);
 
     } else {
       this.navCtrl.navigateBack('');

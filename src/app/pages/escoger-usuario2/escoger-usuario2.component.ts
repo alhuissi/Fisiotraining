@@ -5,8 +5,6 @@ import { Subject, Observable, combineLatest } from 'rxjs';
 import { Router, RouterEvent } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthenticateService } from '../../services/authentication.service';
-import { IonicSelectableComponent } from 'ionic-selectable';
-import { setDefaultService } from 'selenium-webdriver/chrome';
 
 /* Modulo similar a escoger-usuario, pero en lugar de ir al perfil del usuario, solo lo selecciona para el user.service */
 

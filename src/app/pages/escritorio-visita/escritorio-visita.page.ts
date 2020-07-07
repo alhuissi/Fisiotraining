@@ -12,9 +12,7 @@ import { EscogerUsuarioComponent } from '../escoger-usuario/escoger-usuario.comp
 import { AlertController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 
-import { FisiotrainingTutoComponent } from '../fisiotraining-tuto/fisiotraining-tuto.component';
 import { UserService } from '../../services/user.service';
-import { CurrentUserService } from '../../services/currentUser.service';
 
 @Component({
   selector: 'app-escritorio-visita',
@@ -64,7 +62,6 @@ export class EscritorioVisitaPage implements OnInit {
     this.userID = this.authService.userDetails().uid;
     this.userName = this.authService.getName();
     this.userLastName = this.authService.getLastName();
-    console.log('this.authservice.whatRole(): ' + this.userRole)
     if (this.authService.userDetails()) {
       if (this.authService.whatRole() === 'admin') {
         this.authIsAdmin = true;
@@ -90,9 +87,6 @@ export class EscritorioVisitaPage implements OnInit {
         this.authIsKine = false;
         this.authIsUsuario = false;
       }
-
-      console.log('Usuario actual: ');
-      console.log(this.authService.currentUser);
 
     } else {
       this.navCtrl.navigateBack('');
@@ -106,7 +100,6 @@ export class EscritorioVisitaPage implements OnInit {
     this.userName = this.authService.getName();
     this.userLastName = this.authService.getLastName();
     this.userRole = this.authService.getRole();
-    console.log('this.authservice.whatRole(): ' + this.userRole)
     if (this.authService.userDetails()) {
       if (this.authService.whatRole() === 'admin') {
         this.authIsAdmin = true;
@@ -132,9 +125,6 @@ export class EscritorioVisitaPage implements OnInit {
         this.authIsKine = false;
         this.authIsUsuario = false;
       }
-
-      console.log('Usuario actual: ');
-      console.log(this.authService.currentUser);
 
     } else {
       this.navCtrl.navigateBack('');
