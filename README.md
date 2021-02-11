@@ -4,11 +4,11 @@
 PWA that simulates a personal trainer.
 
 Features:
--Sesion booking
--Calendar
--Evaluations
--User administration
--Role based functions
+- Sesion booking
+- Calendar
+- Evaluations
+- User administration
+- Role based functions
 
 
 ## Installation
